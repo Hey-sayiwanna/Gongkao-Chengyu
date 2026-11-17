@@ -5,9 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-  <meta name="apple-mobile-web-app-title" content="不背错词" />
+  <meta name="apple-mobile-web-app-title" content="不背成语" />
+  <meta name="application-name" content="不背成语" />
   <meta name="theme-color" content="#f4f5f8" />
-  <title>不背错词 · 公考望文生义与易错词库</title>
+  <title>不背成语 · 公考望文生义与易错词库</title>
   <link rel="manifest" href="./manifest.json" />
   <link rel="apple-touch-icon" href="./icon-192.png" />
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Crect width='120' height='120' rx='28' fill='%231e293b'/%3E%3Ctext x='60' y='74' font-size='52' font-family='sans-serif' font-weight='700' text-anchor='middle' fill='%23f8fafc'%3E辨%3C/text%3E%3Ccircle cx='92' cy='28' r='10' fill='%23f97316'/%3E%3C/svg%3E" />
@@ -36,12 +37,27 @@
       padding-bottom: calc(92px + env(safe-area-inset-bottom, 0px));
     }
     .glass-card {
-      background: var(--glass-bg);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid var(--glass-border);
-      box-shadow: 0 8px 28px rgba(15, 23, 42, 0.055);
-      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.82);
+      backdrop-filter: blur(24px) saturate(165%);
+      -webkit-backdrop-filter: blur(24px) saturate(165%);
+      border: 1px solid rgba(255, 255, 255, 0.92);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.95), 0 10px 30px -6px rgba(15, 23, 42, 0.065);
+      border-radius: 24px;
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+    }
+    @media (hover: hover) {
+      .glass-card:hover {
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.98), 0 14px 36px -8px rgba(15, 23, 42, 0.095);
+      }
+    }
+    #cardWordTitle {
+      letter-spacing: 0.06em;
+      text-shadow: 0 1px 1px rgba(15, 23, 42, 0.04);
+    }
+    #statTotalLoadedCount, #statCore90Unlearned, #statLiteralUnlearned, #statEmotionUnlearned,
+    #statExamCoreUnlearned, #statPotentialUnlearned, #statConfusableUnlearned, #statDueReview,
+    #statLearnedTotal, #statFavTotal, #statDismissedTotal {
+      font-variant-numeric: tabular-nums;
     }
     .glass-pill {
       background: rgba(255, 255, 255, 0.86);
@@ -93,7 +109,7 @@
       <input
         id="globalSearchInput"
         type="search"
-        placeholder="搜索成语、易混实词、误用陷阱关键字（如：刊、新闻、夫妻、截止）..."
+        placeholder="搜索成语、实词、褒义/贬义/中性或陷阱关键字（如：刊、贬义、新闻、截止）..."
         class="w-full glass-card px-4 py-3 pl-10 text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/40"
       />
       <svg class="w-4 h-4 text-slate-400 absolute left-3.5 top-3.5 pointer-events-none" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -1208,7 +1224,7 @@
   {
     id: "ep01",
     "word": "上行下效",
-    "pinyin": "贬义 · 误作褒义",
+    "pinyin": "shàng xíng xià xiào",
     "cat": "error_prone_idiom",
     "tag": "贬词误褒高频",
     "trap": "误用于表扬领导带好头、下属积极跟进学习好榜样。",
@@ -1221,7 +1237,7 @@
   {
     id: "ep02",
     "word": "推波助澜",
-    "pinyin": "贬义 · 误作褒义",
+    "pinyin": "tuī bō zhù lán",
     "cat": "error_prone_idiom",
     "tag": "贬词误褒高频",
     "trap": "误用于赞扬政策出台对经济发展起到了“推波助澜”的积极作用。",
@@ -1234,7 +1250,7 @@
   {
     id: "ep03",
     "word": "连篇累牍",
-    "pinyin": "贬义 · 误作褒义",
+    "pinyin": "lián piān lěi dú",
     "cat": "error_prone_idiom",
     "tag": "贬词误褒高频",
     "trap": "误以为是形容学者著作丰硕或媒体宣传报道力度大。",
@@ -1247,7 +1263,7 @@
   {
     id: "ep04",
     "word": "溢美之词",
-    "pinyin": "贬/失实 · 误作褒义",
+    "pinyin": "yì měi zhī cí",
     "cat": "error_prone_idiom",
     "tag": "感情色彩陷阱",
     "trap": "误当作真诚的赞美之词，写出“赢得了观众的溢美之词”。",
@@ -1260,7 +1276,7 @@
   {
     id: "ep05",
     "word": "巧舌如簧",
-    "pinyin": "贬义 · 误作褒义",
+    "pinyin": "qiǎo shé rú huáng",
     "cat": "error_prone_idiom",
     "tag": "贬词误褒高频",
     "trap": "误用于夸奖辩论赛选手、主持人或销售冠军口才极佳。",
@@ -1273,7 +1289,7 @@
   {
     id: "ep06",
     "word": "无独有偶",
-    "pinyin": "多指坏事 · 贬义倾向",
+    "pinyin": "wú dú yǒu ǒu",
     "cat": "error_prone_idiom",
     "tag": "感情色彩陷阱",
     "trap": "在庄重正面报道中误用于形容两位英雄事迹或两项重大喜讯恰巧相似。",
@@ -1286,7 +1302,7 @@
   {
     id: "ep07",
     "word": "坐而论道",
-    "pinyin": "贬义 · 误作中性",
+    "pinyin": "zuò ér lùn dào",
     "cat": "error_prone_idiom",
     "tag": "贬词误褒高频",
     "trap": "误用于形容专家学者围坐在一起深入研讨学术理论。",
@@ -1299,7 +1315,7 @@
   {
     id: "ep08",
     "word": "拾人牙慧",
-    "pinyin": "贬义 · 缺乏创见",
+    "pinyin": "shí rén yá huì",
     "cat": "error_prone_idiom",
     "tag": "贬词误褒高频",
     "trap": "误以为是虚心吸收前人智慧结晶。",
@@ -1312,7 +1328,7 @@
   {
     id: "ep09",
     "word": "亦步亦趋",
-    "pinyin": "贬义 · 误作褒义",
+    "pinyin": "yì bù yì qū",
     "cat": "error_prone_idiom",
     "tag": "贬词误褒高频",
     "trap": "误用于赞扬徒弟紧跟名师步伐、踏实求学。",
@@ -1325,7 +1341,7 @@
   {
     id: "ep10",
     "word": "改头换面",
-    "pinyin": "贬义 · 换汤不换药",
+    "pinyin": "gǎi tóu huàn miàn",
     "cat": "error_prone_idiom",
     "tag": "贬词误褒高频",
     "trap": "误用于赞美老旧小区改造后“改头换面、焕然一新”。",
@@ -1338,7 +1354,7 @@
   {
     id: "ep11",
     "word": "处心积虑",
-    "pinyin": "贬义 · 蓄意谋划",
+    "pinyin": "chǔ xīn jī lǜ",
     "cat": "error_prone_idiom",
     "tag": "高频近义色彩辨析",
     "trap": "误用于形容科研人员为了攻克技术难关“处心积虑”。",
@@ -1351,7 +1367,7 @@
   {
     id: "ep12",
     "word": "罄竹难书",
-    "pinyin": "极重贬义 · 专指罪恶",
+    "pinyin": "qìng zhú nán shū",
     "cat": "error_prone_idiom",
     "tag": "对象与色彩双陷阱",
     "trap": "只看字面“竹简写不完”，误用于歌颂英雄功绩或改革成果多得写不完。",
@@ -1364,7 +1380,7 @@
   {
     id: "ep13",
     "word": "粉墨登场",
-    "pinyin": "多含贬义 · 政治讽刺",
+    "pinyin": "fěn mò dēng chǎng",
     "cat": "error_prone_idiom",
     "tag": "贬词误褒高频",
     "trap": "误用于正面报道新产品发布亮相或青年才俊走上舞台。",
@@ -1377,7 +1393,7 @@
   {
     id: "ep14",
     "word": "弹冠相庆",
-    "pinyin": "贬义 · 官场结党",
+    "pinyin": "tán guān xiāng qìng",
     "cat": "error_prone_idiom",
     "tag": "贬词误褒高频",
     "trap": "误以为是大家举杯欢庆胜利或考上公务员后互相祝贺。",
@@ -1390,7 +1406,7 @@
   {
     id: "ep15",
     "word": "人浮于事",
-    "pinyin": "贬义 · 机构臃肿",
+    "pinyin": "rén fú yú shì",
     "cat": "error_prone_idiom",
     "tag": "高频机关治理词",
     "trap": "误以为大家干劲十足、人才水平高于岗位要求。",
@@ -1403,7 +1419,7 @@
   {
     id: "ep16",
     "word": "众口铄金",
-    "pinyin": "消极色彩 · 混淆是非",
+    "pinyin": "zhòng kǒu shuò jīn",
     "cat": "error_prone_idiom",
     "tag": "易与众志成城混淆",
     "trap": "误以为是大家团结发声力量大、齐心协力做成大事。",
@@ -1416,7 +1432,7 @@
   {
     id: "ep17",
     "word": "侃侃而谈",
-    "pinyin": "褒义 · 误作贬义",
+    "pinyin": "kǎn kǎn ér tán",
     "cat": "error_prone_idiom",
     "tag": "褒词误贬高频",
     "trap": "受口语“侃大山”影响，误以为是不着边际地瞎聊吹牛。",
@@ -1429,7 +1445,7 @@
   {
     id: "ep18",
     "word": "蔚然成风",
-    "pinyin": "褒义 · 专指良好风气",
+    "pinyin": "wèi rán chéng fēng",
     "cat": "error_prone_idiom",
     "tag": "褒词误贬高频",
     "trap": "误用于消极现象：“近年来网络刷单造假蔚然成风”。",
@@ -1442,7 +1458,7 @@
   {
     id: "ep19",
     "word": "叹为观止",
-    "pinyin": "褒义 · 赞美至极",
+    "pinyin": "tàn wéi guān zhǐ",
     "cat": "error_prone_idiom",
     "tag": "褒词误贬高频",
     "trap": "误用于对恶劣事故、离奇骗局或贪腐金额发出惊叹。",
@@ -1455,7 +1471,7 @@
   {
     id: "ep20",
     "word": "栉风沐雨",
-    "pinyin": "褒义 · 艰苦奋斗",
+    "pinyin": "zhì fēng mù yǔ",
     "cat": "error_prone_idiom",
     "tag": "高频公文褒义词",
     "trap": "只看字面刮风下雨，误以为只是客观天气恶劣。",
@@ -1468,7 +1484,7 @@
   {
     id: "ep21",
     "word": "焚膏继晷",
-    "pinyin": "褒义 · 夜以继日",
+    "pinyin": "fén gāo jì guǐ",
     "cat": "error_prone_idiom",
     "tag": "书面高频褒义词",
     "trap": "不识字面“膏（灯油）”“晷（日影）”，误以为是焚烧物品或消极熬夜。",
@@ -1481,7 +1497,7 @@
   {
     id: "ep22",
     "word": "鼎力相助",
-    "pinyin": "敬辞 · 严禁用于自己",
+    "pinyin": "dǐng lì xiāng zhù",
     "cat": "error_prone_idiom",
     "tag": "谦敬错位必考",
     "trap": "误用于第一人称表态：“你放心，我一定会鼎力相助”。",
@@ -1494,7 +1510,7 @@
   {
     id: "ep23",
     "word": "蓬荜生辉",
-    "pinyin": "谦辞 · 严禁用于他人",
+    "pinyin": "péng bì shēng huī",
     "cat": "error_prone_idiom",
     "tag": "谦敬错位必考",
     "trap": "去做客或送礼时误对主人说：“希望这幅画能让贵府蓬荜生辉”。",
@@ -1507,7 +1523,7 @@
   {
     id: "ep24",
     "word": "抛砖引玉",
-    "pinyin": "谦辞 · 严禁用于他人",
+    "pinyin": "pāo zhuān yǐn yù",
     "cat": "error_prone_idiom",
     "tag": "谦敬错位必考",
     "trap": "主持人误称赞主讲嘉宾：“下面请王教授先作抛砖引玉的发言”。",
@@ -2665,7 +2681,7 @@
   {
     id: "ep25",
     "word": "好为人师",
-    "pinyin": "hào wéi rén shī · 贬义",
+    "pinyin": "hào wéi rén shī",
     "cat": "error_prone_idiom",
     "tag": "贬词误褒",
     "trap": "误用于称赞资深前辈热心指导新人、乐于传帮带。",
@@ -2678,7 +2694,7 @@
   {
     id: "ep26",
     "word": "天花乱坠",
-    "pinyin": "tiān huā luàn zhuì · 多贬义",
+    "pinyin": "tiān huā luàn zhuì",
     "cat": "error_prone_idiom",
     "tag": "对象与色彩限制",
     "trap": "误用于夸奖演讲精彩绝伦或修饰文章写得华美。",
@@ -2691,7 +2707,7 @@
   {
     id: "ep27",
     "word": "一团和气",
-    "pinyin": "yī tuán hé qì · 贬义倾向",
+    "pinyin": "yī tuán hé qì",
     "cat": "error_prone_idiom",
     "tag": "政论常考贬义词",
     "trap": "误用于表扬班子内部团结友爱、氛围融洽。",
@@ -2704,7 +2720,7 @@
   {
     id: "ep28",
     "word": "振振有词",
-    "pinyin": "zhèn zhèn yǒu cí · 贬义",
+    "pinyin": "zhèn zhèn yǒu cí",
     "cat": "error_prone_idiom",
     "tag": "贬词误褒高频",
     "trap": "误当作“理直气壮”来赞扬正义一方据理力争。",
@@ -2717,7 +2733,7 @@
   {
     id: "ep29",
     "word": "道貌岸然",
-    "pinyin": "dào mào àn rán · 讽刺贬义",
+    "pinyin": "dào mào àn rán",
     "cat": "error_prone_idiom",
     "tag": "古褒今贬陷阱",
     "trap": "误用于正面赞美学者神态庄重威严。",
@@ -2730,7 +2746,7 @@
   {
     id: "ep30",
     "word": "倾巢而出",
-    "pinyin": "qīng cháo ér chū · 贬义",
+    "pinyin": "qīng cháo ér chū",
     "cat": "error_prone_idiom",
     "tag": "贬词误褒",
     "trap": "误用于公安干警或救援队员“全体倾巢而出抢险救灾”。",
@@ -2743,7 +2759,7 @@
   {
     id: "ep31",
     "word": "死灰复燃",
-    "pinyin": "sǐ huī fù rán · 贬义",
+    "pinyin": "sǐ huī fù rán",
     "cat": "error_prone_idiom",
     "tag": "贬词误褒",
     "trap": "误用于赞美传统非遗手艺或老字号品牌重获新生。",
@@ -2769,7 +2785,7 @@
   {
     id: "ep33",
     "word": "高谈阔论",
-    "pinyin": "gāo tán kuò lùn · 多含贬义",
+    "pinyin": "gāo tán kuò lùn",
     "cat": "error_prone_idiom",
     "tag": "贬词误褒",
     "trap": "误用于正面报道代表委员在峰会上建言献策。",
@@ -2782,7 +2798,7 @@
   {
     id: "ep34",
     "word": "如丧考妣",
-    "pinyin": "rú sàng kǎo bǐ · 贬义",
+    "pinyin": "rú sàng kǎo bǐ",
     "cat": "error_prone_idiom",
     "tag": "感情色彩死穴",
     "trap": "误用于同情受灾群众或革命烈士家属的深切悲痛。",
@@ -2795,7 +2811,7 @@
   {
     id: "ep35",
     "word": "沆瀣一气",
-    "pinyin": "hàng xiè yī qì · 贬义",
+    "pinyin": "hàng xiè yī qì",
     "cat": "error_prone_idiom",
     "tag": "典故贬义词",
     "trap": "误用于赞美合作伙伴默契配合、志同道合。",
@@ -2808,7 +2824,7 @@
   {
     id: "ep36",
     "word": "以邻为壑",
-    "pinyin": "yǐ lín wéi hè · 贬义",
+    "pinyin": "yǐ lín wéi hè",
     "cat": "error_prone_idiom",
     "tag": "政论国际关系高频",
     "trap": "误以为与邻居互通沟渠、守望相助。",
@@ -2821,7 +2837,7 @@
   {
     id: "ep37",
     "word": "怙恶不悛",
-    "pinyin": "hù è bù quān · 贬义",
+    "pinyin": "hù è bù quān",
     "cat": "error_prone_idiom",
     "tag": "书面高频重贬词",
     "trap": "不识“怙（依仗坚持）”“悛（悔改）”而误猜词义。",
@@ -2834,7 +2850,7 @@
   {
     id: "ep38",
     "word": "画虎类犬",
-    "pinyin": "huà hǔ lèi quǎn · 贬义",
+    "pinyin": "huà hǔ lèi quǎn",
     "cat": "error_prone_idiom",
     "tag": "盲目模仿贬义词",
     "trap": "忽略其模仿失败的贬义结果。",
@@ -2847,7 +2863,7 @@
   {
     id: "ep39",
     "word": "沐猴而冠",
-    "pinyin": "mù hóu ér guàn · 贬义",
+    "pinyin": "mù hóu ér guàn",
     "cat": "error_prone_idiom",
     "tag": "史记典故重贬词",
     "trap": "误用于童话马戏表演描写。",
@@ -2860,7 +2876,7 @@
   {
     id: "ep40",
     "word": "瓦釜雷鸣",
-    "pinyin": "wǎ fǔ léi míng · 贬义",
+    "pinyin": "wǎ fǔ léi míng",
     "cat": "error_prone_idiom",
     "tag": "楚辞典故高频词",
     "trap": "误以为形容声音气势磅礴如雷贯耳（误作褒义）。",
@@ -2873,7 +2889,7 @@
   {
     id: "ep41",
     "word": "陈陈相因",
-    "pinyin": "chén chén xiāng yīn · 贬义",
+    "pinyin": "chén chén xiāng yīn",
     "cat": "error_prone_idiom",
     "tag": "史记典故古褒今贬",
     "trap": "误用于夸赞文化传统代代传承有序。",
@@ -2886,7 +2902,7 @@
   {
     id: "ep42",
     "word": "吠形吠声",
-    "pinyin": "fèi xíng fèi shēng · 贬义",
+    "pinyin": "fèi xíng fèi shēng",
     "cat": "error_prone_idiom",
     "tag": "盲从附和贬义词",
     "trap": "只看字面狗叫，不知其比喻舆论盲从。",
@@ -2899,7 +2915,7 @@
   {
     id: "ep43",
     "word": "舞文弄墨",
-    "pinyin": "wǔ wén nòng mò · 贬义",
+    "pinyin": "wǔ wén nòng mò",
     "cat": "error_prone_idiom",
     "tag": "贬词误褒高频",
     "trap": "误用于赞美文人墨客挥毫创作、文采飞扬。",
@@ -2912,7 +2928,7 @@
   {
     id: "ep44",
     "word": "胶柱鼓瑟",
-    "pinyin": "jiāo zhù gǔ sè · 贬义",
+    "pinyin": "jiāo zhù gǔ sè",
     "cat": "error_prone_idiom",
     "tag": "史记典故高频词",
     "trap": "误以为是专心致志弹奏古瑟乐器。",
@@ -2925,7 +2941,7 @@
   {
     id: "ep45",
     "word": "文过饰非",
-    "pinyin": "wén guò shì fēi · 贬义",
+    "pinyin": "wén guò shì fēi",
     "cat": "error_prone_idiom",
     "tag": "高频作风批评词",
     "trap": "不知“文（wèn）”在此作动词掩饰讲。",
@@ -2938,7 +2954,7 @@
   {
     id: "ep46",
     "word": "数典忘祖",
-    "pinyin": "shǔ diǎn wàng zǔ · 贬义",
+    "pinyin": "shǔ diǎn wàng zǔ",
     "cat": "error_prone_idiom",
     "tag": "左传典故高频词",
     "trap": "误读为 shù，或不知“典”指历史礼制典籍。",
@@ -2951,7 +2967,7 @@
   {
     id: "ep47",
     "word": "积重难返",
-    "pinyin": "jī zhòng nán fǎn · 贬义",
+    "pinyin": "jī zhòng nán fǎn",
     "cat": "error_prone_idiom",
     "tag": "专指弊端恶习",
     "trap": "误用于正面传统深厚稳固不可动摇。",
@@ -2964,7 +2980,7 @@
   {
     id: "ep48",
     "word": "巧言令色",
-    "pinyin": "qiǎo yán lìng sè · 贬义",
+    "pinyin": "qiǎo yán lìng sè",
     "cat": "error_prone_idiom",
     "tag": "论语典故贬词误褒",
     "trap": "看到“巧”“令（美好）”误以为是形容女子言辞巧妙、容貌美丽。",
@@ -2977,7 +2993,7 @@
   {
     id: "ep49",
     "word": "附庸风雅",
-    "pinyin": "fù yōng fēng yǎ · 贬义",
+    "pinyin": "fù yōng fēng yǎ",
     "cat": "error_prone_idiom",
     "tag": "文化伪装贬义词",
     "trap": "误用于赞美企业家热爱传统文化、资助艺术展览。",
@@ -3016,7 +3032,7 @@
   {
     id: "ep52",
     "word": "雨后春笋",
-    "pinyin": "yǔ hòu chūn sǔn · 褒义",
+    "pinyin": "yǔ hòu chūn sǔn",
     "cat": "error_prone_idiom",
     "tag": "褒词误贬高频",
     "trap": "误用于消极违纪现象：“各种非法集资平台如雨后春笋般冒出来”。",
@@ -3029,7 +3045,7 @@
   {
     id: "ep53",
     "word": "洋洋大观",
-    "pinyin": "yáng yáng dà guān · 褒义",
+    "pinyin": "yáng yáng dà guān",
     "cat": "error_prone_idiom",
     "tag": "褒词误贬",
     "trap": "误用于形容假冒伪劣商品种类繁多。",
@@ -3042,7 +3058,7 @@
   {
     id: "ep54",
     "word": "余勇可贾",
-    "pinyin": "yú yǒng kě gǔ · 褒义",
+    "pinyin": "yú yǒng kě gǔ",
     "cat": "error_prone_idiom",
     "tag": "左传典故读音与色彩",
     "trap": "误读为 jiǎ，或误以为是贪婪出卖勇力。",
@@ -3055,7 +3071,7 @@
   {
     id: "ep55",
     "word": "别出机杼",
-    "pinyin": "bié chū jī zhù · 褒义",
+    "pinyin": "bié chū jī zhù",
     "cat": "error_prone_idiom",
     "tag": "诗文创新高频词",
     "trap": "不识“机杼（织布机，比喻诗文构思布局）”而误用于机器制造。",
@@ -3068,7 +3084,7 @@
   {
     id: "ep56",
     "word": "名噪一时",
-    "pinyin": "míng zào yī shí · 偏褒义",
+    "pinyin": "míng zào yī shí",
     "cat": "error_prone_idiom",
     "tag": "易误判为贬义",
     "trap": "看到“噪”字就误以为是臭名昭著或炒作喧嚣（误作贬义）。",
@@ -3081,7 +3097,7 @@
   {
     id: "ep57",
     "word": "言之凿凿",
-    "pinyin": "yán zhī záo záo · 褒/实证",
+    "pinyin": "yán zhī záo záo",
     "cat": "error_prone_idiom",
     "tag": "易误判为贬义",
     "trap": "与“信誓旦旦”或“振振有词”混淆，误用于骗子毫无根据地瞎编。",
@@ -3094,7 +3110,7 @@
   {
     id: "ep58",
     "word": "不赞一词",
-    "pinyin": "bù zàn yī cí · 褒/中",
+    "pinyin": "bù zàn yī cí",
     "cat": "error_prone_idiom",
     "tag": "史记典故一词两义",
     "trap": "误把“赞”当成称赞夸奖，以为是“一句好话都不肯夸”。",
@@ -3107,7 +3123,7 @@
   {
     id: "ep59",
     "word": "好整以暇",
-    "pinyin": "hào zhěng yǐ xiá · 褒义",
+    "pinyin": "hào zhěng yǐ xiá",
     "cat": "error_prone_idiom",
     "tag": "左传典故读音与色彩",
     "trap": "误读为 hǎo，或误以为是上班偷懒清闲自在（误作贬义）。",
@@ -3120,7 +3136,7 @@
   {
     id: "ep60",
     "word": "凤毛麟角",
-    "pinyin": "fèng máo lín jiǎo · 褒义",
+    "pinyin": "fèng máo lín jiǎo",
     "cat": "error_prone_idiom",
     "tag": "稀少且可贵",
     "trap": "仅看“稀少”而误用于坏事：“这种恶性事故在当地已是凤毛麟角”。",
@@ -3133,7 +3149,7 @@
   {
     id: "ep61",
     "word": "彪炳史册",
-    "pinyin": "biāo bǐng shǐ cè · 褒义",
+    "pinyin": "biāo bǐng shǐ cè",
     "cat": "error_prone_idiom",
     "tag": "崇高褒义大词",
     "trap": "词义极重，误用于普通小事或反面历史事件。",
@@ -3146,7 +3162,7 @@
   {
     id: "ep62",
     "word": "集腋成裘",
-    "pinyin": "jí yè chéng qiú · 褒义",
+    "pinyin": "jí yè chéng qiú",
     "cat": "error_prone_idiom",
     "tag": "积少成多褒义词",
     "trap": "误用于负面小错积累成大祸（坏事积累应用“积羽沉舟”或“千里之堤溃于蚁穴”）。",
@@ -3211,7 +3227,7 @@
   {
     id: "ep67",
     "word": "耳提面命",
-    "pinyin": "ěr tí miàn mìng · 褒义",
+    "pinyin": "ěr tí miàn mìng",
     "cat": "error_prone_idiom",
     "tag": "长对晚褒义词",
     "trap": "看字面“提着耳朵当面命令”，误以为是粗暴训斥体罚（误作贬义）或平级互用。",
@@ -3250,7 +3266,7 @@
   {
     id: "ep70",
     "word": "鞭辟入里",
-    "pinyin": "biān pì rù lǐ · 褒义",
+    "pinyin": "biān pì rù lǐ",
     "cat": "error_prone_idiom",
     "tag": "深刻 vs 全面辨析",
     "trap": "前文讲覆盖面广而全面，后文却误填“鞭辟入里”（前后维度脱节）。",
@@ -3263,7 +3279,7 @@
   {
     id: "ep71",
     "word": "含英咀华",
-    "pinyin": "hán yīng jǔ huá · 褒义",
+    "pinyin": "hán yīng jǔ huá",
     "cat": "error_prone_idiom",
     "tag": "诗文品读专属词",
     "trap": "按字面误用于品尝鲜花美食或欣赏园林花卉。",
@@ -3627,7 +3643,7 @@
   {
     id: "ep99",
     "word": "左右逢源",
-    "pinyin": "zuǒ yòu féng yuán · 褒贬两用",
+    "pinyin": "zuǒ yòu féng yuán",
     "cat": "error_prone_idiom",
     "tag": "一词双色多义词",
     "trap": "只知其一不知其二，遇到褒义学识融会贯通用法时误判为错。",
@@ -3640,7 +3656,7 @@
   {
     id: "ep100",
     "word": "瞻前顾后",
-    "pinyin": "zhān qián gù hòu · 双义词",
+    "pinyin": "zhān qián gù hòu",
     "cat": "error_prone_idiom",
     "tag": "周密 vs 犹豫双义",
     "trap": "以为瞻前顾后只有贬义“畏缩犹豫”。",
@@ -3653,7 +3669,7 @@
   {
     id: "ep101",
     "word": "按图索骥",
-    "pinyin": "àn tú suǒ jì · 双义词",
+    "pinyin": "àn tú suǒ jì",
     "cat": "error_prone_idiom",
     "tag": "寻线索 vs 机械死板",
     "trap": "在检索目录索引找资料的中性语境误判其必为贬义。",
@@ -3666,7 +3682,7 @@
   {
     id: "ep102",
     "word": "沙里淘金",
-    "pinyin": "shā lǐ táo jīn · 双义词",
+    "pinyin": "shā lǐ táo jīn",
     "cat": "error_prone_idiom",
     "tag": "精选精华 vs 费力效微",
     "trap": "忽略其“费力大而收效微”的第二义项。",
@@ -3679,7 +3695,7 @@
   {
     id: "ep103",
     "word": "绵里藏针",
-    "pinyin": "mián lǐ cáng zhēn · 褒贬双义",
+    "pinyin": "mián lǐ cáng zhēn",
     "cat": "error_prone_idiom",
     "tag": "柔中带刚 vs 外善内毒",
     "trap": "在赞美太极拳法或外交艺术柔中带刚时误以为只是骂人阴险。",
@@ -3692,7 +3708,7 @@
   {
     id: "ep104",
     "word": "四平八稳",
-    "pinyin": "sì píng bā wěn · 多含贬义",
+    "pinyin": "sì píng bā wěn",
     "cat": "error_prone_idiom",
     "tag": "稳妥 vs 不求进取",
     "trap": "误用于大加赞扬改革攻坚干部的锐意作为。",
@@ -3705,7 +3721,7 @@
   {
     id: "ep105",
     "word": "老气横秋",
-    "pinyin": "lǎo qì héng qiū · 贬义",
+    "pinyin": "lǎo qì héng qiū",
     "cat": "error_prone_idiom",
     "tag": "对象反常识陷阱",
     "trap": "误用来形容七八十岁白发老爷爷精神风貌。",
@@ -3731,7 +3747,7 @@
   {
     id: "ep107",
     "word": "光风霁月",
-    "pinyin": "guāng fēng jì yuè · 褒义",
+    "pinyin": "guāng fēng jì yuè",
     "cat": "error_prone_idiom",
     "tag": "黄庭坚赞周敦颐典故",
     "trap": "仅当作天气预报景物词，不知其核心比喻人品胸襟。",
@@ -3757,7 +3773,7 @@
   {
     id: "ep109",
     "word": "韦编三绝",
-    "pinyin": "wéi biān sān jué · 褒义",
+    "pinyin": "wéi biān sān jué",
     "cat": "error_prone_idiom",
     "tag": "读书勤奋专属词",
     "trap": "误用于形容古书保存破损严重，或作家写书多次断稿。",
@@ -3770,7 +3786,7 @@
   {
     id: "ep110",
     "word": "削足适履",
-    "pinyin": "xuē zú shì lǚ · 贬义",
+    "pinyin": "xuē zú shì lǚ",
     "cat": "error_prone_idiom",
     "tag": "行测高频主客颠倒词",
     "trap": "与“量体裁衣”正反混淆。",
@@ -3783,7 +3799,7 @@
   {
     id: "ep111",
     "word": "缘木求鱼",
-    "pinyin": "yuán mù qiú yú · 贬义",
+    "pinyin": "yuán mù qiú yú",
     "cat": "error_prone_idiom",
     "tag": "方法方向根本错误",
     "trap": "与“大海捞针”（难找但海里真有针）混淆。",
@@ -3809,7 +3825,7 @@
   {
     id: "ep113",
     "word": "穿凿附会",
-    "pinyin": "chuān záo fù huì · 贬义",
+    "pinyin": "chuān záo fù huì",
     "cat": "error_prone_idiom",
     "tag": "学术解读高频贬词",
     "trap": "误以为是深入挖掘史料、旁征博引。",
@@ -3835,7 +3851,7 @@
   {
     id: "ep115",
     "word": "历久弥新",
-    "pinyin": "lì jiǔ mí xīn · 褒义",
+    "pinyin": "lì jiǔ mí xīn",
     "cat": "error_prone_idiom",
     "tag": "文化传承超高频词",
     "trap": "与“历久弥坚”（感情信念越久越坚定）搭配对象混淆。",
@@ -3874,7 +3890,7 @@
   {
     id: "ep118",
     "word": "见微知著",
-    "pinyin": "jiàn wēi zhī zhù · 褒义",
+    "pinyin": "jiàn wēi zhī zhù",
     "cat": "error_prone_idiom",
     "tag": "洞察力高频词",
     "trap": "与“因小失大”或“小题大做”混淆。",
@@ -3900,7 +3916,7 @@
   {
     id: "ep120",
     "word": "正本清源",
-    "pinyin": "zhèng běn qīng yuán · 褒义",
+    "pinyin": "zhèng běn qīng yuán",
     "cat": "error_prone_idiom",
     "tag": "治本高频政论词",
     "trap": "误用于单纯查找文献最初版本出处。",
@@ -4440,8 +4456,8 @@
     "meaning": "竹字头“簿（bù）”指本子、账册、文书卷宗（对簿公堂——在法庭上核对状纸文书受审、练习簿、登记簿）；草字头“薄”指单薄、轻视（厚此薄彼、妄自菲薄）或迫近（日薄西山）。",
     "usage": "打官司上法庭必是竹字头“对簿公堂”。",
     "src": "https://jzykdxxb.jzmu.edu.cn/info/1216/1136.htm",
-    "sentiment": "中性",
-    "sentimentNote": "中性（双字实词无褒贬差）"
+    "sentiment": "褒贬对比",
+    "sentimentNote": "对簿公堂[中性]｜厚此薄彼[贬义]"
   },
   {
     id: "cw66",
@@ -4466,8 +4482,8 @@
     "meaning": "“淡泊”专指内心恬淡、不追逐名利（固定搭配“淡泊名利、淡泊明志”）；“淡薄”指云雾气味稀薄，或感情、兴趣、记忆、法治意识等不浓厚。",
     "usage": "配“名利/明志”必用三点水“淡泊”（注意不是木字旁柏）；配“意识/观念/印象/血缘感情”必用“淡薄”。",
     "src": "https://jzykdxxb.jzmu.edu.cn/info/1216/1136.htm",
-    "sentiment": "中性",
-    "sentimentNote": "中性（双字实词无褒贬差）"
+    "sentiment": "褒贬对比",
+    "sentimentNote": "淡泊[褒义恬淡]｜淡薄[中性稀薄]"
   },
   {
     id: "cw68",
@@ -5891,8 +5907,8 @@
     "word": "拭目以待",
     "pinyin": "shì mù yǐ dài",
     "cat": "error_prone_idiom",
-    "sentiment": "褒义",
-    "sentimentNote": "中性偏褒（殷切期待）",
+    "sentiment": "中性",
+    "sentimentNote": "中性（殷切期待，偏积极）",
     "tag": "期待心理高频词",
     "trap": "语法重复写成“让我们擦亮眼睛拭目以待”。",
     "meaning": "“拭”就是擦。擦亮眼睛等着看，形容对某件好事或重要结果充满殷切期待并确信其发生。",
@@ -6204,7 +6220,7 @@
     "pinyin": "被迫离开家乡 vs 无处安身漂泊",
     "cat": "error_prone_idiom",
     "sentiment": "中性",
-    "sentimentNote": "前中性偏惜｜后贬义凄惨",
+    "sentimentNote": "两词皆中性（后者凄惨重）",
     "tag": "开拓公考易错辨析对",
     "trap": "把外出务工谋生人员写成“流离失所”。",
     "meaning": "“背井离乡”侧重离开故土到外地谋生（有落脚处，程度较轻）；“流离失所”侧重因战乱或灾荒无家可归、到处流浪漂泊（程度极重、惨烈）。",
@@ -6697,8 +6713,8 @@
     "word": "踌躇满志",
     "pinyin": "chóu chú mǎn zhì",
     "cat": "exam_core",
-    "sentiment": "褒贬对比",
-    "sentimentNote": "中性偏褒（自得满意）",
+    "sentiment": "中性",
+    "sentimentNote": "中性（从容自得，偏积极）",
     "tag": "真题高频 2 次 · 庄子典故头号坑",
     "trap": "看到“踌躇”二字就误以为是犹豫不决、垂头丧气。",
     "meaning": "出自《庄子·养生主》庖丁解牛完毕“提刀而立，为之四顾，为之踌躇满志”。形容对自己取得的成就感到十分得意满足、从容自得。",
@@ -6957,8 +6973,8 @@
     "word": "独善其身 vs 明哲保身",
     "pinyin": "只顾自己不顾整体 vs 怕连累回避斗争",
     "cat": "exam_core",
-    "sentiment": "中性",
-    "sentimentNote": "前中性｜后今偏贬",
+    "sentiment": "褒贬对比",
+    "sentimentNote": "前中性｜后多含贬义",
     "tag": "真题高频 2 次 · 2017国考真题对",
     "trap": "在全球化互通互联语境中选错“明哲保身”（未涉及怕受牵连回避斗争）。",
     "meaning": "“独善其身”原指做官不得志则修养自身，今多指只顾自己好不管整体他人（常用于“没有任何国家能独善其身”）；“明哲保身”指因怕连累自己而回避原则斗争。",
@@ -6970,8 +6986,8 @@
     "word": "不遗余力",
     "pinyin": "bù yí yú lì",
     "cat": "exam_core",
-    "sentiment": "褒义",
-    "sentimentNote": "中性偏褒",
+    "sentiment": "中性",
+    "sentimentNote": "中性（竭尽全力，偏积极）",
     "tag": "真题高频 2 次 · 战国策典故",
     "trap": "误把“遗”当成遗憾。",
     "meaning": "“遗”指留；把全部力量都使出来，一点也不保留。",
@@ -7048,8 +7064,8 @@
     "word": "天马行空",
     "pinyin": "tiān mǎ xíng kōng",
     "cat": "exam_core",
-    "sentiment": "褒义",
-    "sentimentNote": "中性偏褒",
+    "sentiment": "中性",
+    "sentimentNote": "中性（才思豪放不羁）",
     "tag": "真题高频 2 次 · 想象豪迈奔放",
     "trap": "误当作脚不沾地脱离实际的胡思乱想（贬义应用“异想天开/想入非非”）。",
     "meaning": "天马奔腾神速，像是腾起在空中飞行一样。多比喻诗文气势豪放，或思维想象自由奔放不受拘束。",
@@ -7451,7 +7467,7 @@
     "word": "高枕无忧 vs 稳操胜券",
     "pinyin": "安心无患 vs 把握必胜",
     "cat": "exam_core",
-    "sentiment": "中性",
+    "sentiment": "褒贬对比",
     "sentimentNote": "前中性｜后褒义",
     "tag": "竞争态势高频辨析",
     "trap": "混淆“安全无忧”与“竞争必赢”。",
@@ -7592,7 +7608,7 @@
   {
     id: "ec106",
     "word": "令人发指",
-    "pinyin": "líng rén fà zhǐ",
+    "pinyin": "lìng rén fà zhǐ",
     "cat": "exam_core",
     "sentiment": "贬义",
     "sentimentNote": "贬义（愤怒到极点）",
@@ -7789,8 +7805,8 @@
     "word": "望梅止渴 vs 画饼充饥",
     "pinyin": "用空想安慰鼓舞 vs 用空名自我欺骗无实效",
     "cat": "exam_core",
-    "sentiment": "中性",
-    "sentimentNote": "前中性｜后偏贬义",
+    "sentiment": "褒贬对比",
+    "sentimentNote": "前中性｜后多含贬义",
     "tag": "世说新语/三国志名对",
     "trap": "不知曹操望梅止渴确实让士兵走出荒原（侧重心理暗示鼓舞），画饼充饥则纯属空名无用。",
     "meaning": "“望梅止渴”指愿望无法实现，用空想安慰勉励自己（中性，有时确能振作精神）；“画饼充饥”指画个饼解饿，比喻徒有虚名毫无实用，或用空想自欺欺人（偏贬义）。",
@@ -7945,8 +7961,8 @@
     "word": "始终如一 vs 一如既往",
     "pinyin": "自始至终不变 vs 完全跟从前一样",
     "cat": "exam_core",
-    "sentiment": "褒义",
-    "sentimentNote": "前褒义｜后中性偏褒",
+    "sentiment": "褒贬对比",
+    "sentimentNote": "前褒义｜后中性",
     "tag": "真题高频各 2 次 · 时间参照系",
     "trap": "在出现明确转折节点“上市之后仍像以前一样重视研发”时微辨不清。",
     "meaning": "“始终如一”强调从开始到最后全程保持一致不懈怠；“一如既往”强调在某个新节点之后，态度做法依然完全像过去一样。",
@@ -7985,7 +8001,7 @@
     "pinyin": "yī chéng bù biàn",
     "cat": "exam_core",
     "sentiment": "贬义",
-    "sentimentNote": "中性偏贬",
+    "sentimentNote": "贬义（守旧僵化不变）",
     "tag": "真题高频 2 次 · 礼记王制典故",
     "trap": "误写作“一尘不变”。",
     "meaning": "一经形成，就永远不再改变（多用于否定句“世上没有一成不变的模板”，或批评僵化）。",
@@ -8088,8 +8104,8 @@
     "word": "千载难逢",
     "pinyin": "qiān zǎi nán féng",
     "cat": "exam_core",
-    "sentiment": "褒义",
-    "sentimentNote": "中性偏褒",
+    "sentiment": "中性",
+    "sentimentNote": "中性（机遇极难得）",
     "tag": "真题高频 2 次 · 机遇极罕见",
     "trap": "误用于千年一遇的特大灾害（灾害不用“难逢”庆幸语气）。",
     "meaning": "一千年里也很难遇到一次。形容机会极其难得罕见。",
@@ -8114,8 +8130,8 @@
     "word": "有目共睹",
     "pinyin": "yǒu mù gòng dǔ",
     "cat": "exam_core",
-    "sentiment": "褒义",
-    "sentimentNote": "中性偏褒",
+    "sentiment": "中性",
+    "sentimentNote": "中性（事实极其明显）",
     "tag": "真题高频 2 次 · 事实昭彰",
     "trap": "用于隐蔽未公开的内幕细节。",
     "meaning": "凡是有眼睛的人都看得见。形容事实极其明显（多指成就、进步或贡献大家全都亲眼见证）。",
@@ -8245,7 +8261,7 @@
     "pinyin": "名称与实际完全相符 vs 好名声确实不假",
     "cat": "exam_core",
     "sentiment": "褒义",
-    "sentimentNote": "前中性偏褒｜后褒义",
+    "sentimentNote": "两词皆褒义",
     "tag": "真题高频各 2 次 · 名实对应",
     "trap": "忽略“名副其实”侧重头衔称号与实力严丝合缝匹配，“名不虚传”侧重亲见后验证此前传闻不假。",
     "meaning": "“副”指相称、符合。名声或称号与实际完全相符（注意字形是“副”不是“符”）。",
@@ -8374,8 +8390,8 @@
     "word": "翘首以盼",
     "pinyin": "qiáo shǒu yǐ pàn",
     "cat": "potential_hot",
-    "sentiment": "褒义",
-    "sentimentNote": "中性偏褒",
+    "sentiment": "中性",
+    "sentimentNote": "中性（殷切期盼）",
     "tag": "书面期待高频词",
     "trap": "误读为 qiào。",
     "meaning": "“翘（qiáo）”指抬起。抬起头殷切地盼望（同“翘首企足”）。",
@@ -8387,8 +8403,8 @@
     "word": "横空出世",
     "pinyin": "héng kōng chū shì",
     "cat": "potential_hot",
-    "sentiment": "褒义",
-    "sentimentNote": "中性偏褒",
+    "sentiment": "中性",
+    "sentimentNote": "中性（震撼涌现，偏积极）",
     "tag": "科技爆款亮相常客",
     "trap": "只记本义形容山峰高耸，不知现代央媒极常用来形容颠覆性新技术震撼问世。",
     "meaning": "原形容山峰高耸横亘空中，现常比喻卓越新事物、颠覆性产品或杰出人物突然震撼涌现。",
@@ -8439,8 +8455,8 @@
     "word": "弃如敝屣",
     "pinyin": "qì rú bì xǐ",
     "cat": "potential_hot",
-    "sentiment": "贬义",
-    "sentimentNote": "中性偏贬（毫不可惜扔掉）",
+    "sentiment": "中性",
+    "sentimentNote": "中性（毫不可惜抛弃）",
     "tag": "孟子典故 · 书面高频",
     "trap": "不识“敝（破旧）”“屣（xǐ，鞋子）”。",
     "meaning": "像扔掉破鞋子一样把它抛弃，形容毫不可惜地彻底丢弃。",
@@ -8621,8 +8637,8 @@
     "word": "进退失据",
     "pinyin": "jìn tuì shī jù",
     "cat": "potential_hot",
-    "sentiment": "贬义",
-    "sentimentNote": "中性偏贬",
+    "sentiment": "中性",
+    "sentimentNote": "中性（处境窘迫失策）",
     "tag": "失掉依据狼狈高频词",
     "trap": "不知“据”指依据、立足点。",
     "meaning": "前进和后退都失去了依据和立足点，形容处境窘迫、应对失策。",
@@ -8647,8 +8663,8 @@
     "word": "日薄西山",
     "pinyin": "rì bó xī shān",
     "cat": "potential_hot",
-    "sentiment": "贬义",
-    "sentimentNote": "中性偏消极（衰亡将尽）",
+    "sentiment": "中性",
+    "sentimentNote": "中性（衰亡将尽）",
     "tag": "李密陈情表典故",
     "trap": "误把“薄”理解成稀薄，以为傍晚阳光很淡。",
     "meaning": "“薄（bó）”指迫近、靠近。太阳已经快要落到西山了，比喻人到老年残生将尽，或腐朽事物临近灭亡。",
@@ -8712,8 +8728,8 @@
     "word": "绵绵不绝",
     "pinyin": "mián mián bù jué",
     "cat": "potential_hot",
-    "sentiment": "褒义",
-    "sentimentNote": "中性偏褒",
+    "sentiment": "中性",
+    "sentimentNote": "中性（连续不断）",
     "tag": "文脉传承高频词",
     "trap": "与“络绎不绝”（专指行人车马来往不断）混用。",
     "meaning": "连续不断、延绵久远的样子（多修饰文脉、生机、春雨、情思）。",
@@ -8777,8 +8793,8 @@
     "word": "以柔克刚",
     "pinyin": "yǐ róu kè gāng",
     "cat": "potential_hot",
-    "sentiment": "褒义",
-    "sentimentNote": "中性偏褒",
+    "sentiment": "中性",
+    "sentimentNote": "中性（柔性克制刚强）",
     "tag": "柔性基层治理高频喻",
     "trap": "以为仅限武侠搏击。",
     "meaning": "用柔软的去克制刚强的。",
@@ -9090,7 +9106,7 @@
     "pinyin": "shì ér bù jiàn",
     "cat": "potential_hot",
     "sentiment": "贬义",
-    "sentimentNote": "中性偏贬",
+    "sentimentNote": "贬义（漠视不理睬）",
     "tag": "礼记大学 · 漠视忽略高频词",
     "trap": "与“熟视无睹”微辨：视而不见可指心思不在焉没注意到或故意假装没看见；熟视无睹强调“看惯了”麻木冷漠。",
     "meaning": "尽管睁着眼睛看着，却什么也没看见；指不注意，或假装没看见、不理睬。",
@@ -9102,8 +9118,8 @@
     "word": "来日方长",
     "pinyin": "lái rì fāng cháng",
     "cat": "potential_hot",
-    "sentiment": "褒义",
-    "sentimentNote": "中性偏褒",
+    "sentiment": "中性",
+    "sentimentNote": "中性（未来日子尚长）",
     "tag": "时间宽裕劝勉词",
     "trap": "用于十万火急抢险救灾语境。",
     "meaning": "未来的日子还很长，表示事有可为，或劝人不必急于一时。",
@@ -9141,8 +9157,8 @@
     "word": "入乡随俗",
     "pinyin": "rù xiāng suí sú",
     "cat": "potential_hot",
-    "sentiment": "褒义",
-    "sentimentNote": "中性偏褒",
+    "sentiment": "中性",
+    "sentimentNote": "中性（顺应当地习俗）",
     "tag": "跨文化本地化高频词",
     "trap": "误用于同流合污迎合当地陋习腐败（那叫“同流合污/随波逐流”）。",
     "meaning": "到一个地方，就顺从尊重当地的风俗习惯。",
@@ -9245,8 +9261,8 @@
     "word": "摇摇欲坠",
     "pinyin": "yáo yáo yù zhuì",
     "cat": "potential_hot",
-    "sentiment": "贬义",
-    "sentimentNote": "中性偏贬",
+    "sentiment": "中性",
+    "sentimentNote": "中性（濒临倒塌危殆）",
     "tag": "三国志典故 · 体系将倾",
     "trap": "用于稳固上升中的小波动。",
     "meaning": "形容十分危险，很快就要倒塌或灭亡。",
@@ -9464,12 +9480,12 @@
   {
     id: "ph094",
     "word": "抽丝剥茧",
-    "pinyin": "chōu sī bāo jiǎn",
+    "pinyin": "chōu sī bō jiǎn",
     "cat": "potential_hot",
     "sentiment": "褒义",
     "sentimentNote": "褒义",
     "tag": "清代诗话 · 深度剖析热词",
-    "trap": "用于粗枝大叶的宏观概览。",
+    "trap": "误读为 chōu sī bāo jiǎn（“剥”在合成词与成语中统读 bō），或误用于粗枝大叶的宏观概览。",
     "meaning": "丝得一根根抽，茧得一层层剥。形容分析复杂问题或侦破疑案时由表及里、层层深入、细致入微。",
     "usage": "调查研究、考古溯源、复杂案件剖析高频褒义词。",
     "src": "https://gaokao.eol.cn/zhidao/yw/201301/t20130125_897575.shtml"
@@ -10443,6 +10459,7 @@
         if (w.cat === "confusable_words") continue;
         if (w.word.indexOf(" vs ") !== -1 || w.word.indexOf(" / ") !== -1) continue;
         var sInfo = getWordSentimentInfo(w);
+        if (sInfo.note.indexOf("偏") !== -1) continue;
         candidates.push({ w: w, sInfo: sInfo });
       }
       if (candidates.length < 4) return [];
@@ -11198,7 +11215,7 @@
       var url = URL.createObjectURL(blob);
       var a = document.createElement("a");
       a.href = url;
-      a.download = "公考不背错词_进度备份.json";
+      a.download = "公考不背成语_进度备份.json";
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
