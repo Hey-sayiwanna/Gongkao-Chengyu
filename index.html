@@ -3,23 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <meta name="apple-mobile-web-app-title" content="不背成语" />
   <meta name="application-name" content="不背成语" />
   <meta name="theme-color" content="#f4f5f8" />
   <title>不背成语</title>
-  <link rel="apple-touch-icon" href="./apple-touch-icon.png?v=202611" />
-  <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png?v=202611" />
-  <link rel="apple-touch-icon" sizes="512x512" href="./icon-512.png?v=202611" />
-  <script>
-    if (!/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
-      var ml = document.createElement("link");
-      ml.rel = "manifest";
-      ml.href = "./manifest.json?v=202611";
-      document.head.appendChild(ml);
-    }
-  </script>
+  <link rel="manifest" href="./manifest.json?v=7" />
+  <link rel="apple-touch-icon" href="./apple-touch-icon.png?v=7" />
+  <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png?v=7" />
+  <link rel="apple-touch-icon" sizes="512x512" href="./icon-512.png?v=7" />
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Crect width='120' height='120' rx='26' fill='%23ffffff'/%3E%3Ccircle cx='60' cy='34' r='22' fill='none' stroke='%23ff6a00' stroke-width='4.5'/%3E%3Ctext x='60' y='42' font-size='23' font-family='sans-serif' font-weight='800' text-anchor='middle' fill='%23ff6a00'%3E成%3C/text%3E%3Ccircle cx='60' cy='86' r='24' fill='%23ff6a00'/%3E%3Ctext x='60' y='94' font-size='23' font-family='sans-serif' font-weight='800' text-anchor='middle' fill='%23ffffff'%3E语%3C/text%3E%3C/svg%3E" />
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
   <style>
@@ -598,23 +592,32 @@
     <!-- VIEW 4: SYNC & INSTALL (主屏幕安装与数据同步) -->
     <section id="view-sync" class="hidden space-y-4 anim-in">
       <!-- Add to Home Screen Guide -->
-      <div class="glass-card p-5 space-y-3">
-        <div class="text-base font-bold text-slate-900">📲 免服务器添加到 iPhone 与 Mac 主屏幕</div>
+      <div class="glass-card p-5 space-y-3.5">
+        <div class="flex flex-wrap items-center justify-between gap-2">
+          <div class="text-base font-bold text-slate-900">📲 免服务器安装到 iPhone、安卓与 Mac 桌面</div>
+          <button id="btnAndroidInstallPrompt" type="button" class="hidden btn-tap px-3.5 py-2 rounded-xl bg-emerald-600 text-white text-xs font-extrabold hover:bg-emerald-700 shadow-sm">
+            ⚡ 一键安装独立桌面 App
+          </button>
+        </div>
         <p class="text-xs text-slate-600 leading-relaxed">
-          你完全不需要购买「个人服务器」。把配套压缩包里的静态网页免费托管到 <strong>GitHub Pages</strong>（零费用、自带 HTTPS 域名），即可在手机和电脑浏览器打开并固定成独立全屏图标：
+          依托 <strong>GitHub Pages</strong> 免费静态托管与标准 PWA 协议，苹果、安卓与电脑均可生成无浏览器地址栏的独立全屏应用图标，支持断网离线刷词：
         </p>
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
           <div class="p-3.5 rounded-2xl bg-white/80 border border-slate-200/70 space-y-1.5">
-            <div class="font-bold text-slate-900">iPhone / iPad（Safari 浏览器）</div>
-            <p class="text-slate-600 leading-relaxed">1. 用系统自带 Safari 打开你的 GitHub Pages 网址。</p>
-            <p class="text-slate-600 leading-relaxed">2. 点击底部工具栏正中间的「分享」图标（向上箭头方框）。</p>
-            <p class="text-slate-600 leading-relaxed">3. 上滑菜单点「添加到主屏幕」，桌面即出现无地址栏的全屏原生感图标，断网也能背。</p>
+            <div class="font-bold text-slate-900">安卓手机（Edge / Chrome / 自带浏览器）</div>
+            <p class="text-slate-600 leading-relaxed">1. 推荐用安卓版 <strong>Edge 或 Chrome</strong> 打开网址，点右上角菜单选「<strong>安装应用</strong> / 添加到主屏幕」（或点上方绿色一键安装按钮），可生成无浏览器角标的真全屏应用。</p>
+            <p class="text-slate-600 leading-relaxed">2. 用 Vivo、小米、OPPO 等系统自带浏览器打开，点底部菜单「<strong>添加至桌面</strong>」（若桌面未出现图标，到手机「设置 → 权限管理」开启该浏览器的「桌面快捷方式」权限即可）。</p>
           </div>
           <div class="p-3.5 rounded-2xl bg-white/80 border border-slate-200/70 space-y-1.5">
-            <div class="font-bold text-slate-900">Mac 电脑（Safari 或 Chrome）</div>
-            <p class="text-slate-600 leading-relaxed">1. 用 macOS Safari（macOS Sonoma 14 及以上）打开同一网址。</p>
-            <p class="text-slate-600 leading-relaxed">2. 点击顶部菜单栏「文件」→「添加到程序坞（Add to Dock）」。</p>
-            <p class="text-slate-600 leading-relaxed">3. 以后从底部 Dock 栏一键启动独立窗口，支持键盘空格翻面、数字键 1-4 打分、X 键秒删简单词。</p>
+            <div class="font-bold text-slate-900">iPhone / iPad（Safari 浏览器）</div>
+            <p class="text-slate-600 leading-relaxed">1. 用系统自带 Safari 打开网址。</p>
+            <p class="text-slate-600 leading-relaxed">2. 点击底部工具栏正中间的「分享」图标（向上箭头方框）。</p>
+            <p class="text-slate-600 leading-relaxed">3. 点「添加到主屏幕」，桌面即生成无地址栏的独立全屏「不背成语」图标。</p>
+          </div>
+          <div class="p-3.5 rounded-2xl bg-white/80 border border-slate-200/70 space-y-1.5">
+            <div class="font-bold text-slate-900">Mac / Windows 电脑</div>
+            <p class="text-slate-600 leading-relaxed">1. Mac Safari 点顶部菜单「文件 → 添加到程序坞」；Windows / Mac 版 Chrome 或 Edge 点地址栏右侧「安装不背成语」图标。</p>
+            <p class="text-slate-600 leading-relaxed">2. 独立窗口支持键盘空格翻面、数字键 1-4 打分、X 键秒删简单词。</p>
           </div>
         </div>
       </div>
@@ -10995,8 +10998,52 @@
       switchView("library");
     });
 
+    var deferredPwaPrompt = null;
+    var androidInstallBtn = document.getElementById("btnAndroidInstallPrompt");
+
+    window.addEventListener("beforeinstallprompt", function (e) {
+      e.preventDefault();
+      deferredPwaPrompt = e;
+      if (androidInstallBtn) androidInstallBtn.classList.remove("hidden");
+      var topBtn = document.getElementById("btnInstallGuideTop");
+      if (topBtn) topBtn.textContent = "📲 安装App";
+    });
+
+    window.addEventListener("appinstalled", function () {
+      deferredPwaPrompt = null;
+      if (androidInstallBtn) androidInstallBtn.classList.add("hidden");
+      showToast("已成功安装「不背成语」到桌面");
+    });
+
+    if (androidInstallBtn) {
+      androidInstallBtn.addEventListener("click", function () {
+        if (!deferredPwaPrompt) {
+          showToast("请点击浏览器右上角或底部菜单选择「安装应用 / 添加到主屏幕」");
+          return;
+        }
+        deferredPwaPrompt.prompt();
+        deferredPwaPrompt.userChoice.then(function () {
+          deferredPwaPrompt = null;
+          androidInstallBtn.classList.add("hidden");
+        }).catch(function () {});
+      });
+    }
+
     document.getElementById("btnInstallGuideTop").addEventListener("click", function () {
-      switchView("sync");
+      if (deferredPwaPrompt) {
+        deferredPwaPrompt.prompt();
+        deferredPwaPrompt.userChoice.then(function (choice) {
+          if (!choice || choice.outcome !== "accepted") {
+            switchView("sync");
+          }
+          deferredPwaPrompt = null;
+          if (androidInstallBtn) androidInstallBtn.classList.add("hidden");
+        }).catch(function () {
+          switchView("sync");
+        });
+      } else {
+        switchView("sync");
+      }
     });
 
     // Session controls
@@ -11486,7 +11533,7 @@
     });
     if ("serviceWorker" in navigator && (location.protocol === "https:" || location.hostname === "localhost")) {
       window.addEventListener("load", function () {
-        navigator.serviceWorker.register("./sw.js?v=202611").then(function (reg) {
+        navigator.serviceWorker.register("./sw.js?v=7").then(function (reg) {
           if (reg && reg.update) reg.update();
         }).catch(function () {});
       });

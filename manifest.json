@@ -1,22 +1,37 @@
 {
+  "id": "./",
   "name": "不背成语",
   "short_name": "不背成语",
   "description": "公考 90% 覆盖应试核心词书：专攻望文生义、褒贬颠倒与高频真题少用词，支持熟词一键永久剔除与离线记忆复习。",
+  "lang": "zh-CN",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
+  "orientation": "portrait-primary",
   "background_color": "#ffffff",
   "theme_color": "#f2f4f8",
+  "categories": [
+    "education",
+    "books"
+  ],
   "icons": [
     {
-      "src": "./icon-192.png?v=202611",
+      "src": "./icon-192.png?v=7",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any"
     },
     {
-      "src": "./icon-512.png?v=202611",
+      "src": "./icon-512.png?v=7",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icon-maskable-512.png?v=7",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
     }
   ]
 }

@@ -1,11 +1,12 @@
-const CACHE_NAME = "gongkao-idiom-pwa-v6";
+const CACHE_NAME = "gongkao-idiom-pwa-v7";
 const ASSETS = [
   "./",
   "./index.html",
-  "./apple-touch-icon.png?v=202611",
-  "./icon-192.png?v=202611",
-  "./icon-512.png?v=202611",
-  "./manifest.json?v=202611",
+  "./manifest.json?v=7",
+  "./apple-touch-icon.png?v=7",
+  "./icon-192.png?v=7",
+  "./icon-512.png?v=7",
+  "./icon-maskable-512.png?v=7",
   "https://cdn.tailwindcss.com/3.4.17"
 ];
 
@@ -24,7 +25,6 @@ self.addEventListener("activate", (event) => {
   );
 });
 
-// Network-First so new updates & new icons take effect immediately when online; fallback to cache offline
 self.addEventListener("fetch", (event) => {
   if (event.request.method !== "GET") return;
   event.respondWith(
