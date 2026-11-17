@@ -1,10 +1,10 @@
-const CACHE_NAME = "gongkao-idiom-pwa-v4";
+const CACHE_NAME = "gongkao-idiom-pwa-v5";
 const ASSETS = [
   "./",
   "./index.html",
-  "./manifest.json",
-  "./icon-192.png",
-  "./icon-512.png",
+  "./manifest.json?v=5",
+  "./icon-192.png?v=5",
+  "./icon-512.png?v=5",
   "https://cdn.tailwindcss.com/3.4.17"
 ];
 

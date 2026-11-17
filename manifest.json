@@ -1,20 +1,20 @@
 {
   "name": "不背成语",
   "short_name": "不背成语",
-  "description": "专攻公考行测望文生义、褒贬颠倒与高频易混实词，支持太简单一键永久剔除与离线记忆复习。",
+  "description": "公考 90% 覆盖应试核心词书：专攻望文生义、褒贬颠倒与高频真题少用词，支持熟词一键永久剔除与离线记忆复习。",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
-  "background_color": "#f2f4f8",
+  "background_color": "#ffffff",
   "theme_color": "#f2f4f8",
   "icons": [
     {
-      "src": "./icon-192.png",
+      "src": "./icon-192.png?v=5",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "./icon-512.png",
+      "src": "./icon-512.png?v=5",
       "sizes": "512x512",
       "type": "image/png"
     }
