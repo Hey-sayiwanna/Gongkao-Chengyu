@@ -1,0 +1,22 @@
+{
+  "name": "不背错词 · 公考望文生义与易错词库",
+  "short_name": "不背错词",
+  "description": "专攻公考行测望文生义、褒贬颠倒与高频易混实词，支持太简单一键永久剔除与离线记忆复习。",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f2f4f8",
+  "theme_color": "#f2f4f8",
+  "icons": [
+    {
+      "src": "./icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "./icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
