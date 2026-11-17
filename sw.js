@@ -1,16 +1,18 @@
-const CACHE_NAME = "gongkao-idiom-pwa-v5";
+const CACHE_NAME = "gongkao-idiom-pwa-v6";
 const ASSETS = [
   "./",
   "./index.html",
-  "./manifest.json?v=5",
-  "./icon-192.png?v=5",
-  "./icon-512.png?v=5",
+  "./apple-touch-icon.png?v=202611",
+  "./icon-192.png?v=202611",
+  "./icon-512.png?v=202611",
+  "./manifest.json?v=202611",
   "https://cdn.tailwindcss.com/3.4.17"
 ];
 
 self.addEventListener("install", (event) => {
+  self.skipWaiting();
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => cache.addAll(ASSETS)).then(() => self.skipWaiting())
+    caches.open(CACHE_NAME).then((cache) => cache.addAll(ASSETS)).catch(() => {})
   );
 });
 
@@ -22,20 +24,18 @@ self.addEventListener("activate", (event) => {
   );
 });
 
+// Network-First so new updates & new icons take effect immediately when online; fallback to cache offline
 self.addEventListener("fetch", (event) => {
   if (event.request.method !== "GET") return;
   event.respondWith(
-    caches.match(event.request).then((cached) => {
-      if (cached) return cached;
-      return fetch(event.request)
-        .then((resp) => {
-          if (resp && resp.status === 200) {
-            const clone = resp.clone();
-            caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone));
-          }
-          return resp;
-        })
-        .catch(() => caches.match("./index.html"));
-    })
+    fetch(event.request)
+      .then((resp) => {
+        if (resp && resp.status === 200) {
+          const clone = resp.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone));
+        }
+        return resp;
+      })
+      .catch(() => caches.match(event.request).then((cached) => cached || caches.match("./index.html")))
   );
 });
