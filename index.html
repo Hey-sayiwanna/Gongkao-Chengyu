@@ -10,10 +10,10 @@
   <meta name="application-name" content="不背成语" />
   <meta name="theme-color" content="#f4f5f8" />
   <title>不背成语</title>
-  <link rel="manifest" href="./manifest.json?v=9" />
-  <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png?v=9" />
+  <link rel="manifest" href="./manifest.json?v=11" />
+  <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png?v=11" />
   <script>window.__GONGKAO_LOCAL_DICT_URL = "./idiom_full_dict.json";</script>
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Crect width='120' height='120' rx='26' fill='%231c1c1e'/%3E%3Ccircle cx='60' cy='34' r='22' fill='none' stroke='%23ff6a00' stroke-width='4.5'/%3E%3Ctext x='60' y='42' font-size='23' font-family='sans-serif' font-weight='800' text-anchor='middle' fill='%23ff6a00'%3E成%3C/text%3E%3Ccircle cx='60' cy='86' r='24' fill='%23ff6a00'/%3E%3Ctext x='60' y='94' font-size='23' font-family='sans-serif' font-weight='800' text-anchor='middle' fill='%23ffffff'%3E语%3C/text%3E%3C/svg%3E" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Crect width='120' height='120' rx='26' fill='%23425366'/%3E%3Ccircle cx='60' cy='34' r='22' fill='none' stroke='%23ff6a00' stroke-width='4.5'/%3E%3Ctext x='60' y='42' font-size='23' font-family='sans-serif' font-weight='800' text-anchor='middle' fill='%23ff6a00'%3E成%3C/text%3E%3Ccircle cx='60' cy='86' r='24' fill='%23ff6a00'/%3E%3Ctext x='60' y='94' font-size='23' font-family='sans-serif' font-weight='800' text-anchor='middle' fill='%23ffffff'%3E语%3C/text%3E%3C/svg%3E" />
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
   <style>
     :root {
@@ -96,11 +96,15 @@
         </div>
         <p class="text-xs sm:text-sm text-slate-500 mt-0.5">日常只刷高频核心词 · 全局秒查全量成语词典 · 艾宾浩斯自动排期</p>
       </div>
-      <div class="flex items-center gap-2">
-        <button id="btnQuickAddOpen" type="button" class="btn-tap glass-card px-3 py-2 text-xs font-semibold text-slate-700 hover:bg-white flex items-center gap-1.5" title="手动添加生词或易错词">
+      <div class="flex items-center gap-1.5 sm:gap-2">
+        <button id="btnQuickAddOpen" type="button" class="btn-tap glass-card px-2.5 sm:px-3 py-2 text-xs font-semibold text-slate-700 hover:bg-white flex items-center gap-1" title="手动添加生词或易错词">
           <span>＋ 添词</span>
         </button>
-        <button id="btnInstallGuideTop" type="button" class="btn-tap glass-card px-3 py-2 text-xs font-semibold text-blue-700 hover:bg-white flex items-center gap-1" title="如何添加到 iPhone 与 Mac 主屏幕">
+        <button id="btnCloudSyncTop" type="button" class="btn-tap glass-card px-2.5 sm:px-3 py-2 text-xs font-semibold text-indigo-700 hover:bg-white flex items-center gap-1.5" title="GitHub Gist 跨端云端同步">
+          <span>☁️ 云同步</span>
+          <span id="topGistSyncedDot" class="hidden w-2 h-2 rounded-full bg-emerald-500 shadow-sm"></span>
+        </button>
+        <button id="btnInstallGuideTop" type="button" class="btn-tap glass-card px-2.5 sm:px-3 py-2 text-xs font-semibold text-blue-700 hover:bg-white flex items-center gap-1" title="如何添加到 iPhone 与 Mac 主屏幕">
           <span>📲 装到桌面</span>
         </button>
       </div>
@@ -614,6 +618,71 @@
 
     <!-- VIEW 4: SYNC & INSTALL (主屏幕安装与数据同步) -->
     <section id="view-sync" class="hidden space-y-4 anim-in">
+      <!-- GitHub Secret Gist Cloud Sync (共用 Gist 令牌 · 独立私密账本) -->
+      <div class="glass-card p-5 space-y-3.5 border-blue-200/80 bg-gradient-to-br from-white/95 via-blue-50/40 to-indigo-50/40">
+        <div class="flex flex-wrap items-center justify-between gap-2">
+          <div class="flex items-center gap-2">
+            <span class="text-base font-bold text-slate-900">☁️ GitHub 私密 Gist 云端同步</span>
+            <span class="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-blue-100 text-blue-700">共用现有令牌 · 独立账本</span>
+          </div>
+          <span id="gistSyncStatusBadge" class="text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-slate-200/80 text-slate-600">首次填一次令牌</span>
+        </div>
+
+        <p class="text-xs text-slate-600 leading-relaxed">
+          平时背词 100% 存在本机离线秒开；点<strong>上传同步</strong>将本机进度无损并入云端私密 Gist，换设备前点<strong>下载同步</strong>拉取合并。可直接粘贴你在刷题软件里用的同一个 <code>ghp_</code> Gist 令牌——本应用会自动单独存为 <code>bubei-chengyu-sync-v1.json</code>，与刷题软件的账本完全隔离、互不覆盖。
+        </p>
+
+        <!-- Current Local Progress Snapshot -->
+        <div class="grid grid-cols-4 gap-2 text-center">
+          <div class="p-2.5 rounded-2xl bg-white/85 border border-slate-200/70">
+            <div id="gistStatLearned" class="text-base sm:text-lg font-extrabold text-slate-900 tabular-nums">0</div>
+            <div class="text-[11px] text-slate-500">本机已背</div>
+          </div>
+          <div class="p-2.5 rounded-2xl bg-white/85 border border-slate-200/70">
+            <div id="gistStatFav" class="text-base sm:text-lg font-extrabold text-amber-600 tabular-nums">0</div>
+            <div class="text-[11px] text-slate-500">收藏生词</div>
+          </div>
+          <div class="p-2.5 rounded-2xl bg-white/85 border border-slate-200/70">
+            <div id="gistStatDismissed" class="text-base sm:text-lg font-extrabold text-emerald-600 tabular-nums">0</div>
+            <div class="text-[11px] text-slate-500">已删熟词</div>
+          </div>
+          <div class="p-2.5 rounded-2xl bg-white/85 border border-slate-200/70">
+            <div id="gistStatWrong" class="text-base sm:text-lg font-extrabold text-rose-600 tabular-nums">0</div>
+            <div class="text-[11px] text-slate-500">测试错题</div>
+          </div>
+        </div>
+
+        <!-- Token Input Panel (auto-hidden once saved, toggleable via 🔑 令牌) -->
+        <div id="gistTokenPanel" class="space-y-2 pt-0.5">
+          <input
+            id="inputGistToken"
+            type="password"
+            autocomplete="off"
+            placeholder="直接粘贴你现有的 ghp_ 开头 GitHub Gist 令牌"
+            class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white/95 text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/40"
+          />
+          <div class="text-[11px] text-slate-500 leading-relaxed">
+            令牌仅保存在你当前设备的本地存储中。若日后需新建，登录 GitHub 打开
+            <a href="https://github.com/settings/tokens/new?scopes=gist&description=GongkaoGistSync" target="_blank" rel="noopener noreferrer" class="text-blue-600 font-semibold hover:underline">Gist 令牌生成页 ↗</a>
+            勾选 <code>gist</code> 权限即可。
+          </div>
+        </div>
+
+        <!-- Upload / Download / Token Toggle Buttons -->
+        <div class="flex flex-wrap items-center gap-2.5">
+          <button id="btnGistUpload" type="button" class="btn-tap flex-1 min-w-[130px] py-2.5 px-4 rounded-xl bg-blue-600 text-white text-xs font-extrabold hover:bg-blue-700 shadow-sm">
+            ⬆️ 上传同步
+          </button>
+          <button id="btnGistDownload" type="button" class="btn-tap flex-1 min-w-[130px] py-2.5 px-4 rounded-xl bg-white text-blue-700 border border-blue-300 text-xs font-extrabold hover:bg-blue-50 shadow-sm">
+            ⬇️ 下载同步
+          </button>
+          <button id="btnToggleGistToken" type="button" class="hidden btn-tap py-2.5 px-3.5 rounded-xl bg-slate-100 text-slate-700 text-xs font-semibold hover:bg-slate-200" title="查看或更换 GitHub Gist 令牌">
+            🔑 令牌
+          </button>
+        </div>
+
+        <div id="gistSyncFeedback" class="hidden text-xs font-medium p-3 rounded-xl border"></div>
+      </div>
       <!-- Add to Home Screen Guide -->
       <div class="glass-card p-5 space-y-3.5">
         <div class="flex flex-wrap items-center justify-between gap-2">
@@ -10416,6 +10485,7 @@
         due: today + nextInterval,
         lastChoice: choice,
         lastReviewedDay: today,
+        updatedAt: Date.now(),
         learned: true
       };
       saveState();
@@ -10564,6 +10634,7 @@
       if (viewName === "library") renderLibraryList();
       if (viewName === "test") renderTestHub();
       if (viewName === "home") renderHomeStats();
+      if (viewName === "sync" && typeof renderGistSyncPanel === "function") renderGistSyncPanel();
     }
 
     function renderHomeStats() {
@@ -11632,6 +11703,7 @@
       renderHomeStats();
       if (currentView === "library") renderLibraryList();
       if (currentView === "test") renderTestHub();
+      if (typeof renderGistSyncPanel === "function") renderGistSyncPanel();
       var searchVal = document.getElementById("globalSearchInput").value;
       if (searchVal.trim()) runGlobalSearch(searchVal);
     }
@@ -12109,6 +12181,432 @@
     });
 
     // =========================================================================
+    // 10B. GITHUB SECRET GIST CLOUD SYNC (共用 Gist 令牌 · 独立私密账本无损合并)
+    // =========================================================================
+    var BUBEI_GIST_CFG_KEY = "bubei_chengyu_gist_cfg_v1";
+    var BUBEI_GIST_FILENAME = "bubei-chengyu-sync-v1.json";
+    var BUBEI_GIST_DESC = "不背成语私密跨端同步账本 (Mac/iPhone/iPad)";
+    var BUBEI_GIST_SCHEMA = "bubei-chengyu-sync-v1";
+    var BUBEI_GIST_API_BASE = "https://api.github.com/gists";
+    var gistMemoryCfg = { token: "", gistId: "", lastUpAt: 0, lastDownAt: 0 };
+
+    function readBubeiGistCfg() {
+      try {
+        var raw = window.localStorage.getItem(BUBEI_GIST_CFG_KEY);
+        if (!raw) return gistMemoryCfg;
+        var parsed = JSON.parse(raw);
+        return {
+          token: String(parsed.token || ""),
+          gistId: String(parsed.gistId || ""),
+          lastUpAt: Number(parsed.lastUpAt || 0),
+          lastDownAt: Number(parsed.lastDownAt || 0)
+        };
+      } catch (e) {
+        return gistMemoryCfg;
+      }
+    }
+
+    function writeBubeiGistCfg(cfg) {
+      gistMemoryCfg = {
+        token: String((cfg && cfg.token) || ""),
+        gistId: String((cfg && cfg.gistId) || ""),
+        lastUpAt: Number((cfg && cfg.lastUpAt) || 0),
+        lastDownAt: Number((cfg && cfg.lastDownAt) || 0)
+      };
+      try {
+        window.localStorage.setItem(BUBEI_GIST_CFG_KEY, JSON.stringify(gistMemoryCfg));
+      } catch (e) {}
+    }
+
+    function formatSyncClock(ts) {
+      if (!ts) return "";
+      var d = new Date(ts);
+      var pad = function (n) { return String(n).padStart(2, "0"); };
+      return pad(d.getHours()) + ":" + pad(d.getMinutes()) + ":" + pad(d.getSeconds());
+    }
+
+    function summarizeIdiomState(st) {
+      var s = st || state;
+      var learned = 0;
+      var recs = s.records || {};
+      var rKeys = Object.keys(recs);
+      for (var i = 0; i < rKeys.length; i++) {
+        if (recs[rKeys[i]] && recs[rKeys[i]].learned) learned++;
+      }
+      return {
+        learned: learned,
+        fav: Object.keys(s.favorites || {}).length,
+        dismissed: Object.keys(s.dismissed || {}).length,
+        enrolled: Object.keys(s.enrolledDict || {}).length,
+        wrong: Array.isArray(s.wrongBook) ? s.wrongBook.length : 0,
+        custom: Array.isArray(s.customWords) ? s.customWords.length : 0
+      };
+    }
+
+    function renderGistSyncPanel() {
+      var cfg = readBubeiGistCfg();
+      var hasToken = !!cfg.token;
+      var lastTs = Math.max(cfg.lastUpAt || 0, cfg.lastDownAt || 0);
+      var sum = summarizeIdiomState(state);
+
+      var elLearned = document.getElementById("gistStatLearned");
+      var elFav = document.getElementById("gistStatFav");
+      var elDis = document.getElementById("gistStatDismissed");
+      var elWrong = document.getElementById("gistStatWrong");
+      if (elLearned) elLearned.textContent = String(sum.learned);
+      if (elFav) elFav.textContent = String(sum.fav);
+      if (elDis) elDis.textContent = String(sum.dismissed);
+      if (elWrong) elWrong.textContent = String(sum.wrong);
+
+      var badge = document.getElementById("gistSyncStatusBadge");
+      if (badge) {
+        if (lastTs > 0) {
+          badge.textContent = "✓ 上次同步 " + formatSyncClock(lastTs);
+          badge.className = "text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800";
+        } else if (hasToken) {
+          badge.textContent = "已保存令牌";
+          badge.className = "text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-blue-100 text-blue-700";
+        } else {
+          badge.textContent = "首次填一次令牌";
+          badge.className = "text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-slate-200/80 text-slate-600";
+        }
+      }
+
+      var topDot = document.getElementById("topGistSyncedDot");
+      if (topDot) {
+        if (lastTs > 0 || hasToken) topDot.classList.remove("hidden");
+        else topDot.classList.add("hidden");
+      }
+
+      var tkInput = document.getElementById("inputGistToken");
+      if (tkInput && !tkInput.value && cfg.token) {
+        tkInput.value = cfg.token;
+      }
+
+      var tkPanel = document.getElementById("gistTokenPanel");
+      var tkToggleBtn = document.getElementById("btnToggleGistToken");
+      if (tkToggleBtn) {
+        if (hasToken) tkToggleBtn.classList.remove("hidden");
+        else tkToggleBtn.classList.add("hidden");
+      }
+      if (tkPanel && tkPanel.getAttribute("data-manual-open") !== "1") {
+        if (hasToken) tkPanel.classList.add("hidden");
+        else tkPanel.classList.remove("hidden");
+      }
+    }
+
+    function showGistFeedback(text, isError) {
+      var box = document.getElementById("gistSyncFeedback");
+      if (!box) return;
+      box.textContent = text;
+      box.className = isError
+        ? "text-xs font-medium p-3 rounded-xl border bg-rose-50 text-rose-800 border-rose-200"
+        : "text-xs font-medium p-3 rounded-xl border bg-emerald-50 text-emerald-800 border-emerald-200";
+      box.classList.remove("hidden");
+    }
+
+    // 无损合并两台设备的学习状态（按单条记录 updatedAt / 复习日 / 熟悉度阶梯精确合并，绝不冲掉另一端进度）
+    function mergeIdiomStates(baseSt, incomingSt) {
+      var a = baseSt || createInitialState();
+      var b = incomingSt || createInitialState();
+      var out = createInitialState();
+
+      var recA = a.records || {};
+      var recB = b.records || {};
+      var allIds = {};
+      var ka = Object.keys(recA), kb = Object.keys(recB);
+      for (var i = 0; i < ka.length; i++) allIds[ka[i]] = true;
+      for (var j = 0; j < kb.length; j++) allIds[kb[j]] = true;
+
+      var idList = Object.keys(allIds);
+      for (var k = 0; k < idList.length; k++) {
+        var wid = idList[k];
+        var ra = recA[wid];
+        var rb = recB[wid];
+        if (ra && !rb) {
+          out.records[wid] = ra;
+        } else if (!ra && rb) {
+          out.records[wid] = rb;
+        } else if (ra && rb) {
+          var tsA = Number(ra.updatedAt || 0);
+          var tsB = Number(rb.updatedAt || 0);
+          if (tsA > 0 && tsB > 0 && tsA !== tsB) {
+            out.records[wid] = tsB >= tsA ? rb : ra;
+          } else {
+            var dayA = Number(ra.lastReviewedDay || 0);
+            var dayB = Number(rb.lastReviewedDay || 0);
+            if (dayA !== dayB) {
+              out.records[wid] = dayB > dayA ? rb : ra;
+            } else {
+              var stgA = inferStageFromLegacyRecord(ra);
+              var stgB = inferStageFromLegacyRecord(rb);
+              out.records[wid] = stgB >= stgA ? rb : ra;
+            }
+          }
+        }
+      }
+
+      out.dismissed = Object.assign({}, a.dismissed || {}, b.dismissed || {});
+      out.favorites = Object.assign({}, a.favorites || {}, b.favorites || {});
+      out.enrolledDict = Object.assign({}, a.enrolledDict || {}, b.enrolledDict || {});
+
+      var cwSeen = {};
+      var cwCombined = (Array.isArray(a.customWords) ? a.customWords : []).concat(Array.isArray(b.customWords) ? b.customWords : []);
+      for (var c = 0; c < cwCombined.length; c++) {
+        var cw = cwCombined[c];
+        if (!cw || !cw.word) continue;
+        var cwKey = (cw.id || "") + "::" + cw.word;
+        if (!cwSeen[cwKey] && !cwSeen[cw.word]) {
+          cwSeen[cwKey] = true;
+          cwSeen[cw.word] = true;
+          out.customWords.push(cw);
+        }
+      }
+
+      var wbSeen = {};
+      var wbCombined = (Array.isArray(b.wrongBook) ? b.wrongBook : []).concat(Array.isArray(a.wrongBook) ? a.wrongBook : []);
+      for (var w = 0; w < wbCombined.length; w++) {
+        var wi = wbCombined[w];
+        if (!wi || !wi.stem) continue;
+        var wKey = String(wi.id || wi.stem);
+        if (!wbSeen[wKey]) {
+          wbSeen[wKey] = true;
+          out.wrongBook.push(wi);
+        }
+      }
+
+      out.lastRealAcc = typeof b.lastRealAcc === "number" ? b.lastRealAcc : (typeof a.lastRealAcc === "number" ? a.lastRealAcc : null);
+      out.lastTrapAcc = typeof b.lastTrapAcc === "number" ? b.lastTrapAcc : (typeof a.lastTrapAcc === "number" ? a.lastTrapAcc : null);
+      out.lastSentAcc = typeof b.lastSentAcc === "number" ? b.lastSentAcc : (typeof a.lastSentAcc === "number" ? a.lastSentAcc : null);
+      out.showFrontSentiment = typeof b.showFrontSentiment === "boolean" ? b.showFrontSentiment : !!a.showFrontSentiment;
+      return out;
+    }
+
+    async function callGithubGistApi(url, options) {
+      try {
+        return await fetch(url, options);
+      } catch (netErr) {
+        throw new Error("无法连接 GitHub 接口，请检查当前网络后重试");
+      }
+    }
+
+    function buildGistHeaders(token) {
+      return {
+        "Accept": "application/vnd.github+json",
+        "Authorization": "Bearer " + token.trim(),
+        "X-GitHub-Api-Version": "2022-11-28",
+        "Content-Type": "application/json"
+      };
+    }
+
+    // 仅查找包含 `bubei-chengyu-sync-v1.json` 的专属私密 Gist，绝不触碰刷题软件的 `kaogong-cloud-sync-v1.json`
+    async function locateBubeiGist(token, cachedGistId) {
+      if (cachedGistId) {
+        var r0 = await callGithubGistApi(BUBEI_GIST_API_BASE + "/" + encodeURIComponent(cachedGistId), {
+          method: "GET",
+          headers: buildGistHeaders(token),
+          cache: "no-store"
+        });
+        if (r0.ok) {
+          var g0 = await r0.json();
+          if (g0 && g0.files && g0.files[BUBEI_GIST_FILENAME]) return g0;
+        }
+        if (r0.status === 401) throw new Error("GitHub 令牌无效或已过期，请确认令牌有效且勾选了 gist 权限");
+      }
+
+      var listRes = await callGithubGistApi(BUBEI_GIST_API_BASE + "?per_page=100", {
+        method: "GET",
+        headers: buildGistHeaders(token),
+        cache: "no-store"
+      });
+      if (listRes.status === 401) throw new Error("GitHub 令牌无效或未勾选 gist 权限");
+      if (!listRes.ok) throw new Error("连接 GitHub 失败 (HTTP " + listRes.status + ")，请检查网络");
+
+      var gists = await listRes.json();
+      for (var i = 0; i < gists.length; i++) {
+        var g = gists[i];
+        if (g && g.files && g.files[BUBEI_GIST_FILENAME]) {
+          var detailRes = await callGithubGistApi(BUBEI_GIST_API_BASE + "/" + encodeURIComponent(g.id), {
+            method: "GET",
+            headers: buildGistHeaders(token),
+            cache: "no-store"
+          });
+          if (detailRes.ok) return await detailRes.json();
+        }
+      }
+      return null;
+    }
+
+    async function readBubeiGistPayload(gist) {
+      if (!gist || !gist.files || !gist.files[BUBEI_GIST_FILENAME]) return null;
+      var f = gist.files[BUBEI_GIST_FILENAME];
+      var raw = f.content || "";
+      if (f.truncated && f.raw_url) {
+        var r = await callGithubGistApi(f.raw_url, { method: "GET", cache: "no-store" });
+        if (r.ok) raw = await r.text();
+      }
+      return raw ? JSON.parse(raw) : null;
+    }
+
+    async function handleBubeiGistUpload() {
+      var btnUp = document.getElementById("btnGistUpload");
+      var btnDown = document.getElementById("btnGistDownload");
+      var tkInput = document.getElementById("inputGistToken");
+      var cfg = readBubeiGistCfg();
+      var token = String((tkInput && tkInput.value) || cfg.token || "").trim();
+
+      if (!token) {
+        var tkPanel = document.getElementById("gistTokenPanel");
+        if (tkPanel) tkPanel.classList.remove("hidden");
+        showGistFeedback("请先粘贴你现有的 ghp_ 开头 GitHub Gist 令牌", true);
+        if (tkInput) tkInput.focus();
+        return;
+      }
+
+      btnUp.disabled = true;
+      btnDown.disabled = true;
+      var origLabel = btnUp.textContent;
+      btnUp.textContent = "⏳ 正在同步到私密云...";
+
+      try {
+        var existing = await locateBubeiGist(token, cfg.gistId || "");
+        var mergedState = state;
+        var gistId = "";
+
+        if (existing) {
+          gistId = existing.id;
+          var remotePayload = await readBubeiGistPayload(existing).catch(function () { return null; });
+          if (remotePayload && remotePayload.state) {
+            mergedState = mergeIdiomStates(remotePayload.state, state);
+            state = mergedState;
+            saveState();
+          }
+          var upSummary = summarizeIdiomState(mergedState);
+          var patchBody = { description: BUBEI_GIST_DESC, files: {} };
+          patchBody.files[BUBEI_GIST_FILENAME] = {
+            content: JSON.stringify({
+              schema: BUBEI_GIST_SCHEMA,
+              updatedAt: new Date().toISOString(),
+              summary: upSummary,
+              state: mergedState
+            })
+          };
+          var patchRes = await callGithubGistApi(BUBEI_GIST_API_BASE + "/" + encodeURIComponent(gistId), {
+            method: "PATCH",
+            headers: buildGistHeaders(token),
+            body: JSON.stringify(patchBody)
+          });
+          if (!patchRes.ok) throw new Error("更新云端私密 Gist 失败 (HTTP " + patchRes.status + ")");
+        } else {
+          var initSummary = summarizeIdiomState(mergedState);
+          var createBody = { description: BUBEI_GIST_DESC, public: false, files: {} };
+          createBody.files[BUBEI_GIST_FILENAME] = {
+            content: JSON.stringify({
+              schema: BUBEI_GIST_SCHEMA,
+              updatedAt: new Date().toISOString(),
+              summary: initSummary,
+              state: mergedState
+            })
+          };
+          var createRes = await callGithubGistApi(BUBEI_GIST_API_BASE, {
+            method: "POST",
+            headers: buildGistHeaders(token),
+            body: JSON.stringify(createBody)
+          });
+          if (!createRes.ok) throw new Error("创建云端私密 Gist 失败 (HTTP " + createRes.status + ")");
+          var created = await createRes.json();
+          gistId = created.id;
+        }
+
+        var now = Date.now();
+        writeBubeiGistCfg({ token: token, gistId: gistId, lastUpAt: now, lastDownAt: cfg.lastDownAt || 0 });
+        var tkPanelDone = document.getElementById("gistTokenPanel");
+        if (tkPanelDone) tkPanelDone.removeAttribute("data-manual-open");
+        refreshAllViews();
+        var finalSum = summarizeIdiomState(state);
+        showGistFeedback("✓ 上传合并成功（" + formatSyncClock(now) + "）：云端账本共已背 " + finalSum.learned + " 词 · 收藏 " + finalSum.fav + " · 已删熟词 " + finalSum.dismissed, false);
+        showToast("已同步上传至 GitHub 私密 Gist");
+      } catch (err) {
+        showGistFeedback("⚠️ " + (err && err.message ? err.message : "上传失败，请检查网络或令牌权限"), true);
+      } finally {
+        btnUp.disabled = false;
+        btnDown.disabled = false;
+        btnUp.textContent = origLabel;
+      }
+    }
+
+    async function handleBubeiGistDownload() {
+      var btnUp = document.getElementById("btnGistUpload");
+      var btnDown = document.getElementById("btnGistDownload");
+      var tkInput = document.getElementById("inputGistToken");
+      var cfg = readBubeiGistCfg();
+      var token = String((tkInput && tkInput.value) || cfg.token || "").trim();
+
+      if (!token) {
+        var tkPanel = document.getElementById("gistTokenPanel");
+        if (tkPanel) tkPanel.classList.remove("hidden");
+        showGistFeedback("请先粘贴你现有的 ghp_ 开头 GitHub Gist 令牌", true);
+        if (tkInput) tkInput.focus();
+        return;
+      }
+
+      btnUp.disabled = true;
+      btnDown.disabled = true;
+      var origLabel = btnDown.textContent;
+      btnDown.textContent = "⏳ 正在拉取云端进度...";
+
+      try {
+        var existing = await locateBubeiGist(token, cfg.gistId || "");
+        if (!existing) {
+          throw new Error("云端还没有「不背成语」进度账本，请先在有学习记录的设备上点一次「⬆️ 上传同步」");
+        }
+        var remotePayload = await readBubeiGistPayload(existing);
+        if (!remotePayload || !remotePayload.state) {
+          throw new Error("云端账本为空或格式无法识别");
+        }
+
+        state = mergeIdiomStates(state, remotePayload.state);
+        saveState();
+        var now = Date.now();
+        writeBubeiGistCfg({ token: token, gistId: existing.id, lastUpAt: cfg.lastUpAt || 0, lastDownAt: now });
+        var tkPanelDone = document.getElementById("gistTokenPanel");
+        if (tkPanelDone) tkPanelDone.removeAttribute("data-manual-open");
+        refreshAllViews();
+        var finalSum = summarizeIdiomState(state);
+        showGistFeedback("✓ 下载合并成功（" + formatSyncClock(now) + "）：本机现已同步共背 " + finalSum.learned + " 词 · 收藏 " + finalSum.fav + " · 已删熟词 " + finalSum.dismissed, false);
+        showToast("已从云端拉取合并最新进度");
+      } catch (err) {
+        showGistFeedback("⚠️ " + (err && err.message ? err.message : "下载失败，请检查网络或令牌权限"), true);
+      } finally {
+        btnUp.disabled = false;
+        btnDown.disabled = false;
+        btnDown.textContent = origLabel;
+      }
+    }
+
+    document.getElementById("btnCloudSyncTop").addEventListener("click", function () {
+      switchView("sync");
+    });
+    document.getElementById("btnGistUpload").addEventListener("click", function () {
+      handleBubeiGistUpload();
+    });
+    document.getElementById("btnGistDownload").addEventListener("click", function () {
+      handleBubeiGistDownload();
+    });
+    document.getElementById("btnToggleGistToken").addEventListener("click", function () {
+      var tkPanel = document.getElementById("gistTokenPanel");
+      if (!tkPanel) return;
+      if (tkPanel.classList.contains("hidden")) {
+        tkPanel.classList.remove("hidden");
+        tkPanel.setAttribute("data-manual-open", "1");
+      } else {
+        tkPanel.classList.add("hidden");
+        tkPanel.removeAttribute("data-manual-open");
+      }
+    });
+    renderGistSyncPanel();
+
+    // =========================================================================
     // 11. ONE-CLICK GITHUB OPEN CORPUS EXPANSION (cdn.jsdelivr.net + IndexedDB)
     // =========================================================================
     var XINHUA_CDN_URL = "https://cdn.jsdelivr.net/gh/pwxcoo/chinese-xinhua@master/data/idiom.json";
@@ -12342,7 +12840,7 @@
     });
     if ("serviceWorker" in navigator && (location.protocol === "https:" || location.hostname === "localhost")) {
       window.addEventListener("load", function () {
-        navigator.serviceWorker.register("./sw.js?v=9").catch(function () {});
+        navigator.serviceWorker.register("./sw.js?v=11").catch(function () {});
       });
     }
   </script>
