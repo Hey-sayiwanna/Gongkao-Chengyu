@@ -1,12 +1,12 @@
-const CACHE_NAME = "gongkao-idiom-pwa-v8";
+const CACHE_NAME = "gongkao-idiom-pwa-v9";
 const ASSETS = [
   "./",
   "./index.html",
-  "./manifest.json?v=8",
-  "./apple-touch-icon.png?v=8",
-  "./icon-192.png?v=8",
-  "./icon-512.png?v=8",
-  "./icon-maskable-512.png?v=8",
+  "./manifest.json?v=9",
+  "./apple-touch-icon.png?v=9",
+  "./icon-192.png?v=9",
+  "./icon-512.png?v=9",
+  "./icon-maskable-512.png?v=9",
   "https://cdn.tailwindcss.com/3.4.17"
 ];
 

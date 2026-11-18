@@ -10,10 +10,9 @@
   <meta name="application-name" content="不背成语" />
   <meta name="theme-color" content="#f4f5f8" />
   <title>不背成语</title>
-  <link rel="manifest" href="./manifest.json?v=8" />
-  <link rel="apple-touch-icon" href="./apple-touch-icon.png?v=8" />
-  <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png?v=8" />
-  <link rel="apple-touch-icon" sizes="512x512" href="./icon-512.png?v=8" />
+  <link rel="manifest" href="./manifest.json?v=9" />
+  <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png?v=9" />
+  <script>window.__GONGKAO_LOCAL_DICT_URL = "./idiom_full_dict.json";</script>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Crect width='120' height='120' rx='26' fill='%231c1c1e'/%3E%3Ccircle cx='60' cy='34' r='22' fill='none' stroke='%23ff6a00' stroke-width='4.5'/%3E%3Ctext x='60' y='42' font-size='23' font-family='sans-serif' font-weight='800' text-anchor='middle' fill='%23ff6a00'%3E成%3C/text%3E%3Ccircle cx='60' cy='86' r='24' fill='%23ff6a00'/%3E%3Ctext x='60' y='94' font-size='23' font-family='sans-serif' font-weight='800' text-anchor='middle' fill='%23ffffff'%3E语%3C/text%3E%3C/svg%3E" />
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
   <style>
@@ -95,7 +94,7 @@
           <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-900">Hello, 同学</h1>
           <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-100/90 text-blue-700">无锁纯净版</span>
         </div>
-        <p class="text-xs sm:text-sm text-slate-500 mt-0.5">专攻望文生义与高频易错词 · 熟词一键永久剔除</p>
+        <p class="text-xs sm:text-sm text-slate-500 mt-0.5">日常只刷高频核心词 · 全局秒查全量成语词典 · 艾宾浩斯自动排期</p>
       </div>
       <div class="flex items-center gap-2">
         <button id="btnQuickAddOpen" type="button" class="btn-tap glass-card px-3 py-2 text-xs font-semibold text-slate-700 hover:bg-white flex items-center gap-1.5" title="手动添加生词或易错词">
@@ -112,7 +111,7 @@
       <input
         id="globalSearchInput"
         type="search"
-        placeholder="搜索成语、实词、褒义/贬义/中性或陷阱关键字（如：刊、贬义、新闻、截止）..."
+        placeholder="全词库搜索成语、拼音首字母、异序词或考点（如：络绎不绝、盲从盲信、lybj、贬义）..."
         class="w-full glass-card px-4 py-3 pl-10 text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/40"
       />
       <svg class="w-4 h-4 text-slate-400 absolute left-3.5 top-3.5 pointer-events-none" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -144,7 +143,7 @@
               公考 90% 覆盖应试核心总词书
             </div>
             <p class="text-xs text-slate-300 leading-relaxed max-w-xl">
-              精筛 <strong id="statTotalLoadedCount" class="text-amber-300 font-bold">678</strong> 组（约 910+ 核心词），剔除白话水词，全部四字成语逐条标明「褒义 / 贬义 / 中性」，少背词也能稳拿行测逻辑填空 90% 考点。
+              日常背词精筛 <strong id="statTotalLoadedCount" class="text-amber-300 font-bold">701</strong> 组公考核心必背词（不塞生僻杂词），而顶部搜索框已打通 <strong id="statSearchableTotalCount" class="text-emerald-300 font-bold">1275</strong>+ 条离线精校与 3 万+ 中华成语全词典，随查随加。
             </p>
           </div>
           <div class="text-right shrink-0">
@@ -184,7 +183,7 @@
         <div class="glass-card p-5 flex flex-col justify-between">
           <div class="flex items-start justify-between">
             <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-rose-100/90 text-rose-700 text-xs font-bold">
-              <span>🎯 专项一 · 重点扩充 (152组)</span>
+              <span>🎯 专项一 · 重点扩充 (155组)</span>
             </span>
             <div class="text-right">
               <div id="statLiteralUnlearned" class="text-2xl font-extrabold text-rose-600">0</div>
@@ -204,7 +203,7 @@
         <div class="glass-card p-5 flex flex-col justify-between">
           <div class="flex items-start justify-between">
             <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-purple-100/90 text-purple-700 text-xs font-bold">
-              <span>⚖️ 专项二 · 重点扩充 (172组)</span>
+              <span>⚖️ 专项二 · 重点扩充 (180组)</span>
             </span>
             <div class="text-right">
               <div id="statEmotionUnlearned" class="text-2xl font-extrabold text-purple-600">0</div>
@@ -224,7 +223,7 @@
         <div class="glass-card p-5 flex flex-col justify-between">
           <div class="flex items-start justify-between">
             <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-indigo-100/90 text-indigo-800 text-xs font-bold">
-              <span>🏆 核心词书三 · 真题已考 (156组)</span>
+              <span>🏆 核心词书三 · 真题已考 (164组)</span>
             </span>
             <div class="text-right">
               <div id="statExamCoreUnlearned" class="text-2xl font-extrabold text-indigo-600">0</div>
@@ -244,7 +243,7 @@
         <div class="glass-card p-5 flex flex-col justify-between">
           <div class="flex items-start justify-between">
             <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-emerald-100/90 text-emerald-800 text-xs font-bold">
-              <span>📰 核心词书四 · 题源潜力 (100组)</span>
+              <span>📰 核心词书四 · 题源潜力 (104组)</span>
             </span>
             <div class="text-right">
               <div id="statPotentialUnlearned" class="text-2xl font-extrabold text-emerald-600">0</div>
@@ -280,11 +279,11 @@
           </button>
         </div>
 
-        <!-- Card 6: 今日记忆曲线复习 -->
+        <!-- Card 6: 今日艾宾浩斯记忆曲线复习（对标不背单词） -->
         <div class="glass-card p-5 flex flex-col justify-between">
           <div class="flex items-start justify-between">
             <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-amber-100/90 text-amber-800 text-xs font-bold">
-              <span>🔄 SM-2 记忆曲线</span>
+              <span>🔄 艾宾浩斯曲线 · 不背同款</span>
             </span>
             <div class="text-right">
               <div id="statDueReview" class="text-2xl font-extrabold text-amber-600">0</div>
@@ -293,7 +292,7 @@
           </div>
           <div class="my-3">
             <div class="text-lg font-bold text-slate-900">抗遗忘智能复习</div>
-            <p class="text-xs text-slate-500 mt-1 leading-relaxed">按记忆强度动态排程，答错或褒贬判断模糊的词自动缩短间隔，记稳后拉长周期不打扰。</p>
+            <p class="text-xs text-slate-500 mt-1 leading-relaxed">仅凭直觉点「认识 / 模糊 / 不认识」，本组错词自动循环重现，后台按 1·2·4·7·15·30 天遗忘临界点全自动排期，无需自己算天数。</p>
           </div>
           <button id="btnStartReview" type="button" class="btn-tap w-full py-2.5 rounded-xl bg-amber-500 text-white text-xs font-bold hover:bg-amber-600 shadow-sm">
             开始今日复习
@@ -308,8 +307,8 @@
             <span class="inline-flex items-center px-2.5 py-0.5 rounded-lg bg-blue-100/90 text-blue-800 text-xs font-bold">📚 备查大词典 · 新华典故书面库</span>
             <span class="text-xs font-semibold text-slate-500">待学 <strong id="statClassicalUnlearned" class="text-blue-700">0</strong> 条</span>
           </div>
-          <div class="text-base font-bold text-slate-900">新华典故书面成语扩展库（学有余力备查 · 自动标褒贬中性）</div>
-          <p class="text-xs text-slate-500 leading-relaxed">先把上方 90% 应试核心词书刷熟即可上考场；若想继续扩充，可拉取开源 <a href="https://github.com/pwxcoo/chinese-xinhua" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">pwxcoo/chinese-xinhua</a> 中带《史记》《汉书》《左传》书证的 4200+ 书面词离线备查。</p>
+          <div class="text-base font-bold text-slate-900">全量 31,648 词检索已就绪 · 典故进阶扩展刷词（按需开启）</div>
+          <p class="text-xs text-slate-500 leading-relaxed"><span id="fullDictSyncBadge" class="text-emerald-700 font-semibold">✓ 搜索框已内置 1,272 组离线高频词，联网自动静默索引开源 </span><a href="https://github.com/pwxcoo/chinese-xinhua" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">pwxcoo/chinese-xinhua</a> 全量 31,648 条成语供随时检索（绝不混入日常背词任务；查到想背的词点「＋加入背词」即可）。学完核心书后也可点右侧选刷古籍典故词。</p>
         </div>
         <div class="flex sm:flex-col gap-2 shrink-0">
           <button id="btnStudyClassical" type="button" class="btn-tap px-4 py-2.5 rounded-xl bg-blue-600 text-white text-xs font-bold hover:bg-blue-700 whitespace-nowrap">
@@ -376,20 +375,50 @@
             </div>
           </div>
 
+          <!-- 「不背单词」同款 7 格熟悉度阶梯进度条 -->
+          <div class="flex items-center justify-between px-3 py-2 rounded-xl bg-slate-100/75 border border-slate-200/60 mb-3">
+            <div class="flex items-center gap-2">
+              <span class="text-[11px] font-semibold text-slate-500">熟悉度</span>
+              <div id="cardFamiliarityBars" class="flex items-center gap-1" aria-label="记忆熟悉度阶梯"></div>
+            </div>
+            <span id="cardFamiliarityStageText" class="text-[11px] font-bold text-slate-600">新词初见</span>
+          </div>
+
           <div class="text-center my-6">
             <div id="cardWordTitle" class="text-3xl sm:text-4xl font-extrabold tracking-wide text-slate-900">不刊之论</div>
             <div id="cardPinyin" class="text-sm text-slate-500 mt-2 font-mono">bù kān zhī lùn</div>
           </div>
 
-          <!-- Prompt before flip -->
-          <div id="cardFrontPrompt" class="mt-8 p-5 rounded-2xl bg-slate-100/80 border border-slate-200/70 text-center">
-            <p class="text-xs sm:text-sm text-slate-600 font-medium">先在脑中判断：① 它是<strong class="text-emerald-700">褒义</strong>、<strong class="text-rose-600">贬义</strong>还是<strong class="text-slate-800">中性</strong>？ ② 它的<strong class="text-rose-600">字面陷阱</strong>或<strong class="text-blue-700">搭配边界</strong>是什么？</p>
-            <button id="btnRevealAnswer" type="button" class="btn-tap mt-4 px-6 py-2.5 rounded-xl bg-blue-600 text-white text-xs sm:text-sm font-bold hover:bg-blue-700 shadow-sm">
-              点击揭晓防坑解析（空格键）
-            </button>
+          <!-- Front Prompt: Context Sentence + Direct 3-Button Grading (认识 / 模糊 / 不认识, 零天数干扰) -->
+          <div id="cardFrontPrompt" class="mt-6 space-y-5">
+            <div id="cardFrontContextBox" class="p-4 sm:p-5 rounded-2xl bg-slate-100/80 border border-slate-200/70 text-center space-y-1.5">
+              <p id="cardFrontContextText" class="text-xs sm:text-sm text-slate-700 font-medium leading-relaxed">先在脑中回想词义、褒贬色彩与常见搭配对象，凭第一反应选择熟悉度：</p>
+              <p class="text-[11px] text-slate-400">艾宾浩斯引擎将在后台自动计算最佳抗遗忘时间点，无需人工判断天数</p>
+            </div>
+
+            <div id="cardThreeChoiceBar" class="grid grid-cols-3 gap-2.5 sm:gap-3.5 pt-1">
+              <button data-ebchoice="know" type="button" class="btn-tap py-3.5 px-3 rounded-2xl bg-emerald-500 text-white hover:bg-emerald-600 shadow-sm text-center">
+                <div class="text-sm sm:text-base font-extrabold">认识</div>
+                <div class="text-[11px] opacity-85 mt-0.5">秒懂词义与褒贬</div>
+              </button>
+              <button data-ebchoice="vague" type="button" class="btn-tap py-3.5 px-3 rounded-2xl bg-amber-500 text-white hover:bg-amber-600 shadow-sm text-center">
+                <div class="text-sm sm:text-base font-extrabold">模糊</div>
+                <div class="text-[11px] opacity-85 mt-0.5">有点印象拿不准</div>
+              </button>
+              <button data-ebchoice="unknown" type="button" class="btn-tap py-3.5 px-3 rounded-2xl bg-rose-500 text-white hover:bg-rose-600 shadow-sm text-center">
+                <div class="text-sm sm:text-base font-extrabold">不认识</div>
+                <div class="text-[11px] opacity-85 mt-0.5">没见过或想错了</div>
+              </button>
+            </div>
+
+            <div class="text-center">
+              <button id="btnRevealAnswer" type="button" class="btn-tap text-xs text-slate-400 hover:text-slate-600 underline underline-offset-4">
+                直接看防坑解析（按不认识计入本轮巩固）
+              </button>
+            </div>
           </div>
 
-          <!-- Back Content after flip -->
+          <!-- Back Content after choice -->
           <div id="cardBackDetail" class="hidden space-y-3.5 mt-4 anim-in">
             <div id="cardSentimentBackBox" class="px-4 py-3 rounded-2xl border flex items-center justify-between gap-2">
               <span class="text-xs font-bold opacity-85">⚖️ 感情色彩判定</span>
@@ -407,31 +436,24 @@
               <div class="text-xs font-bold text-slate-600 mb-1">📌 考场语境与搭配提示</div>
               <div id="cardUsageText" class="text-xs sm:text-sm text-slate-700 leading-relaxed"></div>
               <div class="mt-2 pt-2 border-t border-slate-200/60 flex items-center justify-between text-[11px] text-slate-400">
-                <span id="cardMemoryMeta">新词首次学习</span>
+                <span id="cardMemoryMeta">艾宾浩斯自动排期中</span>
                 <a id="cardSourceLink" href="http://www.fjsgwy.org/2026/0916/70485.html" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">查看考源出处 ↗</a>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Rating Bar -->
-        <div id="cardRatingBar" class="hidden pt-5 mt-5 border-t border-slate-200/70 grid grid-cols-4 gap-2 sm:gap-3">
-          <button data-rate="1" type="button" class="btn-tap py-2.5 px-2 rounded-xl bg-rose-100 text-rose-800 hover:bg-rose-200 text-center">
-            <div class="text-xs font-bold">1 忘记了</div>
-            <div class="text-[10px] opacity-75">本轮重现</div>
-          </button>
-          <button data-rate="2" type="button" class="btn-tap py-2.5 px-2 rounded-xl bg-amber-100 text-amber-800 hover:bg-amber-200 text-center">
-            <div class="text-xs font-bold">2 有点混</div>
-            <div class="text-[10px] opacity-75">1天后复习</div>
-          </button>
-          <button data-rate="3" type="button" class="btn-tap py-2.5 px-2 rounded-xl bg-blue-100 text-blue-800 hover:bg-blue-200 text-center">
-            <div class="text-xs font-bold">3 记住了</div>
-            <div id="rate3Hint" class="text-[10px] opacity-75">3天后复习</div>
-          </button>
-          <button data-rate="4" type="button" class="btn-tap py-2.5 px-2 rounded-xl bg-emerald-100 text-emerald-800 hover:bg-emerald-200 text-center">
-            <div class="text-xs font-bold">4 稳拿分</div>
-            <div id="rate4Hint" class="text-[10px] opacity-75">7天后复习</div>
-          </button>
+        <!-- Post-Choice Action Bar (对标「不背单词」：选认识后支持「记错了」纠偏；选模糊/不认识后提示本轮重现并进入下一词) -->
+        <div id="cardRatingBar" class="hidden pt-5 mt-5 border-t border-slate-200/70 space-y-2.5">
+          <div id="cardLoopFeedbackBanner" class="text-xs text-center font-medium px-3 py-2 rounded-xl bg-slate-100 text-slate-600"></div>
+          <div class="flex items-center gap-2.5">
+            <button id="btnRegretWrong" type="button" class="hidden btn-tap py-3 px-4 rounded-2xl bg-rose-100 text-rose-800 hover:bg-rose-200 text-xs sm:text-sm font-bold shrink-0">
+              记错了 · 改判不认识
+            </button>
+            <button id="btnNextCardAfterRate" type="button" class="btn-tap flex-1 py-3 px-5 rounded-2xl bg-slate-900 text-white hover:bg-slate-800 text-xs sm:text-sm font-extrabold shadow-sm">
+              下一词 →（空格键）
+            </button>
+          </div>
         </div>
       </div>
     </section>
@@ -569,6 +591,7 @@
           <button data-libfilter="exam_core" type="button" class="btn-tap shrink-0 px-3 py-1.5 rounded-xl text-xs font-semibold bg-white/80 text-slate-700">词书三·真题核心</button>
           <button data-libfilter="potential_hot" type="button" class="btn-tap shrink-0 px-3 py-1.5 rounded-xl text-xs font-semibold bg-white/80 text-slate-700">词书四·时评潜力</button>
           <button data-libfilter="confusable_words" type="button" class="btn-tap shrink-0 px-3 py-1.5 rounded-xl text-xs font-semibold bg-white/80 text-slate-700">易混实词</button>
+          <button data-libfilter="dict_lookup" type="button" class="btn-tap shrink-0 px-3 py-1.5 rounded-xl text-xs font-semibold bg-white/80 text-slate-700">📖 备查大词典</button>
           <button data-libfilter="classical_idiom" type="button" class="btn-tap shrink-0 px-3 py-1.5 rounded-xl text-xs font-semibold bg-white/80 text-slate-700">典故扩充库</button>
           <button data-libfilter="learned" type="button" class="btn-tap shrink-0 px-3 py-1.5 rounded-xl text-xs font-semibold bg-white/80 text-slate-700">已学习</button>
           <button data-libfilter="fav" type="button" class="btn-tap shrink-0 px-3 py-1.5 rounded-xl text-xs font-semibold bg-white/80 text-slate-700">重点收藏</button>
@@ -617,7 +640,7 @@
           <div class="p-3.5 rounded-2xl bg-white/80 border border-slate-200/70 space-y-1.5">
             <div class="font-bold text-slate-900">Mac / Windows 电脑</div>
             <p class="text-slate-600 leading-relaxed">1. Mac Safari 点顶部菜单「文件 → 添加到程序坞」；Windows / Mac 版 Chrome 或 Edge 点地址栏右侧「安装不背成语」图标。</p>
-            <p class="text-slate-600 leading-relaxed">2. 独立窗口支持键盘空格翻面、数字键 1-4 打分、X 键秒删简单词。</p>
+            <p class="text-slate-600 leading-relaxed">2. 独立窗口支持键盘 1/Q 认识、2/W 模糊、3/E 不认识、空格下一词、R 记错了反悔、X 秒删简单词。</p>
           </div>
         </div>
       </div>
@@ -9579,8 +9602,332 @@
     "meaning": "一百里的路程，走到九十里也只能算是才走完一半。比喻做事越是接近成功收尾阶段，越艰难吃劲，越要咬紧牙关坚持到底，绝不可松劲功亏一篑。",
     "usage": "重大工程收官、脱贫攻坚衔接乡村振兴、备考冲刺阶段央媒必引名句。",
     "src": "https://gaokao.eol.cn/zhidao/yw/201301/t20130125_897575.shtml"
+  },
+  {
+    id: "ec_v4_01",
+    "word": "络绎不绝",
+    "pinyin": "luò yì bù jué",
+    "cat": "exam_core",
+    "sentiment": "中性",
+    "sentimentNote": "中性",
+    "tag": "高频必考·对象辨析",
+    "trap": "易与“不绝如缕”混淆（“不绝如缕”仅形容局势危急或声音、技艺细微几近断绝，绝不可形容人多热闹）。",
+    "meaning": "“络绎”指往来不绝、相连不断（典出《后汉书·南匈奴传》）。形容行人、车马、船只等来来往往，前后相接，连续不断。",
+    "usage": "主语须为人群、车辆、船只、客商等动态连续事物，如“展厅内参观者络绎不绝”；近义词有“纷至沓来”“摩肩接踵”。",
+    "src": "https://dict.idioms.moe.edu.tw/idiomView.jsp?ID=1151&webMd=2&la=0"
+  },
+  {
+    id: "ep_v4_01",
+    "word": "盲从盲信",
+    "aliases": [
+      "盲信盲从"
+    ],
+    "pinyin": "máng cóng máng xìn",
+    "cat": "error_prone_idiom",
+    "sentiment": "贬义",
+    "sentimentNote": "贬义",
+    "tag": "同素异序·政论高频",
+    "trap": "亦作“盲信盲从”。易与“偏听偏信”（侧重只片面听信一方意见）或“亦步亦趋”（侧重事事模仿追随）混同。",
+    "meaning": "缺乏独立思考与主见，不辨是非真伪地盲目相信、随声附和并跟随他人。",
+    "usage": "常用于否定劝诫语境（如“面对网络传言与算法推荐，切忌盲从盲信 / 盲信盲从”），反义对应“独立思考”“明辨是非”。",
+    "src": "https://kuku.baidu.com/landing/tscp_doc/eff89fa7bc4f73a2cc5143611efe6aa9"
+  },
+  {
+    id: "ec_v4_02",
+    "word": "浩如烟海",
+    "pinyin": "hào rú yān hǎi",
+    "cat": "exam_core",
+    "sentiment": "中性",
+    "sentimentNote": "中性",
+    "tag": "国考真题·专配典籍",
+    "trap": "与“汗牛充栋”（专指藏书册数多得牛拉出汗、堆满屋）及“恒河沙数”（泛指数量极多）混淆搭配对象。",
+    "meaning": "浩：广大；烟海：茫茫大海。形容典籍、文献、图书、资料等极为丰富繁多。",
+    "usage": "国考真题高频考点：“浩如烟海的古代文献/文化典籍”（强调资料内容浩瀚难尽），不可修饰人口或商品。",
+    "src": "https://gx.huatu.com/2023/0705/1927722.html"
+  },
+  {
+    id: "lt_v4_01",
+    "word": "巧夺天工",
+    "pinyin": "qiǎo duó tiān gōng",
+    "cat": "literal_trap",
+    "sentiment": "褒义",
+    "sentimentNote": "褒义",
+    "tag": "专指人工·严禁配自然",
+    "trap": "考场最高频陷阱：误用来赞美大峡谷、溶洞、奇峰等纯自然景观（自然景观本身就是“天工”，不能自己夺自己）。",
+    "meaning": "夺：胜过。专指精巧的人工技艺胜过天然，形容人工制作的园林、雕塑、器物极其精巧。",
+    "usage": "只能修饰人工制品（如苏绣、微雕、古典园林）；修饰自然山水奇观或人工技艺皆可用“鬼斧神工”。",
+    "src": "https://gs.huatu.com/2023/1103/1722691.html"
+  },
+  {
+    id: "ep_v4_02",
+    "word": "别具匠心",
+    "pinyin": "bié jù jiàng xīn",
+    "cat": "error_prone_idiom",
+    "sentiment": "褒义",
+    "sentimentNote": "褒义",
+    "tag": "搭配受限·文艺构思",
+    "trap": "在国考真题中误用来搭配“开拓国防科技新领域”（搭配范围过窄，科技战略开拓应选“独辟蹊径”）。",
+    "meaning": "匠心：巧妙的心思。指在文学、艺术、建筑、设计等方面具有与众不同的巧妙构思。",
+    "usage": "多搭配展陈设计、园林布局、诗文构思；泛指想法做法与众不同用“别出心裁”，创立新风格新方法用“独辟蹊径”。",
+    "src": "https://gs.huatu.com/2023/1103/1722691.html"
+  },
+  {
+    id: "ec_v4_03",
+    "word": "声名鹊起",
+    "pinyin": "shēng míng què qǐ",
+    "cat": "exam_core",
+    "sentiment": "中性",
+    "sentimentNote": "中性（偏积极）",
+    "tag": "国考真题·由默转名",
+    "trap": "易误写为“声名雀起”，或与表正处鼎盛期的“如日中天”、仅表名气大的“名声大噪”混淆阶段感。",
+    "meaning": "鹊起：像喜鹊飞起一样。形容知名度、声望原本不高，短期内迅速提高、一下子出名。",
+    "usage": "2010国考真题：景泰蓝元代默默存在，到景泰年间因皇家重视而“声名鹊起”（强调从无名到迅速出名的动态跃升）。",
+    "src": "http://edu.sina.com.cn/official/2011-10-26/1556316574.shtml"
+  },
+  {
+    id: "ec_v4_04",
+    "word": "风行草偃",
+    "pinyin": "fēng xíng cǎo yǎn",
+    "cat": "exam_core",
+    "sentiment": "褒义",
+    "sentimentNote": "褒义",
+    "tag": "典出论语·与上行下效反色",
+    "trap": "与贬义词“上行下效”混淆感情色彩，误用于不良风气蔓延。",
+    "meaning": "语本《论语·颜渊》：“君子之德风，小人之德草，草上之风必偃。”风一吹草就倒伏，比喻在上位者以德化民、率先垂范，下属民众自然顺从向善。",
+    "usage": "正面写领导干部以身作则带动清正政风必选“风行草偃”（褒义）；负面写上面带头违规下面跟着学选“上行下效”（贬义）。",
+    "src": "https://pedia.cloud.edu.tw/Entry/Detail?title=%E9%A2%A8%E8%A1%8C%E8%8D%89%E5%81%83"
+  },
+  {
+    id: "lt_v4_02",
+    "word": "可见一斑",
+    "pinyin": "kě jiàn yī bān",
+    "cat": "literal_trap",
+    "sentiment": "中性",
+    "sentimentNote": "中性",
+    "tag": "高频易错字·由小见大",
+    "trap": "易把“斑”（豹子身上的花纹）错写成“一般”，或误以为是贬义词“以偏概全”。",
+    "meaning": "斑：杂色的花纹或斑点（源自《世说新语》“管中窥豹，时见一斑”）。比喻从观察到的一小部分就能推知事物的全貌。",
+    "usage": "常作谓语收尾，如“其治学之严谨由此可见一斑”（不能接宾语说“可见一斑他的实力”）。",
+    "src": "https://zdic.net/hans/%E5%8F%AF%E8%A7%81%E4%B8%80%E6%96%91"
+  },
+  {
+    id: "ec_v4_05",
+    "word": "付之阙如",
+    "aliases": [
+      "付诸阙如"
+    ],
+    "pinyin": "fù zhī quē rú",
+    "cat": "exam_core",
+    "sentiment": "中性",
+    "sentimentNote": "中性",
+    "tag": "学术政论高频文言词",
+    "trap": "亦作“付诸阙如”。误以为是“放在一边不管”（实指客观上尚处于空白欠缺状态）。",
+    "meaning": "阙如：欠缺、空白（语出《论语·子路》“君子于其所不知，盖阙如也”）。指缺少某些本来应该有而目前还没有的东西。",
+    "usage": "常用于指出制度、立法或学术研究尚存空白，如“相关配套细则目前仍付之阙如（付诸阙如）”。",
+    "src": "https://zdic.net/hans/%E4%BB%98%E4%B9%8B%E9%97%95%E5%A6%82"
+  },
+  {
+    id: "ep_v4_03",
+    "word": "不负众望",
+    "pinyin": "bù fù zhòng wàng",
+    "cat": "error_prone_idiom",
+    "sentiment": "褒义",
+    "sentimentNote": "褒义",
+    "tag": "与不孚众望必考反义对",
+    "trap": "与一字之差的“不孚众望”（不能使大家信服，贬义）彻底看反！",
+    "meaning": "负：辜负；众望：大家的期望。指为人做事出色，没有辜负大家的期望。",
+    "usage": "记忆口诀：“负”是辜负，“不负众望”=没辜负期望（褒义）；“孚”是信服，“不孚众望”=不能让人信服（贬义），“深孚众望”=深得信服。",
+    "src": "https://gz163rsw.com/xingce/show/18775.html"
+  },
+  {
+    id: "lt_v4_03",
+    "word": "不堪卒读",
+    "pinyin": "bù kān zú dú",
+    "cat": "literal_trap",
+    "sentiment": "贬义",
+    "sentimentNote": "贬义",
+    "tag": "与不忍卒读高频混用",
+    "trap": "与“不忍卒读”（文章内容悲惨凄切让人不忍心读下去）混淆，误用来形容感人肺腑的悲剧作品。",
+    "meaning": "堪：经得起，能够；卒：完毕、结束。指文章写得极其粗劣糟糕，或充斥谬误秽语，使人根本读不下去。",
+    "usage": "批评劣质文稿词句混乱用“不堪卒读”；形容战乱家书、灾难纪实悲惨动人必须用“不忍卒读”。",
+    "src": "https://gz163rsw.com/xingce/show/18775.html"
+  },
+  {
+    id: "ec_v4_06",
+    "word": "别出机杼",
+    "aliases": [
+      "独出机杼",
+      "自出机杼"
+    ],
+    "pinyin": "bié chū jī zhù",
+    "cat": "exam_core",
+    "sentiment": "褒义",
+    "sentimentNote": "褒义",
+    "tag": "诗文构思创新高频词",
+    "trap": "亦作“独出机杼”“自出机杼”。只看字面织布机，不知其专喻诗文立意与构思布局的独创。",
+    "meaning": "别：另外；机杼：织布机，比喻诗文的组织、构思与布局。指写作不因袭前人，另辟新路，独创新意。",
+    "usage": "多搭配文学创作、学术立论、艺术章法创新，与“拾人牙慧”“陈陈相因”构成反义。",
+    "src": "https://dict.idioms.moe.edu.tw/bookView.jsp?ID=1911"
+  },
+  {
+    id: "ph_v4_01",
+    "word": "笃行不怠",
+    "pinyin": "dǔ xíng bù dài",
+    "cat": "potential_hot",
+    "sentiment": "褒义",
+    "sentimentNote": "褒义",
+    "tag": "央媒贺词高频·实干",
+    "trap": "误把“笃”当作缓慢，实指忠实专一、踏实坚定地践履。",
+    "meaning": "笃行：忠实地践行（出自《礼记·中庸》）；怠：懈怠。指切实坚定地付诸行动，毫不松懈。",
+    "usage": "常与“踔厉奋发”连用（“踔厉奋发、笃行不怠”），用于申论结尾与行测政论实干语境。",
+    "src": "https://www.12371.cn/2022/01/02/ARTI1641084894779351.shtml"
+  },
+  {
+    id: "ph_v4_02",
+    "word": "行稳致远",
+    "pinyin": "xíng wěn zhì yuǎn",
+    "cat": "potential_hot",
+    "sentiment": "褒义",
+    "sentimentNote": "褒义",
+    "tag": "央媒时评顶流高频词",
+    "trap": "既要求“稳”（防风险、打牢根基），又指向“远”（长远可持续发展），不可用于短期突击应急。",
+    "meaning": "若想走得远，必须先走得稳。形容事业、改革或产业在稳健扎实的基础上实现长远发展。",
+    "usage": "常搭配“中国经济巨轮”“制度改革”“数字治理规范发展”，体现稳中求进基调。",
+    "src": "https://www.12371.cn/2022/01/02/ARTI1641084894779351.shtml"
+  },
+  {
+    id: "ec_v4_07",
+    "word": "积厚流光",
+    "pinyin": "jī hòu liú guāng",
+    "cat": "exam_core",
+    "sentiment": "褒义",
+    "sentimentNote": "褒义",
+    "tag": "省考真题·文化底蕴",
+    "trap": "字面易误解为“积累时光流逝”，实指功业德泽深厚而流传广远（“光”通“广”）。",
+    "meaning": "积累的功业与底蕴越深厚，流传给后人的泽惠与影响就越广远（典出《荀子·礼论》）。",
+    "usage": "常用于形容中华文明、优良传统或百年学府底蕴深厚、泽被后世，近义“源远流长”。",
+    "src": "https://gs.huatu.com/2023/1103/1722691.html"
+  },
+  {
+    id: "ec_v4_08",
+    "word": "养虎为患",
+    "aliases": [
+      "养虎遗患"
+    ],
+    "pinyin": "yǎng hǔ wéi huàn",
+    "cat": "error_prone_idiom",
+    "sentiment": "贬义",
+    "sentimentNote": "贬义",
+    "tag": "真题已考·对象严限",
+    "trap": "公考真题常误用来形容“不及时改正自己的小缺点”（自身缺点不是外部凶恶敌人，属对象误用）。",
+    "meaning": "比喻纵容、姑息坏人或凶恶的敌对势力，不加铲除，给自己留下严重后患。",
+    "usage": "对象必须是外部敌手、恶势力或严重隐患，个人小毛病应选“防微杜渐”。",
+    "src": "http://edu.sina.com.cn/official/2014-04-04/1006414129.shtml"
+  },
+  {
+    id: "ec_v4_09",
+    "word": "危如累卵",
+    "aliases": [
+      "势如累卵"
+    ],
+    "pinyin": "wēi rú lěi luǎn",
+    "cat": "exam_core",
+    "sentiment": "中性",
+    "sentimentNote": "中性（客观危急）",
+    "tag": "与如履薄冰必考辨析",
+    "trap": "与表主观谨慎态度的“如履薄冰”“如临深渊”混淆：形容客观局势极度危险必须选“危如累卵”。",
+    "meaning": "累卵：把鸡蛋一层层摞起来。比喻客观局势、处境极其危险，随时可能覆灭坍塌。",
+    "usage": "搭配“局势危如累卵”“城池危如累卵”；近义“千钧一发”“岌岌可危”。",
+    "src": "https://gs.huatu.com/2023/1103/1722691.html"
+  },
+  {
+    id: "ep_v4_04",
+    "word": "名噪一时",
+    "aliases": [
+      "名声大噪"
+    ],
+    "pinyin": "míng zào yī shí",
+    "cat": "error_prone_idiom",
+    "sentiment": "褒义",
+    "sentimentNote": "偏褒义（易误判贬义）",
+    "tag": "与煊赫一时褒贬对比",
+    "trap": "看到“噪”和“一时”就误判为贬义词（贬义指气焰嚣张用“煊赫一时/烜赫一时”）。",
+    "meaning": "指在某个时期内名声很大，受到社会广泛关注与重视（“名声大噪”侧重名声一下子广泛传开）。",
+    "usage": "可用于学者、名作或历史人物在当时声誉极隆，并非贬义词。",
+    "src": "https://gz163rsw.com/xingce/show/18775.html"
+  },
+  {
+    id: "gz_core_19",
+    "word": "积毁销骨",
+    "pinyin": "jī huǐ xiāo gǔ",
+    "cat": "error_prone_idiom",
+    "sentiment": "贬义",
+    "sentimentNote": "贬义",
+    "tag": "高频易误用核心词",
+    "trap": "与“众口铄金”同源典出《史记》，指谗言毁谤致祸。",
+    "meaning": "指接连不断的毁谤馋言，足以毁灭一个人的声誉乃至生命。",
+    "usage": "公考逻辑填空高频设坑词，注意核对感情色彩与字面古义。",
+    "src": "https://gz163rsw.com/xingce/show/18775.html"
+  },
+  {
+    id: "gz_core_20",
+    "word": "群轻折轴",
+    "pinyin": "qún qīng zhé zhóu",
+    "cat": "error_prone_idiom",
+    "sentiment": "中性",
+    "sentimentNote": "中性",
+    "tag": "高频易误用核心词",
+    "trap": "比喻轻微隐患积聚过多也会酿成大祸。",
+    "meaning": "轻微的东西堆多了也能把坚固的车轴压断。比喻听任小问题或流言积少成多，终会导致严重后果。",
+    "usage": "公考逻辑填空高频设坑词，注意核对感情色彩与字面古义。",
+    "src": "https://gz163rsw.com/xingce/show/18775.html"
+  },
+  {
+    id: "gz_core_21",
+    "word": "含蓄蕴藉",
+    "pinyin": "hán xù yùn jiè",
+    "cat": "error_prone_idiom",
+    "sentiment": "褒义",
+    "sentimentNote": "褒义",
+    "tag": "高频易误用核心词",
+    "trap": "注意“藉”在此处读 jiè（不读 jí）。",
+    "meaning": "形容诗文、言辞或神情宽博深厚，意味深长而不外露。",
+    "usage": "公考逻辑填空高频设坑词，注意核对感情色彩与字面古义。",
+    "src": "https://gz163rsw.com/xingce/show/18775.html"
+  },
+  {
+    id: "gz_core_22",
+    "word": "久久为功",
+    "pinyin": "jiǔ jiǔ wéi gōng",
+    "cat": "potential_hot",
+    "sentiment": "褒义",
+    "sentimentNote": "褒义",
+    "tag": "高频易误用核心词",
+    "trap": "央媒政论高频词，反义对应“一蹴而就”“急功近利”。",
+    "meaning": "意为要持之以恒，锲而不舍，驰而不息地长期发力才能取得扎实成效。",
+    "usage": "公考逻辑填空高频设坑词，注意核对感情色彩与字面古义。",
+    "src": "https://www.12371.cn/2022/01/02/ARTI1641084894779351.shtml"
+  },
+  {
+    id: "ph_v4_03",
+    "word": "守正创新",
+    "pinyin": "shǒu zhèng chuàng xīn",
+    "cat": "potential_hot",
+    "sentiment": "褒义",
+    "sentimentNote": "褒义",
+    "tag": "央媒政论核心高频词",
+    "trap": "不可割裂“守正”与“创新”的辩证关系：既不能泥古不化，也不能脱离根本乱改。",
+    "meaning": "坚守正道、基本原则与优秀传统根脉（守正），同时顺应时代大胆开拓新思路新方法（创新）。",
+    "usage": "文化传承、制度改革与科技自立自强题源顶流四字词。",
+    "src": "https://www.12371.cn/2022/01/02/ARTI1641084894779351.shtml"
   }
 ];
+
+    // Tier 2A: 内置离线全覆盖备查词库（默认仅检索备查，不混入日常背词任务，可点「＋加入背词」单独特训）
+    var RAW_BUILTIN_DICT_TUPLES = [["dl_ht_0001","如出一辙","rú chū yī zhé","中性","比喻两件事情非常相似。用于言论和行动等。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0002","道听途说","dào tīng tú shuō","贬义","路上听来的、路上传播的话。泛指没有根据的传闻。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0003","心无旁骛","xīn wú páng wù","中性","旁：另外的；骛：追求。心思没有另外的追求，形容心思集中，专心致志。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0004","无孔不入","wú kǒng bù rù","贬义","有空子就钻。比喻利用一切机会进行活动(含贬义)。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0005","无与伦比","wú yǔ lún bǐ","中性","指事物非常完美，没有能够与它相比的同类的东西。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0006","理所当然","lǐ suǒ dāng rán","中性","道理当然是这样的，意为情理之中发生的，合乎情理的，不容怀疑。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0007","一脉相承","yī mài xiāng chéng","中性","从同一血统、派别世代相承流传下来。比喻某种思想、行为或学说之间有继承关系。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0008","大同小异","dà tóng xiǎo yì","中性","指大体相同，略有差异。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0009","数不胜数","shǔ bù shèng shǔ","中性","数都数不过来。形容数量极多，很难计算。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0010","相去甚远","xiāng qù shèn yuǎn","中性","指互相之间存在很大差异和距离。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0011","熙熙攘攘","xī xī rǎng rǎng","中性","形容人来人往，非常热闹拥挤。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0012","泥沙俱下","ní shā jù xià","中性","指在江河的急流中泥土和沙子随着水一起冲下。比喻好坏性质不同的人或者事物混杂在一起。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0013","人声鼎沸","rén shēng dǐng fèi","中性","本意是锅里的水烧开了，发出响声；现指人群的声音吵吵嚷嚷，就像炸开了锅。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0014","与日俱增","yǔ rì jù zēng","中性","随着时间一天天增长。形容不断增长。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0015","不计其数","bù jì qí shǔ","中性","没办法计算数目，形容极多。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0016","于事无补","yú shì wú bǔ","中性","指对事情没有什么益处。常用来表示所做之事对真正需要完成的事情没有帮助。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0017","异军突起","yì jūn tū qǐ","褒义","比喻与众不同的新派别或新力量一下子崛起。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0018","不胜枚举","bù shèng méi jǔ","中性","指无法一一全举出来，形容数量很多。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0019","寥寥无几","liáo liáo wú jǐ","中性","形容稀少，没有几个。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0020","鱼目混珠","yú mù hùn zhū","贬义","指拿鱼眼睛冒充珍珠，比喻用假的冒充真的。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0021","急于求成","jí yú qiú chéng","贬义","形容急着要取得成功。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0022","只言片语","zhǐ yán piàn yǔ","中性","个别词句，片段的话语。指很少的话。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0023","比比皆是","bǐ bǐ jiē shì","中性","到处都是，形容极其常见。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0024","分道扬镳","fēn dào yáng biāo","中性","分路而行。比喻目标不同，各走各的路或各干各的事。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0025","合情合理","hé qíng hé lǐ","中性","符合情理。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0026","来势汹汹","lái shì xiōng xiōng","中性","动作或事物到来的气势很厉害。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0027","不分轩轾","bù fēn xuān zhì","中性","不分高下、轻重。比喻对待二者的态度或看法差不多。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0028","条分缕析","tiáo fēn lǚ xī","褒义","一条一缕地分析。形容分析得细密清楚而有条理。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0029","独木难支","dú mù nán zhī","中性","一根木头支持不住高大的房子，比喻一个人的力量难以支撑全局。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0030","近在咫尺","jìn zài zhǐ chǐ","中性","形容距离很近。咫：古代长度单位，周制八寸。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0031","不言而喻","bù yán ér yù","中性","不用说话就能明白。形容道理很明显。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0032","街谈巷议","jiē tán xiàng yì","中性","大街小巷里人们的议论。指民间的舆论。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0033","一马当先","yī mǎ dāng xiān","褒义","原指作战时策马冲锋在前。形容领先。也比喻工作走在群众前面，积极带头。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0034","根治病灶","gēn zhì bìng zào","中性","彻底治疗由病变引起的根源问题。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0035","爱莫能助","ài mò néng zhù","中性","指有心帮助，但因力量不够或条件所限而做不到。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0036","大放异彩","dà fàng yì cǎi","褒义","闪耀着无比灿烂的光辉，比喻有着优异的表现或是突出的成就。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0037","恍如隔世","huǎng rú gé shì","中性","仿佛隔了一世。多感慨因人事变迁很大而感到一切都陌生了。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0038","口耳相传","kǒu ěr xiāng chuán","中性","口说耳听地往下传授。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0039","手足无措","shǒu zú wú cuò","中性","形容举动慌乱或没有办法应付。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0040","模棱两可","mó léng liǎng kě","贬义","对问题或事物正反两方面，持既不肯定、也不否定的态度。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0041","熠熠生辉","yì yì shēng huī","褒义","形容光彩闪耀的样子。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0042","赏心悦目","shǎng xīn yuè mù","褒义","指看到美好的景色而心情愉快。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0043","难能可贵","nán néng kě guì","褒义","做到了难做之事，十分可贵。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0044","毋庸讳言","wú yōng huì yán","中性","指用不着隐讳，可以直说的内容。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0045","津津乐道","jīn jīn lè dào","中性","很有兴趣地说个不停。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0046","前所未有","qián suǒ wèi yǒu","中性","历史上从来没有过。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0047","嗤之以鼻","chī zhī yǐ bí","贬义","从鼻子里发出冷笑的声音。表示讥笑和蔑视。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0048","口诛笔伐","kǒu zhū bǐ fá","中性","用语言文字进行揭露、批判和声讨。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0049","势如破竹","shì rú pò zhú","褒义","形容作战或工作节节胜利，毫无阻碍。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0050","触手可及","chù shǒu kě jí","中性","指近在手边，一伸手就可以接触到。形容距离极近。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0051","蜻蜓点水","qīng tíng diǎn shuǐ","贬义","比喻做事肤浅不深入。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0052","登峰造极","dēng fēng zào jí","中性","比喻学问、技艺等已达到最高的境界（有时也用于坏事达到极点）。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0053","一日千里","yī rì qiān lǐ","褒义","原形容马跑得很快。后比喻进展极快。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0054","半斤八两","bàn jīn bā liǎng","贬义","指彼此不相上下，实力相当。多强调都很一般或较差。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0055","经天纬地","jīng tiān wěi dì","褒义","形容有治理天下才能的经世之才。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0056","连绵不断","lián mián bù duàn","中性","形容连续不止，一直都不中断。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0057","毫无二致","háo wú èr zhì","中性","丝毫没有什么两样，指完全一样。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0058","各有千秋","gè yǒu qiān qiū","褒义","比喻各人有各人的长处，各人有各人的特色。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0059","烟消云散","yān xiāo yún sàn","中性","比喻事物消失得干干净净。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0060","稍纵即逝","shāo zòng jí shì","中性","稍微一放松就消失了。形容时间或机会等很容易过去。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0061","斗转星移","dǒu zhuǎn xīng yí","中性","星斗变动位置，指季节或时间的变化。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0062","五彩缤纷","wǔ cǎi bīn fēn","中性","表示颜色繁多，色彩绚丽，十分好看的样子。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0063","屈指可数","qū zhǐ kě shǔ","中性","扳着手指就可以数清楚，形容数量稀少。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0064","崭露头角","zhǎn lù tóu jiǎo","褒义","比喻突出地显露出才能和本领（多指青少年）。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0065","拨云见日","bō yún jiàn rì","褒义","比喻冲破黑暗见到光明。也比喻疑团消除，心里顿时明白。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0066","水涨船高","shuǐ zhǎng chuán gāo","中性","比喻事物随着它所凭借的基础的提高而增长提高。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0067","停滞不前","tíng zhì bù qián","贬义","因为受到阻碍而不能顺利地前进或发展。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0068","举足轻重","jǔ zú qīng chóng","中性","指处于重要地位，一举一动都足以影响全局。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0069","一知半解","yī zhī bàn jiě","贬义","指知道得不全面，理解得也不透彻。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0070","不求甚解","bù qiú shèn jiě","中性","原指读书重在领会精神实质而不死抠字句；现多指学习或研究不认真、不深入。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0071","俯拾皆是","fǔ shí jiē shì","中性","只要低下头来捡取，到处都是，形容多而易得。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0072","欲速不达","yù sù bù dá","中性","一味求快反而不能达到目的。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0073","作茧自缚","zuò jiǎn zì fù","贬义","春蚕吐丝为茧将自己裹缚其中。比喻做了某件事结果使自己受困。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0074","风起云涌","fēng qǐ yún yǒng","褒义","比喻新事物相继兴起，声势浩大。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0075","轰轰烈烈","hōng hōng liè liè","褒义","形容事业的兴旺，也形容声势浩大、气魄宏伟。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0076","无足轻重","wú zú qīng chóng","中性","没有它并不轻些，有它也并不重些。指无关紧要。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0077","口若悬河","kǒu ruò xuán hé","中性","讲起话来滔滔不绝，像瀑布不停地奔流倾泻。形容能说会辩。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0078","和风细雨","hé fēng xì yǔ","褒义","比喻耐心地、和颜悦色地批评或劝说。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0079","千篇一律","qiān piān yī lǜ","贬义","指文章公式化，或办事机械呆板、形式陈旧雷同。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0080","深入人心","shēn rù rén xīn","褒义","指理论、学说、政策等为人们深切了解和信服。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0081","经久不衰","jīng jiǔ bù shuāi","褒义","形容某事或某物经历很长时间仍旧保持旺盛状态。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0082","深入浅出","shēn rù qiǎn chū","褒义","指观点内容深刻，而语言表达浅显易懂。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0083","委曲求全","wēi qǔ qiú quán","中性","也指为了顾全大局而暂时让步迁就。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0084","沽名钓誉","gū míng diào yù","贬义","使用不正当手段谋取好名声和荣誉。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0085","驾轻就熟","jià qīng jiù shú","褒义","比喻对某事有经验、很熟悉，做起来容易。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0086","稗官野史","bài guān yě shǐ","中性","泛称记载轶闻琐事的旧小说和杂史。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0087","鱼龙混杂","yú lóng hùn zá","贬义","比喻坏人和好人混在一起。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0088","此起彼伏","cǐ qǐ bǐ fú","中性","这里起来，那里下去，形容接连不断。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0089","层出不穷","céng chū bù qióng","中性","接连不断地出现，没有穷尽。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0090","安身立命","ān shēn lì mìng","中性","指生活有着落，精神有所寄托。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0091","兴旺发达","xìng wàng fā dá","褒义","指事物或事业充分发展、欣欣向荣的景象。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0092","分庭抗礼","fēn tíng kàng lǐ","中性","比喻双方平起平坐，地位相等、实力相当，可以抗衡。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0093","细枝末节","xì zhī mò jié","中性","比喻事情或问题的细小而无关紧要的部分。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0094","融会贯通","róng huì guàn tōng","褒义","把各方面的知识或道理融合贯穿起来，从而得到系统透彻的理解。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0095","深恶痛绝","shēn è tòng jué","中性","指对某人或某事物厌恶、痛恨到极点。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0096","退避三舍","tuì bì sān shě","中性","主动退让九十里。比喻对人让步，避免冲突。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0097","荒腔走板","huāng qiāng zǒu bǎn","贬义","原指唱曲不合板眼，现多比喻说话离题或举动超出适当尺度。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0098","颜面尽失","yán miàn jìn shī","贬义","体面、脸面全部丢尽。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0099","人尽皆知","rén jìn jiē zhī","中性","所有人都知道，形容流传极广。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0100","哗众取宠","huá zhòng qǔ chǒng","贬义","以浮夸的言行迎合群众，骗取信赖和支持。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0101","接二连三","jiē èr lián sān","中性","一个接着一个，接连不断。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0102","安居乐业","ān jū lè yè","褒义","安定地生活，愉快地工作。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0103","海晏河清","hǎi yàn hé qīng","褒义","黄河水清，大海平静，比喻天下太平。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0104","渊渟岳峙","yuān tíng yuè zhì","褒义","喻人品德如渊水深沉，如高山耸立。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0105","钟灵毓秀","zhōng líng yù xiù","褒义","凝聚了天地间的灵气，孕育着优秀的人物。指山川秀美，人才辈出。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0106","瑕瑜互见","xiá yú hù xiàn","中性","比喻有缺点也有优点，客观评价优劣并存。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0107","春秋笔法","chūn qiū bǐ fǎ","中性","指寓褒贬于曲折严谨的文笔之中。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0108","言外之意","yán wài zhī yì","中性","话里暗含着但没有明说出来的意思。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0109","低头折节","dī tóu zhé jié","贬义","丧失气节，屈服于他人。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0110","弦外之音","xián wài zhī yīn","中性","原指音乐的余音，比喻言外之意。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0111","额手称庆","é shǒu chēng qìng","褒义","把手放在额上，表示庆幸。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0112","击节赞叹","jī jié zàn tàn","褒义","形容对人的诗文、言论或技艺十分赞赏。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0113","投闲置散","tóu xián zhì sàn","中性","指不被重视或安排在闲散不重要的位置上。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0114","贪大求快","tān dà qiú kuài","贬义","片面追求规模大、速度快而不顾实际。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0115","别有匠心","bié yǒu jiàng xīn","褒义","构思巧妙，与众不同。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0116","入室升堂","rù shì shēng táng","褒义","比喻人的学识技艺由浅入深达到高深造诣。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0117","冰山一角","bīng shān yī jiǎo","中性","比喻显露出来的只是庞大事物极小的一部分。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0118","遮风挡雨","zhē fēng dǎng yǔ","中性","比喻起保护庇护作用。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0119","披荆斩棘","pī jīng zhǎn jí","褒义","比喻在创业或前进道路上清除障碍，克服重重困难。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0120","添砖加瓦","tiān zhuān jiā wǎ","褒义","比喻为宏大事业做一些力所能及的贡献。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0121","弱肉强食","ruò ròu qiáng shí","中性","比喻弱者被强者吞并欺凌。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0122","优胜劣汰","yōu shèng liè tài","中性","适应力强的保存下来，适应力差的被淘汰。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0123","物竞天择","wù jìng tiān zé","中性","生物相互竞争，能适应自然的被选择存留。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0124","恒河沙数","héng hé shā shǔ","中性","像恒河里的沙粒一样无法计算，形容数量极多。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0125","触类旁通","chù lèi páng tōng","褒义","掌握某一事物的规律，从而类推通晓同类其他事物。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0126","运筹帷幄","yùn chóu wéi wò","褒义","在军帐内对军略做全面计划，泛指主持大计、谋划决策。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0127","指点迷津","zhǐ diǎn mí jīn","褒义","针对困难困惑处，提供解决的方向或途径。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0128","建言献策","jiàn yán xiàn cè","褒义","陈述主张，提出有益的意见和计策。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0129","出谋划策","chū móu huà cè","中性","制定计谋策略，为人出主意。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0130","老生常谈","lǎo shēng cháng tán","中性","比喻人们听惯了的没有新鲜意思的老话。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0131","烂熟于心","làn shú yú xīn","中性","形容记得非常熟练牢靠。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0132","陈词滥调","chén cí làn tiáo","贬义","形容语言陈腐、空泛无新意。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0133","轻车熟路","qīng chē shú lù","褒义","比喻事情熟悉，做起来轻松容易。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0134","无一例外","wú yī lì wài","中性","全都是这样，没有任何特殊情况。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0135","无一幸免","wú yī xìng miǎn","中性","没有一个人能逃脱灾难。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0136","不出所料","bù chū suǒ liào","中性","事态变化在预料之中，形容原先预料准确。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0137","逸闻轶事","yì wén yì shì","中性","世人少知、不见于正式记载的传闻轶事。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0138","龙蛇混杂","lóng shé hùn zá","贬义","比喻好人和坏人混在一起。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0139","胡编乱造","hú biān luàn zào","贬义","没有根据、不合情理地胡乱编造。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0140","大行其道","dà xíng qí dào","中性","指某种新潮或不良流派、事物在某范围内盛行一时（现多偏消极）。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0141","俯仰可拾","fǔ yǎng kě shí","中性","低头就能捡到，形容数量多、极易得到。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0142","根深蒂固","gēn shēn dì gù","中性","比喻基础稳固或旧观念深植，不容易动摇。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0143","大道至简","dà dào zhì jiǎn","中性","基本原理、方法和规律往往极其简明扼要。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0144","前仆后继","qián pū hòu jì","褒义","前面的人倒下了，后面的人继续跟上去，形容英勇奋斗不怕牺牲。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0145","不温不火","bù wēn bù huǒ","中性","形容神态温和适中，或销售行情平淡不火爆（注意没有“不瘟不火”表销售义）。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0146","后继无人","hòu jì wú rén","中性","缺少后辈来继承前人的事业。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0147","拔地而起","bá dì ér qǐ","中性","形容山峰、高楼建筑物等从地面突兀高耸立起。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0148","破土而出","pò tǔ ér chū","褒义","比喻新事物冲破重重阻力显露生机。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0149","曲意逢迎","qǔ yì féng yíng","贬义","违背自己的本心去迎合讨好别人。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0150","心口不一","xīn kǒu bù yī","贬义","心里想的和嘴上说的不一样，形容虚伪诡诈。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0151","阿谀奉承","ē yú fèng chéng","贬义","曲从拍马，迎合讨好别人。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0152","投其所好","tóu qí suǒ hǎo","贬义","迎合别人的喜好以达目的。多。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0153","百家争鸣","bǎi jiā zhēng míng","褒义","比喻允许各种学术流派自由发表见解。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0154","循循善诱","xún xún shàn yòu","褒义","善于有步骤地引导别人进行学习。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0155","广开言路","guǎng kāi yán lù","褒义","尽量给基层和群众创造发表意见的条件。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0156","以理服人","yǐ lǐ fú rén","褒义","用道理说服人，使人心悦诚服。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0157","畅所欲言","chàng suǒ yù yán","褒义","没有约束地把心里话痛快说出来。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0158","诲人不倦","huì rén bù juàn","褒义","教导别人极有耐心，从不厌倦。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0159","求同存异","qiú tóng cún yì","褒义","找出共同点，保留不同意见。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0160","集思广益","jí sī guǎng yì","褒义","集中群众的智慧，广泛吸收有益的意见。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0161","一针见血","yī zhēn jiàn xuè","褒义","比喻说话直截了当，切中要害。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0162","无关痛痒","wú guān tòng yǎng","中性","指与自身利害无关或无足轻重。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0163","和颜悦色","hé yán yuè sè","褒义","形容态度温和亲切。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0164","隔靴搔痒","gé xuē sāo yǎng","贬义","比喻说话作文没抓住要点，或做事没抓住关键、不解决实际问题。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0165","洋洋盈耳","yáng yáng yíng ěr","褒义","形容宏亮而优美的读书声或乐声充满双耳。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0166","舌灿莲花","shé càn lián huā","褒义","形容人口才极好，能言善道。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0167","闻一知十","wén yī zhī shí","褒义","听到一点就能理解很多，形容善于类推。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0168","旁征博引","páng zhēng bó yǐn","褒义","写文章或说话广泛引用材料作为依据。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0169","妙语连珠","miào yǔ lián zhū","褒义","巧妙风趣的话一个接一个。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0170","声情并茂","shēng qíng bìng mào","褒义","指演唱、朗诵等的音色唱腔和表达的感情都很动人。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0171","引经据典","yǐn jīng jù diǎn","中性","引用经典书籍作为论证的依据。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0172","兴师动众","xìng shī dòng zhòng","贬义","现多指动用很多人力做某件事（多指不值得如此大费周章）。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0173","劳民伤财","láo mín shāng cái","贬义","既使人民劳苦，又耗费钱财。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0174","无可争议","wú kě zhēng yì","中性","事实确凿，没有争论余地。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0175","大动干戈","dà dòng gān gē","中性","原指发动战争，现多比喻大张声势地行事。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0176","无可讳言","wú kě huì yán","中性","没有什么不可以直说的，指可以坦率承认。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0177","偷梁换柱","tōu liáng huàn zhù","贬义","比喻暗中玩弄手法，以假代真，以劣代优。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0178","移花接木","yí huā jiē mù","贬义","比喻暗中用手段更换人或事物来欺骗别人（亦指巧妙嫁接）。多。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0179","避重就轻","bì chóng jiù qīng","贬义","回避重的责任只拣轻的承担，或回避核心问题只谈枝节。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0180","暗度陈仓","àn dù chén cāng","中性","比喻表面正面迷惑对方，暗中迂回出奇制胜（有时也指私下暗中交易）。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0181","刻骨铭心","kè gǔ míng xīn","中性","形容记忆或教训极其深刻，永远难忘。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0182","青黄不接","qīng huáng bù jiē","中性","陈粮已尽新粮未熟，比喻人力、财力或人才梯队一时接续不上。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0183","沉思翰藻","chén sī hàn zǎo","褒义","寓意深沉，文辞华丽。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0184","文采斐然","wén cǎi fěi rán","褒义","形容一个人文笔典雅绚丽、很有才华。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0185","形神兼备","xíng shén jiān bèi","褒义","书画雕塑作品既有美妙形态又有生动神韵。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0186","举不胜举","jǔ bù shèng jǔ","中性","列举也列举不完，形容数量极多。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0187","沉渣泛起","chén zhā fàn qǐ","贬义","已经绝迹的腐朽、陈旧事物又重新冒头出现。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0188","不负韶华","bù fù sháo huá","褒义","不辜负美好的青春年华与时代时光。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0189","无足挂齿","wú zú guà chǐ","中性","不值得一提（常用作谦辞）。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0190","无伤大雅","wú shāng dà yǎ","中性","对事物主要方面没有妨害。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0191","广袤无垠","guǎng mào wú yín","中性","形容大地、草原、海洋等辽阔无边。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0192","山高水长","shān gāo shuǐ cháng","褒义","原比喻人的风范或声誉像高山长水一样永存，后比喻恩德情义深厚。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0193","海阔天空","hǎi kuò tiān kōng","中性","形容空间开阔无拘束，或漫谈没有边际。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0194","学思践悟","xué sī jiàn wù","褒义","边学习、边思考、边实践、边领悟。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0195","细照笃行","xì zhào dǔ xíng","褒义","对照标准深入检视问题并踏实付诸行动。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0196","知行合一","zhī xíng hé yī","褒义","认识事理与实际行动高度统一。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0197","一无是处","yī wú shì chǔ","贬义","没有一点对的地方或用处。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0198","参差不齐","cēn cī bù qí","中性","长短、高低、大小不一致，形容水平不一或很不整齐。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0199","破绽百出","pò zhàn bǎi chū","贬义","比喻说话做事漏洞非常多。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0200","百花齐放","bǎi huā qí fàng","褒义","比喻不同形式和风格的艺术学术自由繁荣发展。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0201","群雄逐鹿","qún xióng zhú lù","中性","形容各派势力激烈争夺主导地位或市场。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0202","唇齿相依","chún chǐ xiāng yī","中性","比喻双方关系极为密切，相互依存。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0203","休戚与共","xiū qī yǔ gòng","褒义","有福同享，有祸同担，形容关系紧密、利害一致。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0204","水乳交融","shuǐ rǔ jiāo róng","褒义","比喻关系非常融洽或结合得极其紧密。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0205","设身处地","shè shēn chǔ dì","褒义","站在别人的处境替别人着想。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0206","畏首畏尾","wèi shǒu wèi wěi","贬义","前也怕后也怕，比喻做事胆小顾虑多。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0207","投鼠忌器","tóu shǔ jì qì","中性","想打老鼠又怕砸坏旁边的器物，比喻想打击坏人却有所顾忌。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0208","谈虎色变","tán hǔ sè biàn","中性","比喻一提到自己受过害的可怕事物就紧张变色。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0209","如鱼得水","rú yú dé shuǐ","褒义","比喻得到志同道合的人或极其适合自己的环境。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0210","悄然兴起","qiǎo rán xìng qǐ","中性","不知不觉间开始流行兴盛起来。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0211","心不在焉","xīn bù zài yān","贬义","思想不集中。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0212","众口一词","zhòng kǒu yī cí","中性","所有人都说同样的话。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0213","兴味索然","xìng wèi suǒ rán","中性","一点儿兴趣都没有。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0214","重见天日","chóng jiàn tiān rì","中性","比喻脱离黑暗，重见光明，或古物重现于世。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0215","互为表里","hù wéi biǎo lǐ","中性","甲为乙的外表，乙为甲的内里，比喻互相依存渗透。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0216","互相标榜","hù xiāng biāo bǎng","贬义","互相吹嘘称颂。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0217","互为因果","hù wéi yīn guǒ","中性","原因和结果相互联系、相互转化。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0218","众望所归","zhòng wàng suǒ guī","褒义","深得众人拥护、敬仰和信赖。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0219","自以为是","zì yǐ wéi shì","贬义","总以为自己完全正确，主观不虚心。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0220","习以为常","xí yǐ wéi cháng","中性","常做或常看到某事，便觉得很平常了。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0221","不了了之","bù liǎo liǎo zhī","贬义","把未做完或未解决的事放在一边不管就算完事。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0222","充耳不闻","chōng ěr bù wén","贬义","塞住耳朵有意不听别人的意见。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0223","敷衍塞责","fū yǎn sè zé","贬义","工作马虎不负责，表面应付搪塞。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0224","石沉大海","shí chén dà hǎi","中性","比喻从此再无消息，或投入没有丝毫回响。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0225","无动于衷","wú dòng yú zhōng","贬义","对应该关心注意的事毫不在意、置之不理。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0226","收效甚微","shōu xiào shèn wēi","中性","付出的努力几乎没什么效果。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0227","粗制滥造","cū zhì làn zào","贬义","制作东西或写文章马虎草率，只求数量不顾质量。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0228","绰绰有余","chuò chuò yǒu yú","褒义","形容房屋、钱财或时间精力非常宽裕，应付自如。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0229","天经地义","tiān jīng dì yì","中性","指理所当然、不容置疑的正理。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0230","不易之论","bù yì zhī lùn","褒义","完全正确、不可更改的言论（同“不刊之论”）。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0231","日异月殊","rì yì yuè shū","中性","每天每月都有变化差异，形容发展变化快。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0232","天造地设","tiān zào dì shè","褒义","事物自然形成且合乎理想，浑然天成不必再加工。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0233","高歌猛进","gāo gē měng jìn","褒义","形容在前进道路上充满乐观豪迈精神快速发展。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0234","日臻完善","rì zhēn wán shàn","褒义","一天天逐步达到完备美好的境地。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0235","今非昔比","jīn fēi xī bǐ","褒义","现在远远胜过从前，形容发生了翻天覆地的变化。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0236","电光火石","diàn guāng huǒ shí","中性","比喻事物像闪电燧火一样瞬息即逝，极快。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0237","杳无音讯","yǎo wú yīn xùn","中性","没有一点消息，信息断绝。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0238","销声匿迹","xiāo shēng nì jì","中性","隐藏起来不再公开讲话、不再出头露面。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0239","病入膏肓","bìng rù gāo huāng","中性","病情极重无法医治，比喻事态严重到不可挽回的地步。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0240","动荡不安","dòng dàng bù ān","贬义","形容局势混乱不稳定。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0241","阴差阳错","yīn chā yáng cuò","中性","由于多种偶然因素凑巧造成了差错。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0242","死气沉沉","sǐ qì chén chén","贬义","形容气氛沉闷不活泼，毫无生气。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0243","不期而遇","bù qī ér yù","中性","没有事先约定而意外碰见。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0244","奄奄一息","yǎn yǎn yī xī","中性","气息微弱临近死亡，比喻事物即将消亡。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0245","接踵而至","jiē zhǒng ér zhì","中性","人们前脚跟着后脚接连不断地来，或事情持续发生。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0246","穷经皓首","qióng jīng hào shǒu","褒义","直到年老头白还在钻研经书古籍，形容勤勉治学至老不倦（亦作“皓首穷经”）。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0247","学而不厌","xué ér bù yàn","褒义","学习没有满足倦怠的时候，形容极其好学。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0248","锲而不舍","qiè ér bù shě","褒义","不停地雕刻，比喻做事治学有恒心、有毅力。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0249","奋发图强","fèn fā tú qiáng","褒义","振作精神，努力谋求强盛。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0250","一盘散沙","yī pán sàn shā","贬义","比喻力量分散，缺乏组织凝聚力。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0251","人心涣散","rén xīn huàn sàn","贬义","思想不统一，人心离散不齐。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0252","离心离德","lí xīn lí dé","贬义","思想不统一，信念不一致，不一条心。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0253","精神抖擞","jīng shén dǒu sǒu","褒义","形容精神振奋饱满。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0254","蒸蒸日上","zhēng zhēng rì shàng","褒义","形容事业、生活一天天向上兴旺发展。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0255","旁若无人","páng ruò wú rén","贬义","形容态度自然镇定，更多形容态度傲慢不把别人放眼里。多。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0256","素不相识","sù bù xiāng shí","中性","向来不认识。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0257","不忘初心","bù wàng chū xīn","褒义","不忘记最初的志向与使命。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0258","力争上游","lì zhēng shàng yóu","褒义","努力奋斗争取先进或有利地位。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0259","风流云散","fēng liú yún sàn","中性","比喻原本常在一起的人四处离散。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0260","风雨同舟","fēng yǔ tóng zhōu","褒义","在狂风暴雨中同乘一船，比喻共同经历患难、齐心渡难关。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0261","交相辉映","jiāo xiāng huī yìng","褒义","各种光亮、色彩等互相映照增辉（常用于美好事物）。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0262","平分秋色","píng fēn qiū sè","中性","比喻双方各得一半，不分高低。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0263","势均力敌","shì jūn lì dí","中性","双方力量相当，不分高低。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0264","遥相呼应","yáo xiāng hū yìng","中性","远远地互相联系、互相配合。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0265","风驰电掣","fēng chí diàn chè","中性","形容速度非常快，像刮风闪电一样。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0266","投机取巧","tóu jī qǔ qiǎo","贬义","靠不正当手段或小聪明钻空子占便宜。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0267","落井下石","luò jǐng xià shí","贬义","乘人危难之时加以陷害打击。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0268","寡廉鲜耻","guǎ lián xiān chǐ","贬义","不知廉耻。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0269","斗折蛇行","dǒu zhé shé xíng","中性","像北斗星一样弯曲、像蛇一样蜿蜒，形容道路或溪流曲折。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0270","拾级而上","shè jí ér shàng","中性","顺着阶梯一步步往上走（“拾”读 shè）。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0271","触目皆是","chù mù jiē shì","中性","眼睛看到的地方到处都是，形容极多。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0272","无出其右","wú chū qí yòu","褒义","古代以右为尊，指没有能超过他的（天下第一）。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0273","掩耳盗铃","yǎn ěr dào líng","贬义","比喻自己欺骗自己，明明掩盖不住偏要设法掩盖。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0274","纤尘不染","xiān chén bù rǎn","褒义","形容极其清洁干净，或品格高洁丝毫不受坏风气沾染。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0275","皮里阳秋","pí lǐ yáng qiū","中性","表面不露声色而藏在心里不说出来的臧否评论。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0276","孤芳自赏","gū fāng zì shǎng","贬义","自命清高、自我欣赏，脱离群众。多。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0277","一语双关","yī yǔ shuāng guān","中性","一句话同时包含表里两层意思。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0278","略逊一筹","lüè xùn yī chóu","中性","比较起来稍微差一点儿。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0279","寥寥数语","liáo liáo shǔ yǔ","中性","非常简短精括的几句话。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0280","一步之遥","yī bù zhī yáo","中性","只有一步的距离，形容离目标或险境极近。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0281","一脉相通","yī mài xiāng tōng","中性","事物之间像同一条脉络贯穿互通。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0282","衣钵相传","yī bō xiāng chuán","中性","比喻师徒或前后代之间学问、技艺、思想的继承传授。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0283","孜孜以求","zī zī yǐ qiú","褒义","不知疲倦地勤勉探求。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0284","潜精研思","qián jīng yán sī","褒义","专心致志地深入钻研学术问题。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0285","浅尝辄止","qiǎn cháng zhé zhǐ","贬义","略微尝试一下就停下来，指学习研究浮于表面不深入。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0286","筚门圭窦","bì mén guī dòu","中性","柴门小户，形容贫苦人家简陋的住室。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0287","兰艾同焚","lán ài tóng fén","中性","香兰与臭艾草一起烧毁，比喻不分好坏一同消灭（同“玉石俱焚”）。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0288","钟鸣鼎食","zhōng míng dǐng shí","中性","击钟列鼎而食，形容古代王侯贵族的豪华排场。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0289","曲径通幽","qǔ jìng tōng yōu","褒义","弯曲小路通往幽雅深处，亦喻经过曲折探索领悟深奥妙理。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0290","桑枢瓮牖","sāng shū wèng yǒu","中性","桑木门轴、瓦罐做窗，形容极端贫苦之家。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0291","生机盎然","shēng jī àng rán","褒义","充满旺盛的生命力与生机活力。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0292","珠联璧合","zhū lián bì hé","褒义","珍珠成串、美玉合一，比喻杰出人才或美好事物完美结合。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0293","行之有效","xíng zhī yǒu xiào","褒义","实行之后证明确实很有成效。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0294","大张旗鼓","dà zhāng qí gǔ","中性","形容声势和规模很大地公开进行。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0295","匪夷所思","fěi yí suǒ sī","中性","不是按常理所能想象到的，形容想法离奇出人意料。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0296","啼笑皆非","tí xiào jiē fēi","中性","哭也不是笑也不是，形容处境尴尬或既令人难受又可笑。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0297","始料未及","shǐ liào wèi jí","中性","当初没有预料到，事态发展出乎意料。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0298","硕果仅存","shuò guǒ jǐn cún","褒义","经过长期淘汰或战乱毁损后唯一存留下来的宝贵人或物。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0299","长盛不衰","cháng shèng bù shuāi","褒义","长时间保持兴盛而不衰败。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0300","鹤立鸡群","hè lì jī qún","褒义","比喻一个人的仪表或才能在周围众人中显得很突出。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0301","冷嘲热讽","lěng cháo rè fěng","贬义","用尖刻辛辣的语言进行嘲笑和讽刺。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0302","疾言厉色","jí yán lì sè","中性","说话急促，脸色严厉，形容对人发怒训斥的神情。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0303","势在必行","shì zài bì xíng","中性","从客观形势发展看必须付诸实施。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0304","迎刃而解","yíng rèn ér jiě","褒义","比喻关键问题解决后，其余关联难题便顺利化解。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0305","孜孜不倦","zī zī bù juàn","褒义","工作或学习勤奋刻苦，不知疲倦。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0306","特立独行","tè lì dú xíng","褒义","有坚定操守与独立见解，不随波逐流。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0307","一目了然","yī mù liǎo rán","中性","一眼就能看得清清楚楚。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0308","惊世骇俗","jīng shì hài sú","中性","因言行异于寻常世俗而使人震惊。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0309","板上钉钉","bǎn shàng dīng dīng","中性","比喻事情已经敲定，不能再变更。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0310","翘首以待","qiáo shǒu yǐ dài","中性","抬起头殷切地盼望等待。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0311","茅塞顿开","máo sè dùn kāi","褒义","形容受到点拨启发后，忽然理解领悟了道理。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0312","如梦初醒","rú mèng chū xǐng","中性","比喻从长期糊涂或错误的境地中刚刚醒悟过来。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0313","独领风骚","dú lǐng fēng sāo","褒义","形容超群出众，在某一领域或时代居于领先地位。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0314","一往无前","yī wǎng wú qián","褒义","无所畏惧、毫不动摇地奋勇前进。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0315","大势所趋","dà shì suǒ qū","中性","整个客观局势发展的必然趋向。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0316","日渐式微","rì jiàn shì wēi","中性","事物由兴盛逐渐走向衰落（“式”为发语词）。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0317","高山仰止","gāo shān yǎng zhǐ","褒义","比喻对崇高品德的景仰爱慕（常与“景行行止”连用）。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0318","转瞬即逝","zhuǎn shùn jí shì","中性","一转眼就消逝不见，形容时间极短。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0319","五彩斑斓","wǔ cǎi bān lán","中性","色彩灿烂丰富、错杂艳丽。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0320","先入为主","xiān rù wéi zhǔ","中性","先听到的意见在头脑中形成成见，此后便不易接受不同看法。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0321","洁身自好","jié shēn zì hǎo","中性","保持自身纯洁不同流合污；有时也指怕惹是非只顾自己。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0322","洗心革面","xǐ xīn gé miàn","褒义","清除旧恶念，彻底改过自新。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0323","严于律己","yán yú lǜ jǐ","褒义","严格地约束要求自己。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0324","目不窥园","mù bù kuī yuán","褒义","西汉董仲舒三年不看花园，形容专心治学、埋头苦读。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0325","铺天盖地","pū tiān gài dì","中性","形容来势极猛、声势浩大、到处都是。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0326","手不释卷","shǒu bù shì juǎn","褒义","书本不离手，形容勤奋好学。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0327","一叶知秋","yī yè zhī qiū","中性","看见一片落叶便知秋临，比喻从细微迹象洞察事物发展的总体趋向。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0328","并驾齐驱","bìng jià qí qū","褒义","几匹马并排快跑，比喻彼此实力相当、齐头并进。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0329","并行不悖","bìng xíng bù bèi","中性","同时实行推进而互不冲突违背。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0330","星罗棋布","xīng luó qí bù","中性","像天上繁星和棋盘棋子一样散布，形容数量多、分布广。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0331","波诡云谲","bō guǐ yún jué","中性","好像云彩和水波那样千态万状不可捉摸，形容局势或文思变幻莫测（亦作“波谲云诡”）。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0332","变幻无常","biàn huàn wú cháng","中性","事物经常突变，毫无规律可循。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0333","民不聊生","mín bù liáo shēng","贬义","老百姓失去赖以生存的条件，活不下去。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0334","雅俗共赏","yǎ sú gòng shǎng","褒义","形容文艺作品既高雅优美又通俗易懂，不同文化层次的人都能欣赏。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0335","美不胜收","měi bù shèng shōu","褒义","美好的景物或展品太多，一时看不过来。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0336","反客为主","fǎn kè wéi zhǔ","中性","客人反过来成为主人，比喻变被动为主动。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0337","以一持万","yǐ yī chí wàn","褒义","形容抓住核心关键就能统驭控制全局。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0338","主客颠倒","zhǔ kè diān dǎo","贬义","比喻事物轻重、主次位置弄颠倒了。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0339","喧宾夺主","xuān bīn duó zhǔ","贬义","外来的或次要的事物占据了原有的或主要事物的位置。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0340","太阿倒持","tài ē dào chí","贬义","把太阿宝剑倒拿把剑柄授人，比喻把大权交给别人，自己反受其害。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0341","不可多得","bù kě duō dé","褒义","形容人才或宝物非常稀少难得。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0342","绝无仅有","jué wú jǐn yǒu","中性","极其少有，再没有第二个。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0343","心如止水","xīn rú zhǐ shuǐ","中性","心里平静得像不动的水面，形容不受外界纷扰诱惑。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0344","指桑骂槐","zhǐ sāng mà huái","贬义","指着桑树数落槐树，比喻表面骂此人实则暗骂彼人。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0345","波澜不惊","bō lán bù jīng","中性","微风吹过水面平静，比喻面对变局依然局面平稳、心态镇定。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0346","严阵以待","yán zhèn yǐ dài","中性","摆好严整阵势等待来犯之敌，形容做好充分应对准备。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0347","去芜存菁","qù wú cún jīng","褒义","除去粗糙杂质，保留精华部分。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0348","弃旧图新","qì jiù tú xīn","褒义","抛弃旧的错误道路，谋求新的发展方向。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0349","拨乱反正","bō luàn fǎn zhèng","褒义","消除混乱局面，扭转乱象使之重归正常秩序。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0350","不可名状","bù kě míng zhuàng","中性","微妙复杂得无法用语言贴切形容描述。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0351","不惜血本","bù xī xuè běn","中性","为了达到目的不惜投入巨额本钱代价。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0352","刚愎自用","gāng bì zì yòng","贬义","十分固执自信，完全听不进别人意见。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0353","剑走偏锋","jiàn zǒu piān fēng","中性","不走常规老路，用出人意料的新奇办法出奇制胜（有时含冒险义）。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0354","泥古不化","ní gǔ bù huà","贬义","拘泥于古代成规或古人说法而不知变通。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0355","恃才放旷","shì cái fàng kuàng","贬义","倚仗自己有才华而行为放纵不加约束。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0356","实至名归","shí zhì míng guī","褒义","有了真正的学识、本领或业绩，自然赢得相应声誉。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0357","名正言顺","míng zhèng yán shùn","褒义","名义正当，道理也讲得通。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0358","精雕细刻","jīng diāo xì kè","褒义","形容创作艺术品或打磨工作极其认真细致。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0359","只争朝夕","zhǐ zhēng zhāo xī","褒义","抓紧一朝一夕的时间，力争尽快推进事业。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0360","独当一面","dú dāng yī miàn","褒义","能够独立负责一个方面的重要工作。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0361","出人头地","chū rén tóu dì","褒义","德才超众或成就突出，超越一般人。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0362","目瞪口呆","mù dèng kǒu dāi","中性","因吃惊、害怕而发愣说不出话。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0363","怅然若失","chàng rán ruò shī","中性","心情失落沮丧，好像丢了什么东西。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0364","追悔莫及","zhuī huǐ mò jí","中性","后悔也已经来不及了。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0365","尔虞我诈","ěr yú wǒ zhà","贬义","你欺骗我、我算计你，彼此互相欺诈。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0366","万马奔腾","wàn mǎ bēn téng","褒义","形容群众活动或发展浪潮声势浩大、场面热烈。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0367","秣马厉兵","mò mǎ lì bīng","中性","喂饱战马、磨快兵器，形容做好充分战斗或竞争准备（亦作“厉兵秣马”）。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0368","汪洋恣肆","wāng yáng zì sì","褒义","形容文章、言论、书法气势豪放，挥洒自如。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0369","戎马倥偬","róng mǎ kǒng zǒng","中性","形容军务繁忙紧急。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0370","纵横捭阖","zòng héng bǎi hé","中性","在政治、外交或商战中运用手腕进行联合或分化瓦解。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0371","金戈铁马","jīn gē tiě mǎ","中性","形容威武雄壮的战马兵仗，借指戎马战事。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0372","开诚布公","kāi chéng bù gōng","褒义","以诚意相见，坦率无私地公开交换意见。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0373","光明磊落","guāng míng lěi luò","褒义","胸怀坦白，心地光明，没有私心暗鬼。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0374","小题大做","xiǎo tí dà zuò","贬义","把小事当作大事来办，指不值得如此兴师动众或有意扩大事态。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0375","娓娓动听","wěi wěi dòng tīng","褒义","话说得婉转生动，使人爱听（近义“娓娓道来”）。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0376","绘声绘色","huì shēng huì sè","褒义","形容叙述、描写极其生动逼真。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0377","惟妙惟肖","wéi miào wéi xiào","褒义","形容描写或模仿得极其逼真传神。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0378","吹毛求疵","chuī máo qiú cī","贬义","故意吹开皮上的毛寻找小疤痕，比喻刻意挑剔毛病找岔子。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0379","回天乏术","huí tiān fá shù","中性","比喻局势或病情严重到极点，已无力挽救。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0380","孤立无援","gū lì wú yuán","中性","只有自身单薄力量，得不到任何外部援助。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0381","力所不逮","lì suǒ bù dài","中性","客观能力达不到（同“力有不逮”）。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0382","一丝不苟","yī sī bù gǒu","褒义","做事十分认真细致，一点儿也不马虎。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0383","事倍功半","shì bèi gōng bàn","中性","费力很大而收效很小（反义“事半功倍”）。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0384","润物无声","rùn wù wú shēng","褒义","比喻潜移默化的熏陶或默默无闻的奉献。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0385","一呼百应","yī hū bǎi yìng","褒义","一声召唤便群起响应，形容号召力极强。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0386","不令而行","bù lìng ér xíng","褒义","在上位者自身端正，不须下令而下属民众自然遵行（语出《论语》）。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0387","荒诞不经","huāng dàn bù jīng","贬义","荒唐离奇，完全不合常理。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0388","无理取闹","wú lǐ qǔ nào","贬义","毫无理由地故意吵闹捣乱。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0389","记忆犹新","jì yì yóu xīn","中性","过去的事至今印象依然清晰如昨。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0390","咄咄逼人","duō duō bī rén","中性","气势汹汹使人惊惧，也指形势发展迅猛给人紧迫压力。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0391","心有余悸","xīn yǒu yú jì","中性","危险事情虽已过去，回想起来仍心惊害怕。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0392","放任自流","fàng rèn zì liú","贬义","听凭自然发展而不加引导管束。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0393","作壁上观","zuò bì shàng guān","中性","站在壁垒上旁观交战，比喻坐视不救、置身事外。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0394","水到渠成","shuǐ dào qú chéng","褒义","水流到之处自然成渠，比喻条件成熟后事情自然成功。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0395","咎由自取","jiù yóu zì qǔ","贬义","灾祸或罪过完全是自己招来的。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0396","井井有条","jǐng jǐng yǒu tiáo","褒义","形容条理分明，整齐有序。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0397","不置可否","bù zhì kě pǐ","中性","既不说赞成也不说反对，不明确表态。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0398","自强不息","zì qiáng bù xī","褒义","自觉努力向上，永不松懈（语出《周易》）。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0399","自圆其说","zì yuán qí shuō","中性","使自己的论断前后一致，没有自相矛盾之处。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0400","沸沸扬扬","fèi fèi yáng yáng","中性","像沸水翻腾一样，形容人声喧扰、到处议论纷纷。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0401","乐见其成","lè jiàn qí chéng","褒义","很愿意看到某件好事发展成功。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0402","大有可为","dà yǒu kě wéi","褒义","事情很有发展前途，值得大干一番。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0403","前程似锦","qián chéng sì jǐn","褒义","形容未来前途像锦缎一样光明美好。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0404","囫囵吞枣","hú lún tūn zǎo","贬义","把枣整个吞下不加咀嚼，比喻学习读书笼统接受而不加分析消化。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0405","渐入佳境","jiàn rù jiā jìng","褒义","比喻境况逐渐好转，或艺术欣赏兴味渐浓。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0406","泛滥成灾","fàn làn chéng zāi","贬义","坏事物或劣质品过多而造成危害。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0407","甚嚣尘上","shèn xiāo chén shàng","贬义","现专用来形容某种错误传闻或反动荒谬言论十分嚣张。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0408","沸反盈天","fèi fǎn yíng tiān","中性","声音像水开锅一样翻滚充满空间，形容人声极度喧闹混乱。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0409","不一而足","bù yī ér zú","中性","同类的事物或现象不止一种而是很多，无法一一列举。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0410","巨细无遗","jù xì wú yí","中性","大小细节全都囊括，毫无遗漏。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0411","不着边际","bù zhuó biān jì","贬义","说话空泛，挨不着实际问题边儿。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0412","莫此为甚","mò cǐ wéi shèn","中性","没有什么能比这个更严重的了。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0413","未定之天","wèi dìng zhī tiān","中性","比喻事情尚无着落或结果还未确定。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0414","不分畛域","bù fēn zhěn yù","中性","不分界限范围，比喻不分彼此、团结一体。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0415","成风化人","chéng fēng huà rén","褒义","通过倡导健康社会风气来感化教育大众。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0416","外强中干","wài qiáng zhōng gān","贬义","外表看似强大，内里实际空虚赢弱。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0417","入不敷出","rù bù fū chū","中性","收入不够开支。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0418","踟蹰不前","chí chú bù qián","中性","迟疑犹豫，不敢前进。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0419","优柔寡断","yōu róu guǎ duàn","贬义","做事犹豫不决，缺乏果断魄力。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0420","弥足珍贵","mí zú zhēn guì","褒义","更加显得十分珍贵。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0421","金瓯无缺","jīn ōu wú quē","褒义","比喻国家疆土完整无缺。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0422","完璧归赵","wán bì guī zhào","褒义","比喻把原物完好无损地归还本人。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0423","白云苍狗","bái yún cāng gǒu","中性","浮云顷刻由白衣变灰狗，比喻世事变幻无常。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0424","迥然不同","jiǒng rán bù tóng","中性","形容差别很大，完全不同。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0425","不可胜数","bù kě shèng shǔ","中性","数量极多，数也数不过来。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0426","所向披靡","suǒ xiàng pī mǐ","褒义","力量所到之处一切障碍全被扫除，常形容军队或强队势不可挡。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0427","如临深渊","rú lín shēn yuān","中性","如同站在深渊边缘，比喻存有戒心、行事极其谨慎。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0428","骑虎难下","qí hǔ nán xià","中性","骑在虎背上不敢下来，比喻事情中途遇到困难却又迫于形势无法停止。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0429","不可思议","bù kě sī yì","中性","神秘奥妙无法想象，或难以理解。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0430","闭门造车","bì mén zào chē","贬义","关起门来按主观想象造车，比喻脱离客观实际、只凭主观办事。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0431","无懈可击","wú xiè kě jī","褒义","没有一处漏洞可以被攻击挑剔，形容极其严密。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0432","置之不理","zhì zhī bù lǐ","贬义","放在一边不予理睬。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0433","漠然置之","mò rán zhì zhī","贬义","态度冷淡地放在一边不管。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0434","视若拱璧","shì ruò gǒng bì","中性","把某物看得像大璧玉一样珍贵。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0435","杀身成仁","shā shēn chéng rén","褒义","为维护仁义道德而不惜牺牲生命。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0436","口是心非","kǒu shì xīn fēi","贬义","嘴上说的和心里想的完全相反。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0437","视死如归","shì sǐ rú guī","褒义","把为正义献身看得像回家一样从容，形容不怕牺牲。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0438","舍生取义","shě shēng qǔ yì","褒义","为了正义事业不惜牺牲生命。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0439","同流合污","tóng liú hé wū","贬义","跟着坏人一起干坏事。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0440","错综复杂","cuò zōng fù zá","中性","头绪繁多、相互交织，情况复杂。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0441","脍炙人口","kuài zhì rén kǒu","褒义","切细的烤肉人人爱吃，比喻优美诗文或佳作受人普遍赞美传诵。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0442","志存高远","zhì cún gāo yuǎn","褒义","立志追求远大的理想与抱负。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0443","家喻户晓","jiā yù hù xiǎo","中性","每家每户都明白知道。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0444","照猫画虎","zhào māo huà hǔ","贬义","比喻单纯照样模仿而仅得表面相似，未能领悟精髓。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0445","精耕细作","jīng gēng xì zuò","褒义","原指农业上认真细致耕作，现常比喻在细分领域用心深耕打磨。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0446","因循守旧","yīn xún shǒu jiù","贬义","沿袭死守老一套，缺乏创新精神。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0447","与时俱进","yǔ shí jù jìn","褒义","随着时代发展而不断创新进步。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0448","接踵而来","jiē zhǒng ér lái","中性","人们前脚跟后脚连续不断地到来。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0449","蜂拥而至","fēng yōng ér zhì","中性","像一窝蜂似地乱哄哄拥聚过来。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0450","吉光片羽","jí guāng piàn yǔ","褒义","神兽的一小块毛皮，比喻残存的珍贵文物或艺术珍品。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0451","毛举细故","máo jǔ xì gù","贬义","烦琐地列举鸡毛蒜皮的小事加以责难。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0452","漏洞百出","lòu dòng bǎi chū","贬义","文章、说话或制度破绽极多。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0453","交口赞誉","jiāo kǒu zàn yù","褒义","众人异口同声地称赞。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0454","呕心沥血","ǒu xīn lì xuè","褒义","形容为事业或创作费尽心思和精力。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0455","心驰神往","xīn chí shén wǎng","褒义","心神飞到所向往的地方或境界。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0456","鞠躬尽瘁","jū gōng jìn cuì","褒义","恭敬谨慎，竭尽全部心力。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0457","鸣金收兵","míng jīn shōu bīng","中性","敲锣撤军，比喻行动或工作告一段落结束。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0458","冷眼旁观","lěng yǎn páng guān","中性","用冷静或冷淡的态度在一旁观看。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0459","拒之门外","jù zhī mén wài","中性","把人挡在门外，形容拒绝接纳或拒绝协商。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ht_0460","力屈道穷","lì qū dào qióng","中性","力量和办法都已用尽。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0461","自力更生","zì lì gēng shēng","褒义","依靠自己的力量把事业办起来或改变原貌发展兴旺。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0462","自给自足","zì jǐ zì zú","中性","“给”读 jǐ。依靠自己的生产满足自己的需要，不依赖外部交换。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0463","享誉中外","xiǎng yù zhōng wài","褒义","在国内和国外都享有很高的声誉（注意语境须有涉外传播）。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0464","乏善可陈","fá shàn kě chén","贬义","说不出有什么优点或值得称赞之处（多批评作品、政绩平庸无亮点）。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0465","一文不值","yī wén bù zhí","贬义","连一文钱的价值都没有，形容毫无价值或毫无用处（区别于表贫穷的“一文不名”）。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0466","焕然一新","huàn rán yī xīn","褒义","改变陈旧面貌，呈现出崭新的气象。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0467","前功尽弃","qián gōng jìn qì","贬义","以前的功劳努力全部废弃落空（区别于差最后一步的“功亏一篑”）。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0468","一诺千金","yī nuò qiān jīn","褒义","许下的一句话有千金重，极言说话算话、极守信用（区别于表话语权重的“一言九鼎”）。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0469","改弦更张","gǎi xián gēng zhāng","中性","换掉琴弦重新安上，比喻改革旧制度或变更旧方法（近义“改弦易辙”）。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0470","改弦易辙","gǎi xián yì zhé","中性","更换琴弦、改变车道，比喻改变原来的方向、计划、态度或做法。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0471","指日可待","zhǐ rì kě dài","褒义","为期不远，不久就可以实现（多用于美好愿望与胜利，贬义灾难将至用“迫在眉睫”）。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0472","震耳欲聋","zhèn ěr yù lóng","中性","声音极大，耳朵都快震聋了（物理声响大，区别于思想唤醒的“振聋发聩”）。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0473","理直气壮","lǐ zhí qì zhuàng","褒义","理由充分正当，因而说话做事气势壮盛（区别于强词夺理的“振振有词”）。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0474","历久弥坚","lì jiǔ mí jiān","褒义","经历时间越长久，信念、情谊或意志反而更加坚定稳固。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0475","高深莫测","gāo shēn mò cè","中性","高深得让人无法揣测理解（有时含故弄玄虚之讽刺）。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0476","天壤之别","tiān rǎng zhī bié","中性","高天与大地的差别，形容两者相隔极远、差别极大。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0477","扬长避短","yáng cháng bì duǎn","褒义","发扬自身长处，避开自身短处。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0478","独具一格","dú jù yī gé","褒义","单独具有一种独特的风貌或格调。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0479","独出心裁","dú chū xīn cái","褒义","想出的办法或诗文构思独特新颖，不落俗套（同“别出心裁”）。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0480","尽善尽美","jìn shàn jìn měi","褒义","极其完美，没有任何缺陷。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0481","与众不同","yǔ zhòng bù tóng","中性","跟大家不一样，有自身特点。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0482","首屈一指","shǒu qū yī zhǐ","褒义","掰指计数时最先弯下大拇指，表示位居第一（引申领先，绝非“首当其冲”）。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0483","倚马可待","yǐ mǎ kě dài","褒义","靠在即将出发的战马旁立等成文，形容文思敏捷、写文章极快（误作盼望归来属望文生义）。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0484","死有余辜","sǐ yǒu yú gū","贬义","即使处死也抵偿不了他的全部罪恶，极言罪大恶极（同“罪不容诛”）。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0485","一叶障目","yī yè zhàng mù","贬义","一片树叶挡住眼睛便看不见泰山，比喻被局部细微现象迷惑而看不到全局大势。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0486","危言耸听","wēi yán sǒng tīng","贬义","故意说吓人的话使听的人震惊恐慌（此处“危”指吓人，区别于“危言危行”之正直）。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0487","一无所长","yī wú suǒ cháng","贬义","没有一点专长本领（区别于表家贫简朴的“身无长物”）。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0488","不名一文","bù míng yī wén","中性","名：占有。一个钱也没有，形容极其贫穷（同“一文不名”）。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0489","山崩地裂","shān bēng dì liè","中性","山岳崩塌、大地裂开，形容巨大自然灾变或震天巨响。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0490","胸无点墨","xiōng wú diǎn mò","贬义","肚子里没有一点墨水，形容人毫无文化学识。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0491","言归于好","yán guī yú hǎo","褒义","彼此重新和好（“重归于好”同义，泛指朋友、国家或人际关系；夫妻复合专指“破镜重圆”）。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0492","以身作则","yǐ shēn zuò zé","褒义","用自己的实际行动做出榜样。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0493","娓娓道来","wěi wěi dào lái","褒义","连续不断、生动亲切地娓娓讲述。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0494","步人后尘","bù rén hòu chén","贬义","踩着人家脚后扬起的尘土走，比喻跟在别人后面追随模仿，毫无创造性。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0495","脱胎换骨","tuō tāi huàn gǔ","褒义","比喻痛改前非、彻底改变旧面貌重新做人，或事物实现根本性蜕变升级。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0496","殚精竭虑","dān jīng jié lǜ","褒义","殚、竭：用尽。使尽全部精力和思虑（正面褒义词，区别于贬义“处心积虑”）。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0497","愈演愈烈","yù yǎn yù liè","贬义","指不良事态、矛盾或风气越发展越严重激烈。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0498","令人咋舌","lìng rén zé shé","中性","咋舌：咬住舌头说不出话。形容数量巨大、价格昂贵或场面惊人让人吃惊感叹。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0499","绵薄之力","mián bó zhī lì","中性","谦辞，指自己微弱单薄的力量（只能用于自己，如“尽一点绵薄之力”，绝不可用于他人）。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0500","峥嵘岁月","zhēng róng suì yuè","褒义","峥嵘：不平凡、不寻常。形容不平凡的艰苦奋斗岁月（区别于虚度光阴的“蹉跎岁月”）。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0501","千钧一发","qiān jūn yī fà","中性","千钧重物系于一根头发上，比喻局势万分危急。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0502","风调雨顺","fēng tiáo yǔ shùn","褒义","风雨适时适量，适合庄稼生长（同“五风十雨”）。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0503","痛改前非","tòng gǎi qián fēi","褒义","彻底悔恨并改正以往的错误。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0504","意气风发","yì qì fēng fā","褒义","形容精神振奋，气概豪迈（区别于主观偏激用事的“意气用事”）。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0505","妙笔生花","miào bǐ shēng huā","褒义","比喻杰出的写作才能，写出精彩美妙的文章。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0506","晦涩难懂","huì sè nán dǒng","贬义","文辞隐晦生僻、不流畅，极难读懂。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0507","漠不关心","mò bù guān xīn","贬义","对人对事态度冷淡，丝毫不关心（不能带宾语说“漠不关心群众”）。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0508","适可而止","shì kě ér zhǐ","中性","到适当的程度就停下来，不要过头。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0509","不容置疑","bù róng zhì yí","中性","事实真实确凿，不允许有任何怀疑（同“毋庸置疑”）。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0510","开山鼻祖","kāi shān bí zǔ","中性","比喻一个学派、艺术流派或行业的创始人。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0511","大快人心","dà kuài rén xīn","褒义","坏人受到惩处或坏事被铲除，使大家心里非常痛快。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0512","蛛丝马迹","zhū sī mǎ jì","中性","顺着蜘蛛丝和马蹄印查寻，比喻事情留下的隐约可寻的线索痕迹。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0513","义正词严","yì zhèng cí yán","褒义","道理正当公允，措辞严肃严厉（亦作“义正辞严”）。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0514","据理力争","jù lǐ lì zhēng","褒义","依据道理竭力争辩维护正当权益。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0515","正襟危坐","zhèng jīn wēi zuò","中性","整好衣襟端端正正坐着（“危”指端正，非危险），形容严肃恭敬或拘谨庄重的样子。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0516","不苟言笑","bù gǒu yán xiào","中性","不随便说笑，形容态度庄重严肃。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0517","枯木逢春","kū mù féng chūn","褒义","干枯的树又遇春天重获生机，比喻垂危病人或衰微事物重获生机。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0518","东山再起","dōng shān zài qǐ","中性","东晋谢安出山复职，指退隐后再度出任要职，也比喻失势或失败后重新恢复力量（多用于人或中性竞争，坏事物复活贬义用“死灰复燃”）。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0519","各抒己见","gè shū jǐ jiàn","中性","各人充分发表自己的看法见解。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0520","悲痛欲绝","bēi tòng yù jué","中性","悲哀伤心到了极点，像要断气一样。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0521","痛心疾首","tòng xīn jí shǒu","贬义","痛恨到极点，形容对败坏现象或过失极其痛心愤恨。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0522","志同道合","zhì tóng dào hé","褒义","志向相同，道路一致，形容彼此理想信念高度契合。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0523","同心协力","tóng xīn xié lì","褒义","团结一致，共同努力。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0524","笔耕不辍","bǐ gēng bù chuò","褒义","辍：停止。坚持写作著述，从不间断。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0525","食古不化","shí gǔ bù huà","贬义","读书像吃东西没消化一样，比喻学古人知识死板拘泥，不会灵活运用。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0526","讳疾忌医","huì jí jì yī","贬义","隐瞒疾病不愿医治，比喻怕人批评而掩饰自身缺点错误，不愿改正。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0527","信誓旦旦","xìn shì dàn dàn","中性","旦旦：诚恳的样子。誓言说得非常诚恳可信（常与反悔背叛构成转折对比）。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0528","竹马之交","zhú mǎ zhī jiāo","褒义","童年时代一起骑竹马玩耍结下的深厚朋友（近义“总角之交”）。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0529","总角之交","zǒng jiǎo zhī jiāo","褒义","总角：古时幼年把头发扎成两个小髻。指童年时期就相识要好的朋友。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0530","举棋不定","jǔ qí bù dìng","贬义","拿着棋子不知落哪儿好，比喻临事犹豫不决，拿不定主意。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0531","见危授命","jiàn wēi shòu mìng","褒义","语出《论语》，面对危难关头勇于献出自己的生命（区别于临危接受任命的“临危受命”）。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0532","一泻千里","yī xiè qiān lǐ","褒义","江水奔流直下千里，形容江河水流迅速，也形容文笔气势奔放畅达（注意不是“泄”）。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0533","举步维艰","jǔ bù wéi jiān","中性","迈开脚步都很困难，比喻处境或事业推进极为艰难（同“步履维艰”）。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0534","乐极生悲","lè jí shēng bēi","中性","高兴到极点时转而发生悲伤的事。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0535","从善如流","cóng shàn rú liú","褒义","听从正确意见就像水往低处流一样自然迅速，形容乐于虚心接受批评建议。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0536","信口雌黄","xìn kǒu cí huáng","贬义","古人用雌黄涂改错字，比喻不顾事实随口乱说、妄加诽谤评论。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0537","偃旗息鼓","yǎn qí xī gǔ","中性","放倒军旗停止击鼓，指秘密行军或休战，现多比喻事情终止或声势减弱。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0538","共商国是","gòng shāng guó shì","褒义","国是：国家大计（固定写“是”，绝不能写“事”）。共同商讨国家大事。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0539","剑拔弩张","jiàn bá nǔ zhāng","中性","剑已出鞘、弩已拉开，形容双方对峙形势紧张一触即发，也形容书法雄健刚劲。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0540","华而不实","huá ér bù shí","贬义","只开花不结果，比喻外表华丽好看而内里空虚无真才实学。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0541","卧薪尝胆","wò xīn cháng dǎn","褒义","越王勾践睡柴草尝苦胆，形容人刻苦自励，发愤图强。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0542","厚积薄发","hòu jī bó fā","褒义","大量充实积累，慢慢稳妥地施展出来，形容只有准备充分才能办好大事。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0543","原形毕露","yuán xíng bì lù","贬义","本来面目完全暴露出来（专指伪装的坏人或骗局败露）。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0544","口蜜腹剑","kǒu mì fù jiàn","贬义","嘴上甜言蜜语，肚子里却怀着害人的剑，形容人阴险毒辣。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0545","叶落归根","yè luò guī gēn","中性","树叶终落回树根，比喻事物总有一定归宿，多指客居他乡者终老故土。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0546","囊萤映雪","náng yíng yìng xuě","褒义","晋车胤口袋装萤火虫、孙康借雪光读书，形容家境贫寒而勤学苦读。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0547","悬梁刺股","xuán liáng cì gǔ","褒义","孙敬头悬房梁、苏秦锥刺大腿防睡，形容刻苦发愤读书。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0548","孤注一掷","gū zhù yī zhì","贬义","把全部赌本押在一把上，比喻在危急时押上全部力量作最后一次冒险。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0549","守株待兔","shǒu zhū dài tù","贬义","比喻死守狭隘经验不知变通，或妄想不劳而获坐等侥幸。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0550","引狼入室","yǐn láng rù shì","贬义","把狼招进屋里，比喻把坏人或侵略者招引进来招致大祸。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0551","扶正祛邪","fú zhèng qū xié","褒义","原为中医术语，泛指扶持正气正风、祛除歪风邪气。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0552","指鹿为马","zhǐ lù wéi mǎ","贬义","秦赵高指着鹿硬说是马，比喻故意颠倒黑白、混淆是非。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0553","掉以轻心","diào yǐ qīng xīn","贬义","对重要问题采取轻率漫不经心的态度（常用于否定劝诫“切莫掉以轻心”）。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0554","斩钉截铁","zhǎn dīng jié tiě","褒义","形容说话或行动坚决果断，毫不犹豫含糊。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0555","无的放矢","wú dì fàng shǐ","贬义","的：箭靶；矢：箭。没有靶子乱射箭，比喻说话做事没有明确目标，不切实际。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0556","无稽之谈","wú jī zhī tán","贬义","稽：查考。毫无根据、无从查考的荒唐说法。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0557","泥牛入海","ní niú rù hǎi","中性","泥塑的牛掉进大海化掉，比喻一去不复返，杳无音信。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0558","洋洋洒洒","yáng yáng sǎ sǎ","褒义","形容文章或谈话内容丰富，连续不断，挥洒自如；也形容规模盛大。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0559","瑜不掩瑕","yú bù yǎn xiá","贬义","玉的光彩掩盖不住它的斑点瑕疵，比喻优点遮盖不了缺点（注意与“瑕不掩瑜”彻底相反！）。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0560","空中楼阁","kōng zhōng lóu gé","贬义","悬在半空中的楼台，比喻脱离根基与现实的空想理论或虚构事物。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0561","统筹兼顾","tǒng chóu jiān gù","褒义","通盘筹划，兼顾各个方面的利益与需求。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0562","翘首企足","qiáo shǒu qǐ zú","中性","抬起头、踮起脚跟，形容殷切盼望（同“翘首以待”）。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0563","肆无忌惮","sì wú jì dàn","贬义","恣意妄行，毫无顾忌畏惧。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0564","肝胆相照","gān dǎn xiāng zhào","褒义","比喻彼此以真心相待，极为忠诚坦诚。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0565","臭名昭著","chòu míng zhāo zhù","贬义","坏名声人人都知道（“昭著”指明显，同“声名狼藉”）。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0566","袖手旁观","xiù shǒu páng guān","贬义","把手揣在袖子里在一旁看，比喻置身事外，既不过问也不协助。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0567","裹足不前","guǒ zú bù qián","贬义","脚像被缠住一样停步不前，多指有所顾虑保守而停滞。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0568","量体裁衣","liàng tǐ cái yī","褒义","按照身材裁剪衣服，比喻根据客观实际情况办事。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0569","铤而走险","tǐng ér zǒu xiǎn","贬义","因无路可走而采取冒险行动（注意是金属旁“铤”，绝不能写成“挺而走险”）。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0570","闻过则喜","wén guò zé xǐ","褒义","听到别人指出自己的过失就高兴，形容虚心接受批评。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0571","顺水推舟","shùn shuǐ tuī zhōu","中性","顺着水流推船，比喻顺应情势说话行事。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0572","颠倒黑白","diān dǎo hēi bái","贬义","把黑的说成白的、白的说成黑的，比喻歪曲事实、混淆是非。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_0573","鸿篇巨制","hóng piān jù zhì","褒义","形容规模宏大、气势磅礴的文学或学术巨著。","https://gs.huatu.com/2023/1103/1722691.html"],["dl_ref_9901","独具特色","dú jù tè sè","褒义","单独具有与众不同的独特风格或特色。","https://gx.huatu.com/2023/0705/1927722.html"]];
+    var BUILTIN_DICT_WORDS = RAW_BUILTIN_DICT_TUPLES.map(function (t) {
+      return { id: t[0], word: t[1], pinyin: t[2], cat: "dict_lookup", sentiment: t[3], sentimentNote: t[3], tag: "行测常考备查词库", trap: "留意文段语境中的搭配对象、轻重程度及感情色彩倾向。", meaning: t[4], usage: "常考备查成语（默认不占用日常核心背词名额，需要重点强化可点右上「＋ 加入背词」）。", src: t[5] };
+    });
 
     var REAL_EXAM_QUESTIONS = [
   {
@@ -9845,9 +10192,10 @@
 
     function createInitialState() {
       return {
-        records: {},       // { [wordId]: { reps, interval, ef, due, lastRate, learned } }
+        records: {},       // { [wordId]: { stage, reps, interval, due, lastChoice, learned } }
         dismissed: {},     // { [wordId]: true } -> 太简单永久剔除
         favorites: {},     // { [wordId]: true }
+        enrolledDict: {},  // { [wordId]: true } -> 用户从备查词典主动加入背词计划的词条
         customWords: [],   // 用户新增或导入词条
         wrongBook: [],     // { id, type, source, url, stem, options, answer, chosen, analysis, wordId }
         lastRealAcc: null,
@@ -9855,6 +10203,19 @@
         lastSentAcc: null,
         showFrontSentiment: false
       };
+    }
+
+    function inferStageFromLegacyRecord(rec) {
+      if (!rec || !rec.learned) return 0;
+      if (typeof rec.stage === "number" && rec.stage >= 0 && rec.stage <= 7) return rec.stage;
+      var iv = Number(rec.interval || 0);
+      if (iv <= 1) return 1;
+      if (iv <= 2) return 2;
+      if (iv <= 4) return 3;
+      if (iv <= 7) return 4;
+      if (iv <= 15) return 5;
+      if (iv <= 30) return 6;
+      return 7;
     }
 
     function loadState() {
@@ -9866,6 +10227,7 @@
         base.records = parsed.records || {};
         base.dismissed = parsed.dismissed || {};
         base.favorites = parsed.favorites || {};
+        base.enrolledDict = parsed.enrolledDict || {};
         base.customWords = Array.isArray(parsed.customWords) ? parsed.customWords : [];
         base.wrongBook = Array.isArray(parsed.wrongBook) ? parsed.wrongBook : [];
         base.lastRealAcc = typeof parsed.lastRealAcc === "number" ? parsed.lastRealAcc : null;
@@ -9889,13 +10251,53 @@
       }
     }
 
-    var cloudExpandedWords = []; // Stored in IndexedDB so thousands of words never overflow localStorage
+    var cloudExpandedWords = [];   // 用户按需开启的古籍典故刷词扩展包
+    var fullXinhuaDictWords = [];  // 后台静默缓存的全量 31,648 条中华成语备查大词典（仅搜索，不混入背词池）
 
-    function getAllWords() {
-      return BUILTIN_WORDS.concat(state.customWords).concat(cloudExpandedWords);
+    // 获取背词有效池（严格遵循「只学核心词 + 主动加入的生词」，绝不被几万条备查词典污染）
+    function getStudyPoolWords() {
+      var out = BUILTIN_WORDS.concat(state.customWords).concat(cloudExpandedWords);
+      for (var i = 0; i < BUILTIN_DICT_WORDS.length; i++) {
+        var dw = BUILTIN_DICT_WORDS[i];
+        if (state.enrolledDict[dw.id] || (state.records[dw.id] && state.records[dw.id].learned)) {
+          out.push(dw);
+        }
+      }
+      for (var j = 0; j < fullXinhuaDictWords.length; j++) {
+        var xw = fullXinhuaDictWords[j];
+        if (state.enrolledDict[xw.id] || (state.records[xw.id] && state.records[xw.id].learned)) {
+          out.push(xw);
+        }
+      }
+      return out;
     }
 
-    // IndexedDB helper for offline caching of 4,200+ expanded idioms
+    // 获取全局可搜索全量词库（核心库 + 自定义 + 内置常考词典 + 31,648全量新华成语库，去重保优）
+    function getAllSearchableWords() {
+      var seenWord = {};
+      var res = [];
+      function appendUnique(arr) {
+        for (var i = 0; i < arr.length; i++) {
+          var item = arr[i];
+          if (!item || !item.word) continue;
+          if (seenWord[item.word]) continue;
+          seenWord[item.word] = true;
+          res.push(item);
+        }
+      }
+      appendUnique(BUILTIN_WORDS);
+      appendUnique(state.customWords);
+      appendUnique(BUILTIN_DICT_WORDS);
+      appendUnique(cloudExpandedWords);
+      appendUnique(fullXinhuaDictWords);
+      return res;
+    }
+
+    function getAllWords() {
+      return getStudyPoolWords();
+    }
+
+    // IndexedDB helper for offline caching of both study packs & 31,648 full lookup dictionary
     var IDB_NAME = "gk_idiom_corpus_idb_v1";
     var IDB_STORE = "packs";
 
@@ -9916,22 +10318,22 @@
       }
     }
 
-    function saveExpandedToIdb(wordsArr) {
+    function savePackToIdb(key, wordsArr) {
       openCorpusIdb(function (db) {
         if (!db) return;
         try {
           var tx = db.transaction(IDB_STORE, "readwrite");
-          tx.objectStore(IDB_STORE).put(wordsArr, "xinhua_filtered");
+          tx.objectStore(IDB_STORE).put(wordsArr, key);
         } catch (e) {}
       });
     }
 
-    function loadExpandedFromIdb(done) {
+    function loadPackFromIdb(key, done) {
       openCorpusIdb(function (db) {
         if (!db) { done([]); return; }
         try {
           var tx = db.transaction(IDB_STORE, "readonly");
-          var req = tx.objectStore(IDB_STORE).get("xinhua_filtered");
+          var req = tx.objectStore(IDB_STORE).get(key);
           req.onsuccess = function () {
             done(Array.isArray(req.result) ? req.result : []);
           };
@@ -9942,8 +10344,11 @@
       });
     }
 
+    function saveExpandedToIdb(wordsArr) { savePackToIdb("xinhua_filtered", wordsArr); }
+    function loadExpandedFromIdb(done) { loadPackFromIdb("xinhua_filtered", done); }
+
     function getActiveWords() {
-      var all = getAllWords();
+      var all = getStudyPoolWords();
       var out = [];
       for (var i = 0; i < all.length; i++) {
         if (!state.dismissed[all[i].id]) out.push(all[i]);
@@ -9963,52 +10368,63 @@
     }
 
     // =========================================================================
-    // 4. SM-2 SPACED REPETITION ENGINE
+    // 4. EBBINGHAUS MEMORY CURVE ENGINE (对标「不背单词」全自动排期)
     // =========================================================================
-    function previewNextInterval(wordId, rate) {
-      var rec = state.records[wordId] || { reps: 0, interval: 0, ef: 2.5 };
-      if (rate === 1) return 0;
-      if (rate === 2) return 1;
-      if (rate === 3) {
-        if (rec.reps === 0) return 2;
-        if (rec.reps === 1) return 5;
-        return Math.max(2, Math.round(rec.interval * rec.ef));
-      }
-      // rate === 4
-      if (rec.reps === 0) return 5;
-      if (rec.reps === 1) return 9;
-      return Math.max(4, Math.round(rec.interval * (rec.ef + 0.25)));
+    // 艾宾浩斯长效记忆临界阶梯（天）：第1阶1天 -> 第2阶2天 -> 第3阶4天 -> 第4阶7天 -> 第5阶15天 -> 第6阶30天 -> 第7阶60天(满格掌握)
+    var EBBINGHAUS_INTERVALS = [0, 1, 2, 4, 7, 15, 30, 60];
+
+    function getWordStage(wordId) {
+      return inferStageFromLegacyRecord(state.records[wordId]);
     }
 
-    function applySm2Rating(wordId, rate) {
-      var today = nowDayStamp();
-      var prev = state.records[wordId] || { reps: 0, interval: 0, ef: 2.5, due: today, learned: false };
-      var nextInterval = previewNextInterval(wordId, rate);
-      var newEf = prev.ef;
-      var newReps = prev.reps;
+    function getStageLabel(stage) {
+      if (stage <= 0) return "新词初见 (0/7)";
+      if (stage === 1) return "初识巩固 (1/7)";
+      if (stage === 2) return "短时强化 (2/7)";
+      if (stage === 3) return "中期抗遗忘 (3/7)";
+      if (stage === 4) return "周度稳固 (4/7)";
+      if (stage === 5) return "半月深记 (5/7)";
+      if (stage === 6) return "月度长效 (6/7)";
+      return "满格已掌握 (7/7)";
+    }
 
-      if (rate === 1) {
-        newReps = 0;
-        newEf = Math.max(1.3, prev.ef - 0.2);
-      } else if (rate === 2) {
-        newReps = 1;
-        newEf = Math.max(1.3, prev.ef - 0.1);
-      } else if (rate === 3) {
-        newReps = prev.reps + 1;
-      } else if (rate === 4) {
-        newReps = prev.reps + 1;
-        newEf = Math.min(3.0, prev.ef + 0.12);
+    // 仅在当日首次遇到该词时推进/回退跨天艾宾浩斯阶梯（组内错词重现只巩固短时记忆，不虚增跨天阶梯）
+    function applyEbbinghausFirstImpression(wordId, choice) {
+      var today = nowDayStamp();
+      var prev = state.records[wordId] || { stage: 0, reps: 0, interval: 0, due: today, learned: false };
+      var prevStage = inferStageFromLegacyRecord(prev);
+      var newStage = prevStage;
+      var nextInterval = 1;
+
+      if (choice === "know") {
+        newStage = Math.min(7, prevStage + 1);
+        nextInterval = EBBINGHAUS_INTERVALS[newStage];
+      } else if (choice === "vague") {
+        newStage = Math.max(1, prevStage - 1);
+        // 模糊词次日必须优先回炉检验，同时保留既有部分熟悉度格数
+        nextInterval = 1;
+      } else {
+        // unknown / 记错了：熟悉度重置回第1格，次日进入艾宾浩斯首个隔夜复习点
+        newStage = 1;
+        nextInterval = 1;
       }
 
       state.records[wordId] = {
-        reps: newReps,
+        stage: newStage,
+        reps: choice === "know" ? (Number(prev.reps || 0) + 1) : 0,
         interval: nextInterval,
-        ef: Number(newEf.toFixed(2)),
         due: today + nextInterval,
-        lastRate: rate,
+        lastChoice: choice,
+        lastReviewedDay: today,
         learned: true
       };
       saveState();
+      return state.records[wordId];
+    }
+
+    // Legacy compatibility wrapper used when wrong answer occurs in Quiz Engine
+    function applySm2Rating(wordId, rate) {
+      applyEbbinghausFirstImpression(wordId, rate === 1 ? "unknown" : (rate === 2 ? "vague" : "know"));
     }
 
     // =========================================================================
@@ -10059,9 +10475,12 @@
     }
 
     function findWordById(wordId) {
-      var all = getAllWords();
-      for (var i = 0; i < all.length; i++) {
-        if (all[i].id === wordId) return all[i];
+      var pools = [BUILTIN_WORDS, state.customWords, BUILTIN_DICT_WORDS, cloudExpandedWords, fullXinhuaDictWords];
+      for (var p = 0; p < pools.length; p++) {
+        var arr = pools[p];
+        for (var i = 0; i < arr.length; i++) {
+          if (arr[i].id === wordId) return arr[i];
+        }
       }
       return null;
     }
@@ -10073,6 +10492,7 @@
       if (cat === "exam_core") return "词书三·真题核心词";
       if (cat === "potential_hot") return "词书四·时评潜力词";
       if (cat === "confusable_words") return "专项五·双字实词";
+      if (cat === "dict_lookup") return "全量备查词典";
       if (cat === "classical_idiom") return "典故书面扩展词";
       return "核心词条";
     }
@@ -10192,6 +10612,10 @@
       var pct = core90Total > 0 ? Math.round((core90Learned / core90Total) * 100) : 0;
 
       document.getElementById("statTotalLoadedCount").textContent = String(active.length);
+      var searchableCountEl = document.getElementById("statSearchableTotalCount");
+      if (searchableCountEl) {
+        searchableCountEl.textContent = String(getAllSearchableWords().length);
+      }
       document.getElementById("statCore90Unlearned").textContent = String(core90Unlearned);
       document.getElementById("statCore90ProgressText").textContent =
         "四字核心词书已学：" + core90Learned + " / " + core90Total + " (" + pct + "%)";
@@ -10221,12 +10645,50 @@
     }
 
     // =========================================================================
-    // 7. FLASHCARD STUDY & REVIEW SESSION
+    // 7. FLASHCARD STUDY & REVIEW SESSION (对标「不背单词」：三键直觉自评 + 组内短时闭环 + 后台艾宾浩斯排期)
     // =========================================================================
     var sessionQueue = [];
     var sessionIndex = 0;
     var sessionRevealed = false;
     var sessionModeTitle = "";
+    var sessionMeta = {};           // { [wordId]: { firstChoice, neededStreak, repeatsDone, prevSnapshot } }
+    var currentCardChoice = null;   // 'know' | 'vague' | 'unknown'
+    var currentCardWasFirst = false;
+
+    function renderFamiliarityBars(stage) {
+      var box = document.getElementById("cardFamiliarityBars");
+      var txt = document.getElementById("cardFamiliarityStageText");
+      if (!box || !txt) return;
+      box.innerHTML = "";
+      var activeColor = stage >= 6 ? "bg-emerald-500" : (stage >= 3 ? "bg-indigo-500" : "bg-amber-500");
+      for (var s = 1; s <= 7; s++) {
+        var seg = document.createElement("span");
+        seg.className = "inline-block w-3.5 sm:w-4 h-1.5 rounded-full transition-all " +
+          (s <= stage ? activeColor : "bg-slate-300/80");
+        box.appendChild(seg);
+      }
+      txt.textContent = getStageLabel(stage);
+    }
+
+    function buildFrontContextSnippet(item) {
+      var u = String(item.usage || "");
+      // Extract clean quoted example sentence containing the target idiom without leaking definitions
+      if (item.word && item.word.indexOf(" vs ") === -1) {
+        var quotes = u.match(/“[^”]{6,48}”/g);
+        if (quotes) {
+          for (var i = 0; i < quotes.length; i++) {
+            var q = quotes[i];
+            if (q.indexOf(item.word) !== -1 && q.indexOf("=") === -1 && q.indexOf("指") === -1) {
+              return "语境例句：" + q;
+            }
+          }
+        }
+      }
+      if (item.cat === "confusable_words") {
+        return "先在脑中区分这两个近义词的搭配对象、轻重侧重与褒贬差异：";
+      }
+      return "先在脑中回想它的准确本义、褒贬色彩与常见设坑点，凭第一直觉选择：";
+    }
 
     function startStudySession(catFilter, reviewOnly) {
       var active = getActiveWords();
@@ -10241,12 +10703,13 @@
             if (!isCore90IdiomCat(w.cat)) continue;
           } else if (catFilter && w.cat !== catFilter) {
             continue;
+          } else if (!catFilter && w.cat === "dict_lookup" && !state.enrolledDict[w.id]) {
+            continue;
           }
           if (!rec || !rec.learned) pool.push(w);
         }
       }
 
-      // If all unlearned in this category are finished, allow reviewing all active in category
       if (!reviewOnly && pool.length === 0) {
         for (var j = 0; j < active.length; j++) {
           var matchCat = !catFilter || (catFilter === "core_90_all" ? isCore90IdiomCat(active[j].cat) : active[j].cat === catFilter);
@@ -10260,31 +10723,52 @@
       }
 
       if (reviewOnly && pool.length === 0) {
-        showToast("今日待复习队列已清零，可先学习新词或做真题测验");
+        showToast("今日艾宾浩斯待复习词条已清零，可去学新词或做真题测验");
         return;
+      }
+
+      // Sort due reviews so lower familiarity stages come first
+      if (reviewOnly) {
+        pool.sort(function (a, b) {
+          return getWordStage(a.id) - getWordStage(b.id);
+        });
       }
 
       sessionQueue = pool.slice(0, 12);
       sessionIndex = 0;
-      sessionModeTitle = reviewOnly ? "今日抗遗忘复习" : catLabel(catFilter);
+      sessionMeta = {};
+      sessionModeTitle = reviewOnly ? "艾宾浩斯抗遗忘复习" : catLabel(catFilter);
       switchView("session");
       renderCurrentCard();
     }
 
+    function insertRequeueCard(item, offsetAhead) {
+      var targetIdx = Math.min(sessionQueue.length, sessionIndex + 1 + offsetAhead);
+      sessionQueue.splice(targetIdx, 0, item);
+    }
+
     function renderCurrentCard() {
       if (sessionIndex >= sessionQueue.length) {
-        showToast("🎉 本轮 " + sessionModeTitle + " 已完成");
+        showToast("🎉 本组「" + sessionModeTitle + "」已全部掌握过关！");
         switchView("home");
         return;
       }
       var item = sessionQueue[sessionIndex];
       sessionRevealed = false;
+      currentCardChoice = null;
+      currentCardWasFirst = false;
 
-      document.getElementById("sessionProgressText").textContent = sessionModeTitle + " · " + (sessionIndex + 1) + " / " + sessionQueue.length;
+      var mInfo = sessionMeta[item.id];
+      var roundTag = (mInfo && mInfo.repeatsDone > 0) ? " · 组内巩固重现" : "";
+      document.getElementById("sessionProgressText").textContent =
+        sessionModeTitle + " · " + (sessionIndex + 1) + " / " + sessionQueue.length + roundTag;
       document.getElementById("cardCategoryBadge").textContent = catLabel(item.cat);
       document.getElementById("cardTagBadge").textContent = item.tag || "高频易错";
       document.getElementById("cardWordTitle").textContent = item.word;
       document.getElementById("cardPinyin").textContent = item.pinyin || "";
+
+      renderFamiliarityBars(getWordStage(item.id));
+      document.getElementById("cardFrontContextText").textContent = buildFrontContextSnippet(item);
 
       var sInfo = getWordSentimentInfo(item);
       var frontSentEl = document.getElementById("cardSentimentFrontBadge");
@@ -10302,11 +10786,6 @@
       document.getElementById("cardMeaningText").textContent = item.meaning;
       document.getElementById("cardUsageText").textContent = item.usage || "结合真题语境对比记忆。";
 
-      var rec = state.records[item.id];
-      document.getElementById("cardMemoryMeta").textContent = rec && rec.learned
-        ? ("已连续记住 " + rec.reps + " 次 · 当前间隔 " + rec.interval + " 天")
-        : "首次学习词条";
-
       var srcLink = document.getElementById("cardSourceLink");
       if (item.src) {
         srcLink.href = item.src;
@@ -10314,9 +10793,6 @@
       } else {
         srcLink.classList.add("hidden");
       }
-
-      document.getElementById("rate3Hint").textContent = previewNextInterval(item.id, 3) + "天后复习";
-      document.getElementById("rate4Hint").textContent = previewNextInterval(item.id, 4) + "天后复习";
 
       var isFav = !!state.favorites[item.id];
       var favBtn = document.getElementById("btnSessionFav");
@@ -10330,22 +10806,112 @@
       document.getElementById("cardRatingBar").classList.add("hidden");
     }
 
-    function revealCurrentCard() {
+    // 选择「认识 / 模糊 / 不认识」后立即揭晓解析并后台自动执行艾宾浩斯排期
+    function handleEbbinghausChoice(choice) {
       if (sessionRevealed) return;
+      var item = sessionQueue[sessionIndex];
+      if (!item) return;
+
       sessionRevealed = true;
+      currentCardChoice = choice;
+
+      var meta = sessionMeta[item.id];
+      if (!meta) {
+        currentCardWasFirst = true;
+        var prevCopy = state.records[item.id] ? JSON.parse(JSON.stringify(state.records[item.id])) : null;
+        meta = {
+          firstChoice: choice,
+          neededStreak: choice === "know" ? 0 : (choice === "vague" ? 1 : 2),
+          repeatsDone: 0,
+          prevSnapshot: prevCopy
+        };
+        sessionMeta[item.id] = meta;
+        applyEbbinghausFirstImpression(item.id, choice);
+      } else {
+        currentCardWasFirst = false;
+        if (choice === "know") {
+          meta.neededStreak = Math.max(0, meta.neededStreak - 1);
+        } else if (choice === "vague") {
+          meta.neededStreak = Math.max(1, meta.neededStreak);
+        } else {
+          meta.neededStreak = 2;
+        }
+      }
+
+      // 组内短时记忆循环（对标「不背单词」：模糊词与不认识词在本轮隔几张牌自动重现，直至真正答出「认识」）
+      var willRepeatInRound = false;
+      if (meta.neededStreak > 0 && meta.repeatsDone < 4) {
+        meta.repeatsDone++;
+        insertRequeueCard(item, choice === "vague" ? 4 : 3);
+        willRepeatInRound = true;
+      }
+
+      var updatedStage = getWordStage(item.id);
+      renderFamiliarityBars(updatedStage);
+      document.getElementById("cardMemoryMeta").textContent =
+        "当前熟悉度：" + getStageLabel(updatedStage) + " · 艾宾浩斯已自动安排下次复习";
+
+      var banner = document.getElementById("cardLoopFeedbackBanner");
+      var regretBtn = document.getElementById("btnRegretWrong");
+      var nextBtn = document.getElementById("btnNextCardAfterRate");
+
+      if (choice === "know") {
+        regretBtn.classList.remove("hidden");
+        nextBtn.textContent = "下一词 →（空格键）";
+        if (willRepeatInRound) {
+          banner.className = "text-xs text-center font-medium px-3 py-2 rounded-xl bg-blue-50 text-blue-800 border border-blue-200/70";
+          banner.textContent = "✓ 本次巩固答对！稍后再复核 1 次即可彻底通过本组（若刚才想错了点左下角「记错了」）";
+        } else {
+          banner.className = "text-xs text-center font-medium px-3 py-2 rounded-xl bg-emerald-50 text-emerald-800 border border-emerald-200/70";
+          banner.textContent = "✓ 已判为「认识」· 核对下方陷阱无误请点下一词，若发现望文生义可点「记错了」纠偏";
+        }
+      } else if (choice === "vague") {
+        regretBtn.classList.add("hidden");
+        nextBtn.textContent = "记住了，下一词 →（空格键）";
+        banner.className = "text-xs text-center font-medium px-3 py-2 rounded-xl bg-amber-50 text-amber-900 border border-amber-200/70";
+        banner.textContent = "已记为「模糊」· 稍后将在本组内再次抽查巩固，并自动缩短艾宾浩斯复习周期";
+      } else {
+        regretBtn.classList.add("hidden");
+        nextBtn.textContent = "记住了，下一词 →（空格键）";
+        banner.className = "text-xs text-center font-medium px-3 py-2 rounded-xl bg-rose-50 text-rose-900 border border-rose-200/70";
+        banner.textContent = "已记为「不认识」· 稍后将在本组内循环重现直至答出「认识」，并排入首轮抗遗忘节点";
+      }
+
       document.getElementById("cardFrontPrompt").classList.add("hidden");
       document.getElementById("cardBackDetail").classList.remove("hidden");
       document.getElementById("cardRatingBar").classList.remove("hidden");
+      renderHomeStats();
     }
 
-    function handleSessionRate(rateNum) {
+    // 点「直接看解析」等同于「不认识」
+    function revealCurrentCard() {
+      handleEbbinghausChoice("unknown");
+    }
+
+    // 选「认识」翻面后发现自己其实望文生义了 -> 点「记错了」一键改判为「不认识」并加入本组重现
+    function handleRegretWrong() {
+      if (!sessionRevealed) return;
       var item = sessionQueue[sessionIndex];
       if (!item) return;
-      applySm2Rating(item.id, rateNum);
-      if (rateNum === 1) {
-        // Re-append forgotten card to end of current round for immediate reinforcement
-        sessionQueue.push(item);
+      var meta = sessionMeta[item.id];
+      if (meta) {
+        if (currentCardWasFirst && meta.prevSnapshot) {
+          state.records[item.id] = meta.prevSnapshot;
+        }
+        applyEbbinghausFirstImpression(item.id, "unknown");
+        meta.firstChoice = "unknown";
+        meta.neededStreak = 2;
+        if (meta.repeatsDone < 4) {
+          meta.repeatsDone++;
+          insertRequeueCard(item, 3);
+        }
       }
+      renderHomeStats();
+      showToast("已纠偏为「不认识」，稍后将在本组内重现强化");
+      advanceToNextSessionCard();
+    }
+
+    function advanceToNextSessionCard() {
       sessionIndex++;
       renderCurrentCard();
     }
@@ -10735,7 +11301,9 @@
     // 9. LIBRARY FAST PRUNING & SEARCH
     // =========================================================================
     function renderLibraryList() {
-      var all = getAllWords();
+      var all = (currentLibFilter === "dict_lookup" || currentLibFilter === "fav" || currentLibFilter === "dismissed")
+        ? getAllSearchableWords()
+        : getStudyPoolWords();
       var list = [];
       for (var i = 0; i < all.length; i++) {
         var w = all[i];
@@ -10824,6 +11392,33 @@
       appendNextBatch();
     }
 
+    var TONE_STRIP_MAP = {
+      "ā":"a","á":"a","ǎ":"a","à":"a",
+      "ē":"e","é":"e","ě":"e","è":"e",
+      "ī":"i","í":"i","ǐ":"i","ì":"i",
+      "ō":"o","ó":"o","ǒ":"o","ò":"o",
+      "ū":"u","ú":"u","ǔ":"u","ù":"u",
+      "ǖ":"v","ǘ":"v","ǚ":"v","ǜ":"v","ü":"v"
+    };
+
+    function normalizePinyinKeys(py) {
+      if (!py) return { compact: "", initials: "" };
+      var plain = String(py).toLowerCase().replace(/[āáǎàēéěèīíǐìōóǒòūúǔùǖǘǚǜü]/g, function (m) {
+        return TONE_STRIP_MAP[m] || m;
+      });
+      var parts = plain.split(/\s+/);
+      var inits = "";
+      for (var i = 0; i < parts.length; i++) {
+        if (parts[i]) inits += parts[i].charAt(0);
+      }
+      return { compact: plain.replace(/\s+/g, ""), initials: inits };
+    }
+
+    function isWordInCoreOrEnrolled(w) {
+      if (w.cat !== "dict_lookup") return true;
+      return !!(state.enrolledDict[w.id] || (state.records[w.id] && state.records[w.id].learned));
+    }
+
     function buildWordRowCard(w, isDismissedView) {
       var wrap = document.createElement("div");
       wrap.className = "p-3.5 rounded-2xl bg-white/85 border border-slate-200/80 flex flex-col gap-1.5";
@@ -10835,19 +11430,40 @@
       left.className = "flex items-center gap-2 flex-wrap";
       var title = document.createElement("span");
       title.className = "text-sm font-extrabold text-slate-900";
-      title.textContent = w.word;
+      title.textContent = w.word + (w.aliases && w.aliases.length ? ("（亦作：" + w.aliases.join("/") + "）") : "");
+
+      if (w.pinyin) {
+        var pySpan = document.createElement("span");
+        pySpan.className = "text-[11px] font-mono text-slate-400";
+        pySpan.textContent = w.pinyin;
+        left.appendChild(title);
+        left.appendChild(pySpan);
+      } else {
+        left.appendChild(title);
+      }
 
       var sInfo = getWordSentimentInfo(w);
       var sentBadge = document.createElement("span");
       sentBadge.className = "text-[11px] px-2 py-0.5 rounded-md border font-bold " + getSentimentBadgeClasses(sInfo.sentiment);
       sentBadge.textContent = sInfo.note;
 
+      var isLookupOnly = !isWordInCoreOrEnrolled(w);
       var badge = document.createElement("span");
-      badge.className = "text-[11px] px-2 py-0.5 rounded-md bg-slate-100 text-slate-600 font-medium";
-      badge.textContent = catLabel(w.cat);
-      left.appendChild(title);
+      badge.className = isLookupOnly
+        ? "text-[11px] px-2 py-0.5 rounded-md bg-blue-50 text-blue-700 border border-blue-200/70 font-semibold"
+        : "text-[11px] px-2 py-0.5 rounded-md bg-slate-100 text-slate-600 font-medium";
+      badge.textContent = isLookupOnly ? "📖 备查词典·默认不占背词任务" : catLabel(w.cat);
+
       left.appendChild(sentBadge);
       left.appendChild(badge);
+
+      var stage = getWordStage(w.id);
+      if (stage > 0) {
+        var stgBadge = document.createElement("span");
+        stgBadge.className = "text-[10px] px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-700 font-bold";
+        stgBadge.textContent = "熟悉度 " + stage + "/7";
+        left.appendChild(stgBadge);
+      }
 
       var right = document.createElement("div");
       right.className = "flex items-center gap-1.5 shrink-0";
@@ -10859,6 +11475,24 @@
         resBtn.className = "btn-tap px-2.5 py-1 rounded-lg bg-blue-50 text-blue-700 text-xs font-bold hover:bg-blue-100";
         resBtn.textContent = "恢复学习";
         right.appendChild(resBtn);
+      } else if (isLookupOnly) {
+        var favBtn0 = document.createElement("button");
+        favBtn0.type = "button";
+        favBtn0.setAttribute("data-favid", w.id);
+        var faved0 = !!state.favorites[w.id];
+        favBtn0.className = faved0
+          ? "btn-tap px-2 py-1 rounded-lg bg-amber-50 text-amber-600 text-xs font-bold"
+          : "btn-tap px-2 py-1 rounded-lg bg-slate-100 text-slate-500 text-xs";
+        favBtn0.textContent = faved0 ? "★" : "☆";
+
+        var enrollBtn = document.createElement("button");
+        enrollBtn.type = "button";
+        enrollBtn.setAttribute("data-enrollid", w.id);
+        enrollBtn.className = "btn-tap px-2.5 py-1 rounded-lg bg-indigo-600 text-white text-xs font-bold hover:bg-indigo-700";
+        enrollBtn.textContent = "＋ 加入背词";
+
+        right.appendChild(favBtn0);
+        right.appendChild(enrollBtn);
       } else {
         var favBtn = document.createElement("button");
         favBtn.type = "button";
@@ -10884,16 +11518,62 @@
 
       var trapLine = document.createElement("div");
       trapLine.className = "text-xs text-rose-700 leading-relaxed";
-      trapLine.textContent = "❌ 陷阱：" + w.trap;
+      trapLine.textContent = (w.cat === "dict_lookup" ? "📌 提示：" : "❌ 陷阱：") + w.trap;
 
       var meanLine = document.createElement("div");
       meanLine.className = "text-xs text-slate-700 leading-relaxed";
-      meanLine.textContent = "✅ 正解：" + w.meaning;
+      meanLine.textContent = "✅ 释义：" + w.meaning;
 
       wrap.appendChild(header);
       wrap.appendChild(trapLine);
       wrap.appendChild(meanLine);
+      if (w.usage) {
+        var usageLine = document.createElement("div");
+        usageLine.className = "text-[11px] text-slate-500 leading-relaxed";
+        usageLine.textContent = "💡 语境：" + w.usage;
+        wrap.appendChild(usageLine);
+      }
       return wrap;
+    }
+
+    function scoreSearchMatch(w, kw, swappedKw) {
+      var wordLower = String(w.word || "").toLowerCase();
+      if (wordLower === kw) return 100;
+      if (w.aliases) {
+        for (var a = 0; a < w.aliases.length; a++) {
+          if (String(w.aliases[a]).toLowerCase() === kw) return 99;
+        }
+      }
+      // 同素异序四字成语智能互通（例如：盲信盲从 <-> 盲从盲信，灼见真知 <-> 真知灼见）
+      if (swappedKw && wordLower === swappedKw) return 96;
+      if (wordLower.indexOf(" vs ") !== -1) {
+        var parts = wordLower.split(" vs ");
+        for (var p = 0; p < parts.length; p++) {
+          if (parts[p].trim() === kw) return 95;
+        }
+      }
+      if (wordLower.indexOf(kw) === 0) return 86;
+      if (wordLower.indexOf(kw) !== -1) return 80;
+      if (w.aliases) {
+        for (var b = 0; b < w.aliases.length; b++) {
+          if (String(w.aliases[b]).toLowerCase().indexOf(kw) !== -1) return 78;
+        }
+      }
+      // Pinyin & initials match (e.g. lybj -> 络绎不绝, mcmx -> 盲从盲信)
+      if (/^[a-z\s']+$/.test(kw)) {
+        var cleanAlpha = kw.replace(/\s+/g, "");
+        var pyKeys = normalizePinyinKeys(w.pinyin);
+        if (pyKeys.initials === cleanAlpha || pyKeys.compact === cleanAlpha) return 75;
+        if (pyKeys.initials.indexOf(cleanAlpha) === 0 || pyKeys.compact.indexOf(cleanAlpha) === 0) return 68;
+      }
+      // Four-char 2+2 morpheme overlap (e.g. searching 4-char variant with identical 4 chars in reordered form)
+      if (kw.length === 4 && wordLower.length === 4 && /^[\u4e00-\u9fff]{4}$/.test(kw)) {
+        if (kw.split("").sort().join("") === wordLower.split("").sort().join("")) return 92;
+      }
+      var sInf = getWordSentimentInfo(w);
+      var hay = (sInf.note + " " + (w.trap || "") + " " + (w.meaning || "") + " " + (w.usage || "")).toLowerCase();
+      if (hay.indexOf(kw) !== -1) return 40;
+      return 0;
     }
 
     function runGlobalSearch(q) {
@@ -10908,34 +11588,41 @@
       clearBtn.classList.remove("hidden");
       panel.classList.remove("hidden");
 
-      var all = getAllWords();
-      var matches = [];
-      for (var i = 0; i < all.length; i++) {
-        var w = all[i];
-        var sInf = getWordSentimentInfo(w);
-        var hay = (w.word + " " + sInf.note + " " + (w.pinyin || "") + " " + w.trap + " " + w.meaning + " " + (w.usage || "")).toLowerCase();
-        if (hay.indexOf(kw) !== -1) matches.push(w);
-      }
+      var swappedKw = (kw.length === 4 && /^[\u4e00-\u9fff]{4}$/.test(kw))
+        ? (kw.slice(2, 4) + kw.slice(0, 2))
+        : "";
 
-      document.getElementById("searchResultCount").textContent = "找到 " + matches.length + " 条匹配词条（含已剔除词）";
+      var all = getAllSearchableWords();
+      var scored = [];
+      for (var i = 0; i < all.length; i++) {
+        var sc = scoreSearchMatch(all[i], kw, swappedKw);
+        if (sc > 0) scored.push({ w: all[i], score: sc, idx: i });
+      }
+      scored.sort(function (a, b) {
+        if (b.score !== a.score) return b.score - a.score;
+        return a.idx - b.idx;
+      });
+
+      document.getElementById("searchResultCount").textContent =
+        "全词典共找到 " + scored.length + " 条匹配（核心必背词置顶 · 备查词可一键加入背词）";
       var listEl = document.getElementById("searchResultsList");
       listEl.innerHTML = "";
-      if (matches.length === 0) {
+      if (scored.length === 0) {
         var none = document.createElement("div");
         none.className = "text-xs text-slate-400 py-3 text-center";
-        none.textContent = "未搜到该词条，可点右上角「＋ 添词」加入你的专属易错库。";
+        none.textContent = "未搜到该词条，可点右上角「＋ 添词」加入你的专属词库。";
         listEl.appendChild(none);
         return;
       }
-      var cap = Math.min(matches.length, 60);
+      var cap = Math.min(scored.length, 60);
       var sFrag = document.createDocumentFragment();
       for (var j = 0; j < cap; j++) {
-        sFrag.appendChild(buildWordRowCard(matches[j], !!state.dismissed[matches[j].id]));
+        sFrag.appendChild(buildWordRowCard(scored[j].w, !!state.dismissed[scored[j].w.id]));
       }
-      if (matches.length > cap) {
+      if (scored.length > cap) {
         var note = document.createElement("div");
         note.className = "text-[11px] text-slate-400 text-center py-2";
-        note.textContent = "仅展示前 60 条结果，请补充关键字缩小范围。";
+        note.textContent = "仅展示匹配度最高的前 60 条，请补充关键字缩小范围。";
         sFrag.appendChild(note);
       }
       listEl.appendChild(sFrag);
@@ -11094,13 +11781,21 @@
       });
     });
 
-    var rateBtns = document.getElementById("cardRatingBar").querySelectorAll("[data-rate]");
-    for (var r = 0; r < rateBtns.length; r++) {
-      rateBtns[r].addEventListener("click", function (e) {
-        var score = parseInt(e.currentTarget.getAttribute("data-rate"), 10);
-        handleSessionRate(score);
+    var ebBtns = document.getElementById("cardThreeChoiceBar").querySelectorAll("[data-ebchoice]");
+    for (var r = 0; r < ebBtns.length; r++) {
+      ebBtns[r].addEventListener("click", function (e) {
+        var ch = e.currentTarget.getAttribute("data-ebchoice");
+        handleEbbinghausChoice(ch);
       });
     }
+
+    document.getElementById("btnNextCardAfterRate").addEventListener("click", function () {
+      advanceToNextSessionCard();
+    });
+
+    document.getElementById("btnRegretWrong").addEventListener("click", function () {
+      handleRegretWrong();
+    });
 
     // Search controls
     document.getElementById("globalSearchInput").addEventListener("input", function (e) {
@@ -11118,6 +11813,18 @@
 
     // Delegated clicks for search results & library cards
     function handleWordActionDelegation(e) {
+      var enrollBtn = e.target.closest("[data-enrollid]");
+      if (enrollBtn) {
+        var eid = enrollBtn.getAttribute("data-enrollid");
+        var wObj = findWordById(eid);
+        state.enrolledDict[eid] = true;
+        delete state.dismissed[eid];
+        applyEbbinghausFirstImpression(eid, "unknown");
+        saveState();
+        refreshAllViews();
+        showToast("已将「" + (wObj ? wObj.word : eid) + "」加入你的个人艾宾浩斯背词与今日复习计划");
+        return;
+      }
       var disBtn = e.target.closest("[data-dismissid]");
       if (disBtn) {
         dismissWordAsSimple(disBtn.getAttribute("data-dismissid"));
@@ -11292,6 +11999,7 @@
             state.records = data.state.records || state.records;
             state.dismissed = data.state.dismissed || state.dismissed;
             state.favorites = data.state.favorites || state.favorites;
+            state.enrolledDict = data.state.enrolledDict || state.enrolledDict;
             state.wrongBook = Array.isArray(data.state.wrongBook) ? data.state.wrongBook : state.wrongBook;
             if (Array.isArray(data.state.customWords)) {
               state.customWords = data.state.customWords;
@@ -11358,18 +12066,38 @@
       showToast("学习进度与错题记录已重置");
     });
 
-    // Keyboard shortcuts for Mac desktop / iPad keyboard users
+    // Keyboard shortcuts for Mac desktop / iPad keyboard users (对标「不背单词」Mac快捷键：1/Q认识，2/W模糊，3/E不认识，空格/回车下一词，R记错了)
     document.addEventListener("keydown", function (e) {
       var tag = (e.target && e.target.tagName) ? e.target.tagName.toLowerCase() : "";
       if (tag === "input" || tag === "textarea" || tag === "select") return;
       if (currentView !== "session") return;
 
-      if (e.code === "Space") {
-        e.preventDefault();
-        if (!sessionRevealed) revealCurrentCard();
-      } else if (sessionRevealed && (e.key === "1" || e.key === "2" || e.key === "3" || e.key === "4")) {
-        handleSessionRate(parseInt(e.key, 10));
-      } else if (e.key === "x" || e.key === "X") {
+      var k = (e.key || "").toLowerCase();
+      if (!sessionRevealed) {
+        if (k === "1" || k === "q" || k === "n") {
+          e.preventDefault();
+          handleEbbinghausChoice("know");
+        } else if (k === "2" || k === "w") {
+          e.preventDefault();
+          handleEbbinghausChoice("vague");
+        } else if (k === "3" || k === "e" || k === "m") {
+          e.preventDefault();
+          handleEbbinghausChoice("unknown");
+        } else if (e.code === "Space") {
+          e.preventDefault();
+          revealCurrentCard();
+        }
+      } else {
+        if (e.code === "Space" || e.code === "Enter") {
+          e.preventDefault();
+          advanceToNextSessionCard();
+        } else if ((k === "r" || k === "3") && currentCardChoice === "know") {
+          e.preventDefault();
+          handleRegretWrong();
+        }
+      }
+
+      if (k === "x") {
         var item = sessionQueue[sessionIndex];
         if (item) {
           dismissWordAsSimple(item.id, function () {
@@ -11521,7 +12249,76 @@
       }
     });
 
-    // Boot: restore cached GitHub corpus from IndexedDB if previously loaded
+    var XINHUA_MIRRORS = [
+      "https://fastly.jsdelivr.net/gh/pwxcoo/chinese-xinhua@master/data/idiom.json",
+      "https://cdn.jsdelivr.net/gh/pwxcoo/chinese-xinhua@master/data/idiom.json"
+    ];
+
+    function buildFullSearchLookupList(rawList) {
+      var existing = {};
+      var base = BUILTIN_WORDS.concat(BUILTIN_DICT_WORDS).concat(state.customWords);
+      for (var i = 0; i < base.length; i++) {
+        existing[base[i].word] = true;
+      }
+      var out = [];
+      for (var j = 0; j < rawList.length; j++) {
+        var row = rawList[j];
+        if (!row) continue;
+        // Support both standard chinese-xinhua objects and compact [word, pinyin, explanation, derivation] arrays
+        var w = Array.isArray(row) ? String(row[0] || "").trim() : String(row.word || "").trim();
+        var py = Array.isArray(row) ? String(row[1] || "") : String(row.pinyin || "");
+        var exp = Array.isArray(row) ? String(row[2] || "").trim() : String(row.explanation || "").trim();
+        var deriv = Array.isArray(row) ? String(row[3] || "").trim() : String(row.derivation || "").trim();
+        var ex = Array.isArray(row) ? "" : String(row.example || "").trim();
+        if (!w || existing[w]) continue;
+        existing[w] = true;
+        var xhSent = inferIdiomSentiment(w, exp, deriv);
+        out.push({
+          id: "fd_" + j,
+          word: w,
+          pinyin: py,
+          cat: "dict_lookup",
+          sentiment: xhSent.sentiment,
+          sentimentNote: xhSent.sentimentNote,
+          tag: "中华成语全词典",
+          trap: deriv && deriv !== "无" ? ("典故出处：" + deriv.slice(0, 95)) : "全量备查词条，留意结合语境核对搭配对象。",
+          meaning: exp || "暂无详细释义",
+          usage: ex && ex !== "无" ? ("例句：" + ex.slice(0, 105)) : "默认仅用于检索备查，点右上「＋ 加入背词」即可纳入你的艾宾浩斯复习计划。",
+          src: "https://github.com/pwxcoo/chinese-xinhua"
+        });
+      }
+      return out;
+    }
+
+    async function silentlyEnsureFullSearchDict() {
+      var badgeEl = document.getElementById("fullDictSyncBadge");
+      var urls = [];
+      if (window.__GONGKAO_LOCAL_DICT_URL) {
+        urls.push(window.__GONGKAO_LOCAL_DICT_URL);
+      }
+      for (var m = 0; m < XINHUA_MIRRORS.length; m++) urls.push(XINHUA_MIRRORS[m]);
+
+      for (var u = 0; u < urls.length; u++) {
+        try {
+          var resp = await fetch(urls[u]);
+          if (!resp.ok) continue;
+          var rawJson = await resp.json();
+          if (!Array.isArray(rawJson) || rawJson.length < 1000) continue;
+          var fullLookup = buildFullSearchLookupList(rawJson);
+          fullXinhuaDictWords = fullLookup;
+          savePackToIdb("full_xinhua_lookup_v2", fullLookup);
+          if (badgeEl) {
+            badgeEl.textContent = "✓ 全量 " + getAllSearchableWords().length + " 条中华成语检索库已离线就绪 · 开源来源 ";
+          }
+          refreshAllViews();
+          return;
+        } catch (err) {
+          // Try next mirror silently; offline 1,272 built-in dictionary entries remain 100% functional
+        }
+      }
+    }
+
+    // Boot: restore cached study packs AND full 31,648 lookup dictionary from IndexedDB
     renderHomeStats();
     loadExpandedFromIdb(function (cachedArr) {
       if (cachedArr && cachedArr.length > 0) {
@@ -11531,11 +12328,21 @@
         refreshAllViews();
       }
     });
+    loadPackFromIdb("full_xinhua_lookup_v2", function (cachedFull) {
+      var badgeEl = document.getElementById("fullDictSyncBadge");
+      if (cachedFull && cachedFull.length > 5000) {
+        fullXinhuaDictWords = cachedFull;
+        if (badgeEl) {
+          badgeEl.textContent = "✓ 全量 " + getAllSearchableWords().length + " 条中华成语检索库已离线就绪 · 开源来源 ";
+        }
+        refreshAllViews();
+      } else {
+        silentlyEnsureFullSearchDict();
+      }
+    });
     if ("serviceWorker" in navigator && (location.protocol === "https:" || location.hostname === "localhost")) {
       window.addEventListener("load", function () {
-        navigator.serviceWorker.register("./sw.js?v=8").then(function (reg) {
-          if (reg && reg.update) reg.update();
-        }).catch(function () {});
+        navigator.serviceWorker.register("./sw.js?v=9").catch(function () {});
       });
     }
   </script>

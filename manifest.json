@@ -2,7 +2,7 @@
   "id": "./",
   "name": "不背成语",
   "short_name": "不背成语",
-  "description": "公考 90% 覆盖应试核心词书：专攻望文生义、褒贬颠倒与高频真题少用词，支持熟词一键永久剔除与离线记忆复习。",
+  "description": "日常只背公考高频核心词，全局秒搜 31,648 条全量成语词典，复刻「不背单词」认识/模糊/不认识三键与艾宾浩斯自动排期。",
   "lang": "zh-CN",
   "start_url": "./index.html",
   "scope": "./",
@@ -16,19 +16,19 @@
   ],
   "icons": [
     {
-      "src": "./icon-192.png?v=8",
+      "src": "./icon-192.png?v=9",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "./icon-512.png?v=8",
+      "src": "./icon-512.png?v=9",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "./icon-maskable-512.png?v=8",
+      "src": "./icon-maskable-512.png?v=9",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
