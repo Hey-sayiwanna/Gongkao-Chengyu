@@ -10,10 +10,10 @@
   <meta name="application-name" content="不背成语" />
   <meta name="theme-color" content="#f4f5f8" />
   <title>不背成语</title>
-  <link rel="manifest" href="./manifest.json?v=11" />
-  <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png?v=11" />
+  <link rel="manifest" href="./manifest.json?v=13" />
+  <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png?v=13" />
   <script>window.__GONGKAO_LOCAL_DICT_URL = "./idiom_full_dict.json";</script>
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Crect width='120' height='120' rx='26' fill='%23425366'/%3E%3Ccircle cx='60' cy='34' r='22' fill='none' stroke='%23ff6a00' stroke-width='4.5'/%3E%3Ctext x='60' y='42' font-size='23' font-family='sans-serif' font-weight='800' text-anchor='middle' fill='%23ff6a00'%3E成%3C/text%3E%3Ccircle cx='60' cy='86' r='24' fill='%23ff6a00'/%3E%3Ctext x='60' y='94' font-size='23' font-family='sans-serif' font-weight='800' text-anchor='middle' fill='%23ffffff'%3E语%3C/text%3E%3C/svg%3E" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Crect width='120' height='120' rx='26' fill='%237b342d'/%3E%3Ccircle cx='60' cy='34' r='22' fill='none' stroke='%23ff6a00' stroke-width='4.5'/%3E%3Ctext x='60' y='42' font-size='23' font-family='sans-serif' font-weight='800' text-anchor='middle' fill='%23ff6a00'%3E成%3C/text%3E%3Ccircle cx='60' cy='86' r='24' fill='%23ff6a00'/%3E%3Ctext x='60' y='94' font-size='23' font-family='sans-serif' font-weight='800' text-anchor='middle' fill='%23ffffff'%3E语%3C/text%3E%3C/svg%3E" />
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
   <style>
     :root {
@@ -36,7 +36,10 @@
       background-attachment: fixed;
       color: var(--text-main);
       min-height: 100vh;
-      padding-bottom: calc(92px + env(safe-area-inset-bottom, 0px));
+      padding-bottom: calc(136px + env(safe-area-inset-bottom, 16px));
+    }
+    .bottom-float-nav {
+      bottom: calc(24px + env(safe-area-inset-bottom, 12px));
     }
     .glass-card {
       background: rgba(255, 255, 255, 0.82);
@@ -88,24 +91,18 @@
   <div class="max-w-3xl mx-auto px-4 pt-5 sm:pt-7">
 
     <!-- Header -->
-    <header class="flex items-center justify-between gap-3 mb-5">
-      <div>
-        <div class="flex items-center gap-2">
-          <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-900">Hello, 同学</h1>
-          <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-100/90 text-blue-700">无锁纯净版</span>
-        </div>
-        <p class="text-xs sm:text-sm text-slate-500 mt-0.5">日常只刷高频核心词 · 全局秒查全量成语词典 · 艾宾浩斯自动排期</p>
+    <header class="flex items-center justify-between gap-2.5 mb-5">
+      <div class="min-w-0">
+        <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-900">Hello, 同学</h1>
+        <p class="text-xs sm:text-sm text-slate-500 mt-0.5 truncate">只刷高频核心词 · 秒查全词典 · 艾宾浩斯排期</p>
       </div>
-      <div class="flex items-center gap-1.5 sm:gap-2">
-        <button id="btnQuickAddOpen" type="button" class="btn-tap glass-card px-2.5 sm:px-3 py-2 text-xs font-semibold text-slate-700 hover:bg-white flex items-center gap-1" title="手动添加生词或易错词">
+      <div class="flex items-center gap-2 shrink-0">
+        <button id="btnQuickAddOpen" type="button" class="btn-tap glass-card px-3 py-2 text-xs font-semibold text-slate-700 hover:bg-white flex items-center gap-1 whitespace-nowrap shrink-0" title="手动添加生词或易错词">
           <span>＋ 添词</span>
         </button>
-        <button id="btnCloudSyncTop" type="button" class="btn-tap glass-card px-2.5 sm:px-3 py-2 text-xs font-semibold text-indigo-700 hover:bg-white flex items-center gap-1.5" title="GitHub Gist 跨端云端同步">
+        <button id="btnCloudSyncTop" type="button" class="btn-tap glass-card px-3 py-2 text-xs font-semibold text-indigo-700 hover:bg-white flex items-center gap-1.5 whitespace-nowrap shrink-0" title="GitHub Gist 跨端云端同步">
           <span>☁️ 云同步</span>
-          <span id="topGistSyncedDot" class="hidden w-2 h-2 rounded-full bg-emerald-500 shadow-sm"></span>
-        </button>
-        <button id="btnInstallGuideTop" type="button" class="btn-tap glass-card px-2.5 sm:px-3 py-2 text-xs font-semibold text-blue-700 hover:bg-white flex items-center gap-1" title="如何添加到 iPhone 与 Mac 主屏幕">
-          <span>📲 装到桌面</span>
+          <span id="topGistSyncedDot" class="hidden w-2 h-2 rounded-full bg-emerald-500 shadow-sm shrink-0"></span>
         </button>
       </div>
     </header>
@@ -167,16 +164,24 @@
           </div>
         </div>
 
-        <div class="flex flex-wrap items-center gap-2.5 pt-1">
-          <button id="btnStartCore90Book" type="button" class="btn-tap flex-1 min-w-[200px] py-2.5 px-4 rounded-xl bg-amber-400 text-slate-950 text-xs sm:text-sm font-extrabold hover:bg-amber-300 shadow-sm">
-            🚀 按考频优先级合刷 90% 核心词书
-          </button>
-          <button id="btnJumpFastPrune" type="button" class="btn-tap py-2.5 px-3.5 rounded-xl bg-white/15 text-white text-xs font-semibold hover:bg-white/25 border border-white/15">
-            批量剔除熟词 →
-          </button>
-          <button id="btnLoadGithubCorpus" type="button" class="btn-tap py-2.5 px-3.5 rounded-xl bg-blue-500/25 text-blue-200 text-xs font-semibold hover:bg-blue-500/35 border border-blue-400/30">
-            ☁️ 一键扩充 4200+ 书面成语库
-          </button>
+        <div class="space-y-2.5 pt-1">
+          <div class="flex items-center gap-2.5">
+            <button id="btnStartCore90Book" type="button" class="btn-tap flex-1 py-2.5 px-3.5 rounded-xl bg-amber-400 text-slate-950 text-xs sm:text-sm font-extrabold hover:bg-amber-300 shadow-sm">
+              🚀 按考频优先级合刷 90% 核心词书
+            </button>
+            <button id="btnJumpFastPrune" type="button" class="btn-tap py-2.5 px-3.5 rounded-xl bg-white/15 text-white text-xs font-semibold hover:bg-white/25 border border-white/15 whitespace-nowrap shrink-0">
+              批量剔除熟词 →
+            </button>
+          </div>
+          <div class="grid grid-cols-2 gap-2.5">
+            <button id="btnLoadGithubCorpus" type="button" class="btn-tap py-2.5 px-3 rounded-xl bg-blue-500/25 text-blue-200 text-xs font-semibold hover:bg-blue-500/35 border border-blue-400/30 truncate">
+              ☁️ 扩充 4200+ 书面库
+            </button>
+            <button id="btnOpenStudySettings" type="button" class="btn-tap py-2.5 px-3 rounded-xl bg-white/15 text-white text-xs font-semibold hover:bg-white/25 border border-white/20 flex items-center justify-center gap-1.5 whitespace-nowrap">
+              <span>⚙️ 背词设置</span>
+              <span id="heroBatchBadge" class="text-[11px] px-1.5 py-0.5 rounded-md bg-white/15 text-amber-300 font-bold tabular-nums">20/20</span>
+            </button>
+          </div>
         </div>
         <div id="cloudCorpusStatus" class="hidden text-xs px-3 py-2 rounded-xl bg-white/95 text-slate-800 border border-blue-200 font-medium"></div>
       </div>
@@ -348,16 +353,16 @@
 
     <!-- ACTIVE STUDY / REVIEW FLASHCARD SESSION -->
     <section id="view-session" class="hidden space-y-4 anim-in">
-      <div class="flex items-center justify-between">
-        <button id="btnExitSession" type="button" class="btn-tap glass-card px-3.5 py-2 text-xs font-semibold text-slate-700 flex items-center gap-1">
-          <span>← 返回概览</span>
+      <div class="flex items-center justify-between gap-2">
+        <button id="btnExitSession" type="button" class="btn-tap glass-card px-3 py-2 text-xs font-semibold text-slate-700 flex items-center gap-1 whitespace-nowrap shrink-0">
+          <span>← 返回</span>
         </button>
-        <div id="sessionProgressText" class="text-xs font-bold text-slate-600">1 / 10</div>
-        <div class="flex items-center gap-2">
-          <button id="btnSessionFav" type="button" class="btn-tap glass-card px-3 py-2 text-xs font-semibold text-slate-600" title="加入或取消重点收藏">
+        <div id="sessionProgressText" class="text-sm font-extrabold text-slate-700 tabular-nums whitespace-nowrap">0 / 20</div>
+        <div class="flex items-center gap-1.5 shrink-0">
+          <button id="btnSessionFav" type="button" class="btn-tap glass-card px-2.5 sm:px-3 py-2 text-xs font-semibold text-slate-600 whitespace-nowrap" title="加入或取消重点收藏">
             ☆ 收藏
           </button>
-          <button id="btnSessionDismiss" type="button" class="btn-tap px-3 py-2 rounded-xl bg-slate-800 text-white text-xs font-semibold hover:bg-slate-900" title="快捷键 X：太简单，永久剔除">
+          <button id="btnSessionDismiss" type="button" class="btn-tap px-2.5 sm:px-3 py-2 rounded-xl bg-slate-800 text-white text-xs font-semibold hover:bg-slate-900 whitespace-nowrap" title="快捷键 X：太简单，永久剔除">
             ⚡ 太简单剔除
           </button>
         </div>
@@ -683,35 +688,17 @@
 
         <div id="gistSyncFeedback" class="hidden text-xs font-medium p-3 rounded-xl border"></div>
       </div>
-      <!-- Add to Home Screen Guide -->
-      <div class="glass-card p-5 space-y-3.5">
-        <div class="flex flex-wrap items-center justify-between gap-2">
-          <div class="text-base font-bold text-slate-900">📲 免服务器安装到 iPhone、安卓与 Mac 桌面</div>
-          <button id="btnAndroidInstallPrompt" type="button" class="hidden btn-tap px-3.5 py-2 rounded-xl bg-emerald-600 text-white text-xs font-extrabold hover:bg-emerald-700 shadow-sm">
-            ⚡ 一键安装独立桌面 App
+      <!-- Add to Home Screen Guide (精简单段版) -->
+      <div class="glass-card p-5 space-y-2">
+        <div class="flex items-center justify-between gap-2">
+          <div class="text-base font-bold text-slate-900">📲 添加到主屏幕</div>
+          <button id="btnAndroidInstallPrompt" type="button" class="hidden btn-tap px-3 py-1.5 rounded-xl bg-emerald-600 text-white text-xs font-extrabold hover:bg-emerald-700 shadow-sm">
+            一键安装到桌面
           </button>
         </div>
         <p class="text-xs text-slate-600 leading-relaxed">
-          依托 <strong>GitHub Pages</strong> 免费静态托管与标准 PWA 协议，苹果、安卓与电脑均可生成无浏览器地址栏的独立全屏应用图标，支持断网离线刷词：
+          iPhone / iPad 用系统自带 Safari 打开本页，点底部「分享」按钮选择「<strong>添加到主屏幕</strong>」，即可在桌面生成无地址栏的全屏图标；Mac 与安卓浏览器方法相同，在菜单里点「添加到程序坞」或「安装应用 / 添加至桌面」即可（仅菜单名字不同）。
         </p>
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
-          <div class="p-3.5 rounded-2xl bg-white/80 border border-slate-200/70 space-y-1.5">
-            <div class="font-bold text-slate-900">安卓手机（Edge / Chrome / 自带浏览器）</div>
-            <p class="text-slate-600 leading-relaxed">1. 推荐用安卓版 <strong>Edge 或 Chrome</strong> 打开网址，点右上角菜单选「<strong>安装应用</strong> / 添加到主屏幕」（或点上方绿色一键安装按钮），可生成无浏览器角标的真全屏应用。</p>
-            <p class="text-slate-600 leading-relaxed">2. 用 Vivo、小米、OPPO 等系统自带浏览器打开，点底部菜单「<strong>添加至桌面</strong>」（若桌面未出现图标，到手机「设置 → 权限管理」开启该浏览器的「桌面快捷方式」权限即可）。</p>
-          </div>
-          <div class="p-3.5 rounded-2xl bg-white/80 border border-slate-200/70 space-y-1.5">
-            <div class="font-bold text-slate-900">iPhone / iPad（Safari 浏览器）</div>
-            <p class="text-slate-600 leading-relaxed">1. 用系统自带 Safari 打开网址。</p>
-            <p class="text-slate-600 leading-relaxed">2. 点击底部工具栏正中间的「分享」图标（向上箭头方框）。</p>
-            <p class="text-slate-600 leading-relaxed">3. 点「添加到主屏幕」，桌面即生成无地址栏的独立全屏「不背成语」图标。</p>
-          </div>
-          <div class="p-3.5 rounded-2xl bg-white/80 border border-slate-200/70 space-y-1.5">
-            <div class="font-bold text-slate-900">Mac / Windows 电脑</div>
-            <p class="text-slate-600 leading-relaxed">1. Mac Safari 点顶部菜单「文件 → 添加到程序坞」；Windows / Mac 版 Chrome 或 Edge 点地址栏右侧「安装不背成语」图标。</p>
-            <p class="text-slate-600 leading-relaxed">2. 独立窗口支持键盘 1/Q 认识、2/W 模糊、3/E 不认识、空格下一词、R 记错了反悔、X 秒删简单词。</p>
-          </div>
-        </div>
       </div>
 
       <!-- Cross-Device Backup & Custom Corpus Import -->
@@ -826,6 +813,55 @@
     </div>
   </div>
 
+  <!-- Global Study Batch Settings Modal (全局每轮新词/复习词数量设置) -->
+  <div id="modalStudySettings" class="hidden fixed inset-0 z-50 bg-slate-900/40 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="glass-card bg-white/95 w-full max-w-sm p-5 space-y-4 anim-in">
+      <div class="flex items-center justify-between">
+        <div class="text-base font-bold text-slate-900">⚙️ 每轮背词量设置（全局生效）</div>
+        <button id="btnCloseStudySettings" type="button" class="text-xs px-2.5 py-1 rounded-lg bg-slate-100 text-slate-600">关闭</button>
+      </div>
+
+      <div class="space-y-3.5 text-xs">
+        <div class="space-y-2">
+          <div class="flex items-center justify-between">
+            <label for="inputNewBatchSize" class="font-bold text-slate-800">每轮新学词数（新词）</label>
+            <input id="inputNewBatchSize" type="number" min="5" max="200" step="5" value="20" class="w-20 px-2.5 py-1.5 rounded-xl border border-slate-200 text-center font-extrabold text-slate-900 tabular-nums focus:outline-none focus:ring-2 focus:ring-blue-500/40" />
+          </div>
+          <div id="newBatchPresets" class="grid grid-cols-5 gap-1.5">
+            <button type="button" data-preset-new="10" class="btn-tap py-1.5 rounded-xl border border-slate-200 bg-slate-50 font-semibold text-slate-700">10</button>
+            <button type="button" data-preset-new="15" class="btn-tap py-1.5 rounded-xl border border-slate-200 bg-slate-50 font-semibold text-slate-700">15</button>
+            <button type="button" data-preset-new="20" class="btn-tap py-1.5 rounded-xl border border-blue-500 bg-blue-600 font-bold text-white">20</button>
+            <button type="button" data-preset-new="30" class="btn-tap py-1.5 rounded-xl border border-slate-200 bg-slate-50 font-semibold text-slate-700">30</button>
+            <button type="button" data-preset-new="50" class="btn-tap py-1.5 rounded-xl border border-slate-200 bg-slate-50 font-semibold text-slate-700">50</button>
+          </div>
+        </div>
+
+        <div class="space-y-2 pt-1 border-t border-slate-200/70">
+          <div class="flex items-center justify-between">
+            <label for="inputReviewBatchSize" class="font-bold text-slate-800">每轮复习词数（复习词）</label>
+            <input id="inputReviewBatchSize" type="number" min="5" max="200" step="5" value="20" class="w-20 px-2.5 py-1.5 rounded-xl border border-slate-200 text-center font-extrabold text-slate-900 tabular-nums focus:outline-none focus:ring-2 focus:ring-amber-500/40" />
+          </div>
+          <div id="reviewBatchPresets" class="grid grid-cols-5 gap-1.5">
+            <button type="button" data-preset-rev="10" class="btn-tap py-1.5 rounded-xl border border-slate-200 bg-slate-50 font-semibold text-slate-700">10</button>
+            <button type="button" data-preset-rev="15" class="btn-tap py-1.5 rounded-xl border border-slate-200 bg-slate-50 font-semibold text-slate-700">15</button>
+            <button type="button" data-preset-rev="20" class="btn-tap py-1.5 rounded-xl border border-amber-500 bg-amber-500 font-bold text-white">20</button>
+            <button type="button" data-preset-rev="30" class="btn-tap py-1.5 rounded-xl border border-slate-200 bg-slate-50 font-semibold text-slate-700">30</button>
+            <button type="button" data-preset-rev="50" class="btn-tap py-1.5 rounded-xl border border-slate-200 bg-slate-50 font-semibold text-slate-700">50</button>
+          </div>
+        </div>
+
+        <p class="text-[11px] text-slate-500 leading-relaxed">
+          保存后对首页核心词书、全部专项分册及今日艾宾浩斯复习统一生效，并自动随云同步保存。
+        </p>
+      </div>
+
+      <div class="flex justify-end gap-2 pt-1">
+        <button id="btnCancelStudySettings" type="button" class="btn-tap px-4 py-2 rounded-xl bg-slate-100 text-slate-700 text-xs font-semibold">取消</button>
+        <button id="btnSaveStudySettings" type="button" class="btn-tap px-4 py-2 rounded-xl bg-slate-900 text-white text-xs font-bold">保存设置</button>
+      </div>
+    </div>
+  </div>
+
   <!-- Toast with Undo -->
   <div id="appToast" class="hidden fixed bottom-24 left-1/2 -translate-x-1/2 z-50 glass-pill bg-slate-900/92 text-white px-4 py-2.5 rounded-2xl shadow-lg flex items-center gap-3 text-xs font-medium">
     <span id="appToastText">已剔除简单词</span>
@@ -833,17 +869,17 @@
   </div>
 
   <!-- Bottom Liquid Glass Floating Navigation -->
-  <nav class="fixed bottom-4 left-1/2 -translate-x-1/2 z-40 w-[calc(100%-2rem)] max-w-md glass-pill rounded-full p-1.5 flex items-center justify-between">
-    <button data-nav="home" type="button" class="nav-tab btn-tap flex-1 py-2 rounded-full text-center text-xs font-bold bg-slate-900 text-white">
+  <nav class="fixed bottom-float-nav left-1/2 -translate-x-1/2 z-40 w-[calc(100%-2rem)] max-w-md glass-pill rounded-full p-1.5 flex items-center justify-between">
+    <button data-nav="home" type="button" class="nav-tab btn-tap flex-1 py-2.5 rounded-full text-center text-xs font-bold bg-slate-900 text-white">
       学习
     </button>
-    <button data-nav="test" type="button" class="nav-tab btn-tap flex-1 py-2 rounded-full text-center text-xs font-semibold text-slate-600 hover:text-slate-900">
+    <button data-nav="test" type="button" class="nav-tab btn-tap flex-1 py-2.5 rounded-full text-center text-xs font-semibold text-slate-600 hover:text-slate-900">
       测试
     </button>
-    <button data-nav="library" type="button" class="nav-tab btn-tap flex-1 py-2 rounded-full text-center text-xs font-semibold text-slate-600 hover:text-slate-900">
+    <button data-nav="library" type="button" class="nav-tab btn-tap flex-1 py-2.5 rounded-full text-center text-xs font-semibold text-slate-600 hover:text-slate-900">
       筛词库
     </button>
-    <button data-nav="sync" type="button" class="nav-tab btn-tap flex-1 py-2 rounded-full text-center text-xs font-semibold text-slate-600 hover:text-slate-900">
+    <button data-nav="sync" type="button" class="nav-tab btn-tap flex-1 py-2.5 rounded-full text-center text-xs font-semibold text-slate-600 hover:text-slate-900">
       桌面与同步
     </button>
   </nav>
@@ -10270,7 +10306,9 @@
         lastRealAcc: null,
         lastTrapAcc: null,
         lastSentAcc: null,
-        showFrontSentiment: false
+        showFrontSentiment: false,
+        newBatchSize: 20,
+        reviewBatchSize: 20
       };
     }
 
@@ -10303,6 +10341,10 @@
         base.lastTrapAcc = typeof parsed.lastTrapAcc === "number" ? parsed.lastTrapAcc : null;
         base.lastSentAcc = typeof parsed.lastSentAcc === "number" ? parsed.lastSentAcc : null;
         base.showFrontSentiment = !!parsed.showFrontSentiment;
+        var nb = parseInt(parsed.newBatchSize, 10);
+        var rb = parseInt(parsed.reviewBatchSize, 10);
+        base.newBatchSize = (!isNaN(nb) && nb >= 1 && nb <= 500) ? nb : 20;
+        base.reviewBatchSize = (!isNaN(rb) && rb >= 1 && rb <= 500) ? rb : 20;
         return base;
       } catch (e) {
         return memoryStoreFallback || createInitialState();
@@ -10626,9 +10668,9 @@
         var target = b.getAttribute("data-nav");
         var active = (target === viewName) || (viewName === "session" && target === "home");
         if (active) {
-          b.className = "nav-tab btn-tap flex-1 py-2 rounded-full text-center text-xs font-bold bg-slate-900 text-white";
+          b.className = "nav-tab btn-tap flex-1 py-2.5 rounded-full text-center text-xs font-bold bg-slate-900 text-white";
         } else {
-          b.className = "nav-tab btn-tap flex-1 py-2 rounded-full text-center text-xs font-semibold text-slate-600 hover:text-slate-900";
+          b.className = "nav-tab btn-tap flex-1 py-2.5 rounded-full text-center text-xs font-semibold text-slate-600 hover:text-slate-900";
         }
       }
       if (viewName === "library") renderLibraryList();
@@ -10713,6 +10755,10 @@
       document.getElementById("statLearnedTotal").textContent = String(learnedCount);
       document.getElementById("statFavTotal").textContent = String(favCount);
       document.getElementById("statDismissedTotal").textContent = String(dismissedCount);
+      var hbBadge = document.getElementById("heroBatchBadge");
+      if (hbBadge) {
+        hbBadge.textContent = (state.newBatchSize || 20) + "/" + (state.reviewBatchSize || 20);
+      }
     }
 
     // =========================================================================
@@ -10722,9 +10768,19 @@
     var sessionIndex = 0;
     var sessionRevealed = false;
     var sessionModeTitle = "";
+    var sessionTargetTotal = 20;    // 本轮固定目标总词数（不会因错词组内重现而膨胀）
+    var sessionPassedMap = {};      // { [wordId]: true } 本轮已掌握过关的唯一词条集合
     var sessionMeta = {};           // { [wordId]: { firstChoice, neededStreak, repeatsDone, prevSnapshot } }
     var currentCardChoice = null;   // 'know' | 'vague' | 'unknown'
     var currentCardWasFirst = false;
+
+    function updateSessionCounterText() {
+      var doneCount = Object.keys(sessionPassedMap).length;
+      var el = document.getElementById("sessionProgressText");
+      if (el) {
+        el.textContent = doneCount + " / " + sessionTargetTotal;
+      }
+    }
 
     function renderFamiliarityBars(stage) {
       var box = document.getElementById("cardFamiliarityBars");
@@ -10805,7 +10861,12 @@
         });
       }
 
-      sessionQueue = pool.slice(0, 12);
+      var batchLimit = reviewOnly
+        ? Math.max(1, Number(state.reviewBatchSize || 20))
+        : Math.max(1, Number(state.newBatchSize || 20));
+      sessionQueue = pool.slice(0, batchLimit);
+      sessionTargetTotal = sessionQueue.length;
+      sessionPassedMap = {};
       sessionIndex = 0;
       sessionMeta = {};
       sessionModeTitle = reviewOnly ? "艾宾浩斯抗遗忘复习" : catLabel(catFilter);
@@ -10829,10 +10890,7 @@
       currentCardChoice = null;
       currentCardWasFirst = false;
 
-      var mInfo = sessionMeta[item.id];
-      var roundTag = (mInfo && mInfo.repeatsDone > 0) ? " · 组内巩固重现" : "";
-      document.getElementById("sessionProgressText").textContent =
-        sessionModeTitle + " · " + (sessionIndex + 1) + " / " + sessionQueue.length + roundTag;
+      updateSessionCounterText();
       document.getElementById("cardCategoryBadge").textContent = catLabel(item.cat);
       document.getElementById("cardTagBadge").textContent = item.tag || "高频易错";
       document.getElementById("cardWordTitle").textContent = item.word;
@@ -10869,8 +10927,8 @@
       var favBtn = document.getElementById("btnSessionFav");
       favBtn.textContent = isFav ? "★ 已收藏" : "☆ 收藏";
       favBtn.className = isFav
-        ? "btn-tap glass-card px-3 py-2 text-xs font-bold text-amber-600"
-        : "btn-tap glass-card px-3 py-2 text-xs font-semibold text-slate-600";
+        ? "btn-tap glass-card px-2.5 sm:px-3 py-2 text-xs font-bold text-amber-600 whitespace-nowrap"
+        : "btn-tap glass-card px-2.5 sm:px-3 py-2 text-xs font-semibold text-slate-600 whitespace-nowrap";
 
       document.getElementById("cardFrontPrompt").classList.remove("hidden");
       document.getElementById("cardBackDetail").classList.add("hidden");
@@ -10916,6 +10974,10 @@
         insertRequeueCard(item, choice === "vague" ? 4 : 3);
         willRepeatInRound = true;
       }
+      if (!willRepeatInRound) {
+        sessionPassedMap[item.id] = true;
+      }
+      updateSessionCounterText();
 
       var updatedStage = getWordStage(item.id);
       renderFamiliarityBars(updatedStage);
@@ -10969,6 +11031,7 @@
         if (currentCardWasFirst && meta.prevSnapshot) {
           state.records[item.id] = meta.prevSnapshot;
         }
+        delete sessionPassedMap[item.id];
         applyEbbinghausFirstImpression(item.id, "unknown");
         meta.firstChoice = "unknown";
         meta.neededStreak = 2;
@@ -11764,8 +11827,7 @@
       e.preventDefault();
       deferredPwaPrompt = e;
       if (androidInstallBtn) androidInstallBtn.classList.remove("hidden");
-      var topBtn = document.getElementById("btnInstallGuideTop");
-      if (topBtn) topBtn.textContent = "📲 安装App";
+
     });
 
     window.addEventListener("appinstalled", function () {
@@ -11788,22 +11850,7 @@
       });
     }
 
-    document.getElementById("btnInstallGuideTop").addEventListener("click", function () {
-      if (deferredPwaPrompt) {
-        deferredPwaPrompt.prompt();
-        deferredPwaPrompt.userChoice.then(function (choice) {
-          if (!choice || choice.outcome !== "accepted") {
-            switchView("sync");
-          }
-          deferredPwaPrompt = null;
-          if (androidInstallBtn) androidInstallBtn.classList.add("hidden");
-        }).catch(function () {
-          switchView("sync");
-        });
-      } else {
-        switchView("sync");
-      }
-    });
+
 
     // Session controls
     document.getElementById("btnExitSession").addEventListener("click", function () {
@@ -11844,11 +11891,20 @@
       renderHomeStats();
     });
 
+    function removeWordFromActiveSession(wordId) {
+      sessionPassedMap[wordId] = true;
+      for (var q = sessionQueue.length - 1; q >= sessionIndex; q--) {
+        if (sessionQueue[q] && sessionQueue[q].id === wordId) {
+          sessionQueue.splice(q, 1);
+        }
+      }
+    }
+
     document.getElementById("btnSessionDismiss").addEventListener("click", function () {
       var item = sessionQueue[sessionIndex];
       if (!item) return;
       dismissWordAsSimple(item.id, function () {
-        sessionQueue.splice(sessionIndex, 1);
+        removeWordFromActiveSession(item.id);
         renderCurrentCard();
       });
     });
@@ -12173,7 +12229,7 @@
         var item = sessionQueue[sessionIndex];
         if (item) {
           dismissWordAsSimple(item.id, function () {
-            sessionQueue.splice(sessionIndex, 1);
+            removeWordFromActiveSession(item.id);
             renderCurrentCard();
           });
         }
@@ -12379,6 +12435,8 @@
       out.lastTrapAcc = typeof b.lastTrapAcc === "number" ? b.lastTrapAcc : (typeof a.lastTrapAcc === "number" ? a.lastTrapAcc : null);
       out.lastSentAcc = typeof b.lastSentAcc === "number" ? b.lastSentAcc : (typeof a.lastSentAcc === "number" ? a.lastSentAcc : null);
       out.showFrontSentiment = typeof b.showFrontSentiment === "boolean" ? b.showFrontSentiment : !!a.showFrontSentiment;
+      out.newBatchSize = Number(b.newBatchSize || a.newBatchSize || 20);
+      out.reviewBatchSize = Number(b.reviewBatchSize || a.reviewBatchSize || 20);
       return out;
     }
 
@@ -12604,6 +12662,71 @@
         tkPanel.removeAttribute("data-manual-open");
       }
     });
+    // Global Study Batch Settings Modal wiring
+    function syncSettingsPresetHighlight() {
+      var nv = parseInt(document.getElementById("inputNewBatchSize").value, 10) || 20;
+      var rv = parseInt(document.getElementById("inputReviewBatchSize").value, 10) || 20;
+      var nBtns = document.querySelectorAll("[data-preset-new]");
+      for (var i = 0; i < nBtns.length; i++) {
+        var b = nBtns[i];
+        var active = parseInt(b.getAttribute("data-preset-new"), 10) === nv;
+        b.className = active
+          ? "btn-tap py-1.5 rounded-xl border border-blue-500 bg-blue-600 font-bold text-white"
+          : "btn-tap py-1.5 rounded-xl border border-slate-200 bg-slate-50 font-semibold text-slate-700";
+      }
+      var rBtns = document.querySelectorAll("[data-preset-rev]");
+      for (var j = 0; j < rBtns.length; j++) {
+        var rb = rBtns[j];
+        var rActive = parseInt(rb.getAttribute("data-preset-rev"), 10) === rv;
+        rb.className = rActive
+          ? "btn-tap py-1.5 rounded-xl border border-amber-500 bg-amber-500 font-bold text-white"
+          : "btn-tap py-1.5 rounded-xl border border-slate-200 bg-slate-50 font-semibold text-slate-700";
+      }
+    }
+
+    function openStudySettingsModal() {
+      document.getElementById("inputNewBatchSize").value = String(state.newBatchSize || 20);
+      document.getElementById("inputReviewBatchSize").value = String(state.reviewBatchSize || 20);
+      syncSettingsPresetHighlight();
+      document.getElementById("modalStudySettings").classList.remove("hidden");
+    }
+
+    function closeStudySettingsModal() {
+      document.getElementById("modalStudySettings").classList.add("hidden");
+    }
+
+    document.getElementById("btnOpenStudySettings").addEventListener("click", openStudySettingsModal);
+    document.getElementById("btnCloseStudySettings").addEventListener("click", closeStudySettingsModal);
+    document.getElementById("btnCancelStudySettings").addEventListener("click", closeStudySettingsModal);
+    document.getElementById("inputNewBatchSize").addEventListener("input", syncSettingsPresetHighlight);
+    document.getElementById("inputReviewBatchSize").addEventListener("input", syncSettingsPresetHighlight);
+
+    var presetNewBtns = document.querySelectorAll("[data-preset-new]");
+    for (var pn = 0; pn < presetNewBtns.length; pn++) {
+      presetNewBtns[pn].addEventListener("click", function (e) {
+        document.getElementById("inputNewBatchSize").value = e.currentTarget.getAttribute("data-preset-new");
+        syncSettingsPresetHighlight();
+      });
+    }
+    var presetRevBtns = document.querySelectorAll("[data-preset-rev]");
+    for (var pr = 0; pr < presetRevBtns.length; pr++) {
+      presetRevBtns[pr].addEventListener("click", function (e) {
+        document.getElementById("inputReviewBatchSize").value = e.currentTarget.getAttribute("data-preset-rev");
+        syncSettingsPresetHighlight();
+      });
+    }
+
+    document.getElementById("btnSaveStudySettings").addEventListener("click", function () {
+      var nv = Math.min(500, Math.max(1, parseInt(document.getElementById("inputNewBatchSize").value, 10) || 20));
+      var rv = Math.min(500, Math.max(1, parseInt(document.getElementById("inputReviewBatchSize").value, 10) || 20));
+      state.newBatchSize = nv;
+      state.reviewBatchSize = rv;
+      saveState();
+      refreshAllViews();
+      closeStudySettingsModal();
+      showToast("✓ 已更新全局背词量：每轮新词 " + nv + " 个 · 复习 " + rv + " 个");
+    });
+
     renderGistSyncPanel();
 
     // =========================================================================
@@ -12840,7 +12963,7 @@
     });
     if ("serviceWorker" in navigator && (location.protocol === "https:" || location.hostname === "localhost")) {
       window.addEventListener("load", function () {
-        navigator.serviceWorker.register("./sw.js?v=11").catch(function () {});
+        navigator.serviceWorker.register("./sw.js?v=13").catch(function () {});
       });
     }
   </script>
