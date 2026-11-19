@@ -22,8 +22,8 @@
     })();
   </script>
   <title>不背成语</title>
-  <link rel="manifest" href="./manifest.json?v=15" />
-  <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png?v=15" />
+  <link rel="manifest" href="./manifest.json?v=16" />
+  <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png?v=16" />
   <script>window.__GONGKAO_LOCAL_DICT_URL = "./idiom_full_dict.json";</script>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Crect width='120' height='120' rx='26' fill='%237b342d'/%3E%3Ccircle cx='60' cy='34' r='22' fill='none' stroke='%23ff6a00' stroke-width='4.5'/%3E%3Ctext x='60' y='42' font-size='23' font-family='sans-serif' font-weight='800' text-anchor='middle' fill='%23ff6a00'%3E成%3C/text%3E%3Ccircle cx='60' cy='86' r='24' fill='%23ff6a00'/%3E%3Ctext x='60' y='94' font-size='23' font-family='sans-serif' font-weight='800' text-anchor='middle' fill='%23ffffff'%3E语%3C/text%3E%3C/svg%3E" />
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
@@ -185,6 +185,116 @@
     }
     html[data-theme="dark"] nav .nav-tab:not(.bg-slate-900) {
       color: #94a3b8 !important;
+    }
+
+    /* 修复底部提示条（#appToast）被 .glass-pill 浅白底覆盖导致白字变隐形的 Bug */
+    #appToast {
+      background: rgba(15, 23, 42, 0.94) !important;
+      color: #f8fafc !important;
+      border: 1px solid rgba(255, 255, 255, 0.16) !important;
+      box-shadow: 0 14px 34px rgba(2, 6, 23, 0.28) !important;
+    }
+    #appToastText {
+      color: #f8fafc !important;
+    }
+
+    /* 居中正方形撒花庆贺块（#modalSessionCelebrateCard）：严格 1:1 正方形，日夜双模式高对比不反白 */
+    #modalSessionCelebrateCard {
+      width: 248px;
+      height: 248px;
+      aspect-ratio: 1 / 1;
+      border-radius: 28px;
+      background: rgba(255, 255, 255, 0.97) !important;
+      border: 1px solid rgba(226, 232, 240, 0.95) !important;
+      box-shadow: 0 24px 54px -10px rgba(15, 23, 42, 0.22), inset 0 1px 0 rgba(255, 255, 255, 1) !important;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      padding: 22px 20px 18px;
+      text-align: center;
+      animation: celebratePopIn 0.26s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    html[data-theme="dark"] #modalSessionCelebrateCard {
+      background: rgba(20, 29, 47, 0.97) !important;
+      border-color: rgba(255, 255, 255, 0.15) !important;
+      box-shadow: 0 26px 58px -10px rgba(2, 6, 23, 0.78), inset 0 1px 0 rgba(255, 255, 255, 0.10) !important;
+    }
+    @keyframes celebratePopIn {
+      0% { opacity: 0; transform: scale(0.86) translateY(8px); }
+      100% { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    @keyframes partyBounce {
+      0%, 100% { transform: scale(1) rotate(0deg); }
+      30% { transform: scale(1.16) rotate(-8deg); }
+      65% { transform: scale(1.08) rotate(6deg); }
+    }
+    .celebrate-emoji-wrap {
+      width: 62px;
+      height: 62px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, rgba(251, 191, 36, 0.20) 0%, rgba(244, 63, 94, 0.16) 100%);
+      border: 1px solid rgba(251, 191, 36, 0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      line-height: 1;
+      animation: partyBounce 0.75s ease-out;
+      position: relative;
+      z-index: 2;
+    }
+    .confetti-dot {
+      position: absolute;
+      width: 7px;
+      height: 11px;
+      border-radius: 3px;
+      opacity: 0;
+      pointer-events: none;
+      z-index: 1;
+      animation: confettiFall 1.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    @keyframes confettiFall {
+      0% { opacity: 1; transform: translate(0, 0) rotate(0deg) scale(0.7); }
+      80% { opacity: 0.95; }
+      100% { opacity: 0; transform: translate(var(--tx), var(--ty)) rotate(var(--rot)) scale(1); }
+    }
+
+    /* 设置弹窗内的 iOS 风格胶囊开关 */
+    .setting-switch {
+      width: 44px;
+      height: 25px;
+      border-radius: 999px;
+      padding: 2px;
+      transition: background-color 0.18s ease;
+      display: inline-flex;
+      align-items: center;
+      cursor: pointer;
+      border: none;
+      flex-shrink: 0;
+    }
+    .setting-switch[aria-checked="true"] {
+      background-color: #10b981 !important;
+    }
+    .setting-switch[aria-checked="false"] {
+      background-color: #cbd5e1 !important;
+    }
+    html[data-theme="dark"] .setting-switch[aria-checked="false"] {
+      background-color: #475569 !important;
+    }
+    .setting-switch-knob {
+      width: 21px;
+      height: 21px;
+      border-radius: 999px;
+      background: #ffffff !important;
+      box-shadow: 0 2px 5px rgba(15, 23, 42, 0.22);
+      transition: transform 0.18s ease;
+      transform: translateX(0);
+    }
+    .setting-switch[aria-checked="true"] .setting-switch-knob {
+      transform: translateX(19px);
     }
 
     /* 弹窗遮罩与深色弹层底板 */
@@ -1094,8 +1204,18 @@
           </div>
         </div>
 
+        <div class="pt-2.5 border-t border-slate-200/70 flex items-center justify-between gap-3">
+          <div class="space-y-0.5">
+            <div class="font-bold text-slate-800">每日首次打开复习弹窗</div>
+            <div class="text-[11px] text-slate-500">有昨日已学成语时自动弹窗提醒（为 0 不弹）</div>
+          </div>
+          <button id="btnToggleDailyPopup" type="button" role="switch" aria-checked="true" class="setting-switch" title="开启或关闭每日首次登录复习弹窗">
+            <span class="setting-switch-knob"></span>
+          </button>
+        </div>
+
         <p class="text-[11px] text-slate-500 leading-relaxed">
-          保存后对首页核心词书、全部专项分册及今日艾宾浩斯复习统一生效，并自动随云同步保存。
+          保存后对全部词书与每日提醒统一生效，并自动随云同步保存。
         </p>
       </div>
 
@@ -1133,6 +1253,21 @@
           立即复习
         </button>
       </div>
+    </div>
+  </div>
+
+  <!-- Centered Square Confetti Celebration Modal (背完/复习完本轮居中正方形撒花庆贺弹窗) -->
+  <div id="modalSessionCelebrate" class="hidden fixed inset-0 z-50 bg-slate-900/40 backdrop-blur-sm flex items-center justify-center p-4">
+    <div id="modalSessionCelebrateCard">
+      <div id="celebrateConfettiLayer" class="absolute inset-0 pointer-events-none overflow-hidden"></div>
+      <div class="celebrate-emoji-wrap mt-1" aria-hidden="true">🎉</div>
+      <div class="space-y-1 relative z-10 px-1">
+        <div id="celebrateTitleText" class="text-lg font-extrabold text-slate-900">本轮过关！</div>
+        <p id="celebrateSubText" class="text-xs text-slate-500 leading-snug line-clamp-2">已完成本组全部成语学习与巩固</p>
+      </div>
+      <button id="btnCloseCelebrateModal" type="button" class="btn-tap relative z-10 w-full py-2 rounded-xl bg-amber-500 text-white text-xs font-extrabold hover:bg-amber-600 shadow-sm">
+        继续加油
+      </button>
     </div>
   </div>
 
@@ -10582,7 +10717,8 @@
         lastSentAcc: null,
         showFrontSentiment: false,
         newBatchSize: 20,
-        reviewBatchSize: 20
+        reviewBatchSize: 20,
+        enableDailyPopup: true
       };
     }
 
@@ -10619,6 +10755,7 @@
         var rb = parseInt(parsed.reviewBatchSize, 10);
         base.newBatchSize = (!isNaN(nb) && nb >= 1 && nb <= 500) ? nb : 20;
         base.reviewBatchSize = (!isNaN(rb) && rb >= 1 && rb <= 500) ? rb : 20;
+        base.enableDailyPopup = typeof parsed.enableDailyPopup === "boolean" ? parsed.enableDailyPopup : true;
         return base;
       } catch (e) {
         return memoryStoreFallback || createInitialState();
@@ -11236,8 +11373,10 @@
 
     function renderCurrentCard() {
       if (sessionIndex >= sessionQueue.length) {
-        showToast("🎉 本组「" + sessionModeTitle + "」已全部掌握过关！");
+        var finishedCount = sessionTargetTotal || Object.keys(sessionPassedMap).length || 0;
+        var finishedTitle = sessionModeTitle || "本轮词条";
         switchView("home");
+        showSessionCelebration(finishedTitle, finishedCount);
         return;
       }
       var item = sessionQueue[sessionIndex];
@@ -12798,6 +12937,7 @@
       out.showFrontSentiment = typeof b.showFrontSentiment === "boolean" ? b.showFrontSentiment : !!a.showFrontSentiment;
       out.newBatchSize = Number(b.newBatchSize || a.newBatchSize || 20);
       out.reviewBatchSize = Number(b.reviewBatchSize || a.reviewBatchSize || 20);
+      out.enableDailyPopup = typeof b.enableDailyPopup === "boolean" ? b.enableDailyPopup : (typeof a.enableDailyPopup === "boolean" ? a.enableDailyPopup : true);
       return out;
     }
 
@@ -13049,6 +13189,10 @@
     function openStudySettingsModal() {
       document.getElementById("inputNewBatchSize").value = String(state.newBatchSize || 20);
       document.getElementById("inputReviewBatchSize").value = String(state.reviewBatchSize || 20);
+      var sw = document.getElementById("btnToggleDailyPopup");
+      if (sw) {
+        sw.setAttribute("aria-checked", state.enableDailyPopup !== false ? "true" : "false");
+      }
       syncSettingsPresetHighlight();
       document.getElementById("modalStudySettings").classList.remove("hidden");
     }
@@ -13078,15 +13222,24 @@
       });
     }
 
+    document.getElementById("btnToggleDailyPopup").addEventListener("click", function () {
+      var sw = document.getElementById("btnToggleDailyPopup");
+      var cur = sw.getAttribute("aria-checked") === "true";
+      sw.setAttribute("aria-checked", cur ? "false" : "true");
+    });
+
     document.getElementById("btnSaveStudySettings").addEventListener("click", function () {
       var nv = Math.min(500, Math.max(1, parseInt(document.getElementById("inputNewBatchSize").value, 10) || 20));
       var rv = Math.min(500, Math.max(1, parseInt(document.getElementById("inputReviewBatchSize").value, 10) || 20));
+      var sw = document.getElementById("btnToggleDailyPopup");
+      var popupOn = sw ? (sw.getAttribute("aria-checked") === "true") : true;
       state.newBatchSize = nv;
       state.reviewBatchSize = rv;
+      state.enableDailyPopup = popupOn;
       saveState();
       refreshAllViews();
       closeStudySettingsModal();
-      showToast("✓ 已更新全局背词量：每轮新词 " + nv + " 个 · 复习 " + rv + " 个");
+      showToast("✓ 设置已保存：新词 " + nv + " · 复习 " + rv + " · 每日弹窗" + (popupOn ? "已开启" : "已关闭"));
     });
 
     // 浅色 / 深色夜间模式切换（与考公刷题月亮按键一致，记忆用户选择并实时更新顶栏状态色）
@@ -13228,6 +13381,7 @@
     }
 
     function maybeAutoPromptYesterdayReview() {
+      if (state.enableDailyPopup === false) return;
       if (currentView !== "home") return;
       var modal = document.getElementById("modalYesterdayReview");
       if (!modal || !modal.classList.contains("hidden")) return;
@@ -13258,6 +13412,73 @@
         if (ym && !ym.classList.contains("hidden")) {
           closeYesterdayReviewModal(true);
         }
+      }
+    });
+
+    // =========================================================================
+    // 居中正方形撒花庆贺弹窗控制（替代原先易被底栏样式覆盖的底部空白提示框）
+    // =========================================================================
+    var celebrateAutoTimer = null;
+
+    function closeSessionCelebration() {
+      var modal = document.getElementById("modalSessionCelebrate");
+      if (modal) modal.classList.add("hidden");
+      if (celebrateAutoTimer) {
+        clearTimeout(celebrateAutoTimer);
+        celebrateAutoTimer = null;
+      }
+    }
+
+    function showSessionCelebration(modeTitle, countNum) {
+      var modal = document.getElementById("modalSessionCelebrate");
+      var layer = document.getElementById("celebrateConfettiLayer");
+      var subEl = document.getElementById("celebrateSubText");
+      if (!modal || !layer || !subEl) return;
+
+      subEl.textContent = countNum > 0
+        ? ("已完成 " + countNum + " 个成语巩固 · " + modeTitle)
+        : ("「" + modeTitle + "」已全部掌握过关");
+
+      // 生成 16 颗居中向四周迸发的礼花彩纸片
+      layer.innerHTML = "";
+      var colors = ["#f59e0b", "#f43f5e", "#3b82f6", "#10b981", "#8b5cf6", "#ec4899"];
+      var vectors = [
+        [-82, -68, "-140deg"], [-48, -86, "115deg"], [0, -92, "80deg"], [48, -84, "-95deg"],
+        [84, -66, "150deg"], [-94, -18, "-110deg"], [94, -16, "125deg"], [-86, 36, "95deg"],
+        [86, 38, "-120deg"], [-52, 74, "160deg"], [54, 72, "-155deg"], [0, 82, "70deg"],
+        [-68, -42, "65deg"], [68, -40, "-75deg"], [-34, 54, "-85deg"], [36, 56, "90deg"]
+      ];
+      for (var i = 0; i < vectors.length; i++) {
+        var dot = document.createElement("span");
+        dot.className = "confetti-dot";
+        dot.style.left = "50%";
+        dot.style.top = "36%";
+        dot.style.backgroundColor = colors[i % colors.length];
+        dot.style.setProperty("--tx", vectors[i][0] + "px");
+        dot.style.setProperty("--ty", vectors[i][1] + "px");
+        dot.style.setProperty("--rot", vectors[i][2]);
+        dot.style.animationDelay = ((i % 4) * 0.03) + "s";
+        layer.appendChild(dot);
+      }
+
+      modal.classList.remove("hidden");
+      if (celebrateAutoTimer) clearTimeout(celebrateAutoTimer);
+      celebrateAutoTimer = setTimeout(function () {
+        closeSessionCelebration();
+      }, 2800);
+    }
+
+    document.getElementById("btnCloseCelebrateModal").addEventListener("click", closeSessionCelebration);
+    document.getElementById("modalSessionCelebrate").addEventListener("click", function (e) {
+      if (e.target && e.target.id === "modalSessionCelebrate") {
+        closeSessionCelebration();
+      }
+    });
+    document.addEventListener("keydown", function (e) {
+      var cm = document.getElementById("modalSessionCelebrate");
+      if (cm && !cm.classList.contains("hidden") && (e.key === "Escape" || e.key === " " || e.key === "Enter")) {
+        e.preventDefault();
+        closeSessionCelebration();
       }
     });
 
@@ -13500,7 +13721,7 @@
     });
     if ("serviceWorker" in navigator && (location.protocol === "https:" || location.hostname === "localhost")) {
       window.addEventListener("load", function () {
-        navigator.serviceWorker.register("./sw.js?v=15").catch(function () {});
+        navigator.serviceWorker.register("./sw.js?v=16").catch(function () {});
       });
     }
   </script>
