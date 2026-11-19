@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <meta name="apple-mobile-web-app-title" content="不背成语" />
   <meta name="application-name" content="不背成语" />
   <meta id="metaThemeColor" name="theme-color" content="#f2f4f8" />
@@ -22,8 +22,8 @@
     })();
   </script>
   <title>不背成语</title>
-  <link rel="manifest" href="./manifest.json?v=14" />
-  <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png?v=14" />
+  <link rel="manifest" href="./manifest.json?v=15" />
+  <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png?v=15" />
   <script>window.__GONGKAO_LOCAL_DICT_URL = "./idiom_full_dict.json";</script>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Crect width='120' height='120' rx='26' fill='%237b342d'/%3E%3Ccircle cx='60' cy='34' r='22' fill='none' stroke='%23ff6a00' stroke-width='4.5'/%3E%3Ctext x='60' y='42' font-size='23' font-family='sans-serif' font-weight='800' text-anchor='middle' fill='%23ff6a00'%3E成%3C/text%3E%3Ccircle cx='60' cy='86' r='24' fill='%23ff6a00'/%3E%3Ctext x='60' y='94' font-size='23' font-family='sans-serif' font-weight='800' text-anchor='middle' fill='%23ffffff'%3E语%3C/text%3E%3C/svg%3E" />
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
@@ -163,6 +163,14 @@
       box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 12px 32px -8px rgba(2, 6, 23, 0.58) !important;
     }
 
+    html[data-theme="dark"] .theme-icon-btn:hover {
+      background: rgba(51, 65, 85, 0.92) !important;
+      color: #fde68a !important;
+    }
+    html[data-theme="dark"] .glass-card:hover {
+      background: rgba(30, 41, 59, 0.90) !important;
+    }
+
     html[data-theme="dark"] .glass-pill {
       background: rgba(18, 26, 44, 0.88) !important;
       border-color: rgba(255, 255, 255, 0.12) !important;
@@ -182,7 +190,8 @@
     /* 弹窗遮罩与深色弹层底板 */
     html[data-theme="dark"] #modalAddWord > .glass-card,
     html[data-theme="dark"] #modalConfirmReset > .glass-card,
-    html[data-theme="dark"] #modalStudySettings > .glass-card {
+    html[data-theme="dark"] #modalStudySettings > .glass-card,
+    html[data-theme="dark"] #modalYesterdayReview > .glass-card {
       background: rgba(20, 29, 47, 0.96) !important;
       border-color: rgba(255, 255, 255, 0.14) !important;
     }
@@ -1093,6 +1102,36 @@
       <div class="flex justify-end gap-2 pt-1">
         <button id="btnCancelStudySettings" type="button" class="btn-tap px-4 py-2 rounded-xl bg-slate-100 text-slate-700 text-xs font-semibold">取消</button>
         <button id="btnSaveStudySettings" type="button" class="btn-tap px-4 py-2 rounded-xl bg-slate-900 text-white text-xs font-bold">保存设置</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Daily Login Auto-Prompt Modal: Review Yesterday's Studied Idioms (每日登录自动提醒复习昨日所学，可一键跳过) -->
+  <div id="modalYesterdayReview" class="hidden fixed inset-0 z-50 bg-slate-900/45 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="glass-card bg-white/95 w-full max-w-sm p-5 space-y-4 anim-in">
+      <div class="flex items-start justify-between gap-2">
+        <div>
+          <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-lg bg-amber-100 text-amber-800 text-[11px] font-bold">
+            📅 每日温故提醒
+          </span>
+          <div class="text-base font-extrabold text-slate-900 mt-2">先复习昨天学的成语吗？</div>
+        </div>
+        <button id="btnCloseYesterdayModal" type="button" class="btn-tap text-xs px-2.5 py-1 rounded-lg bg-slate-100 text-slate-500 hover:text-slate-700 shrink-0">跳过</button>
+      </div>
+
+      <p id="yesterdayModalDesc" class="text-xs text-slate-600 leading-relaxed">
+        昨天你共学习了 <strong id="yesterdayModalCount" class="text-amber-600 font-extrabold">0</strong> 个成语，趁隔夜遗忘临界点先过一遍印象最深；今天不想复习也可以直接跳过。
+      </p>
+
+      <div id="yesterdayPreviewTags" class="flex flex-wrap gap-1.5 p-3 rounded-2xl bg-slate-100/80 border border-slate-200/70 max-h-28 overflow-y-auto"></div>
+
+      <div class="flex items-center gap-2.5 pt-1">
+        <button id="btnSkipYesterdayReview" type="button" class="btn-tap flex-1 py-2.5 px-3 rounded-xl bg-slate-100 text-slate-700 text-xs font-semibold hover:bg-slate-200/80">
+          跳过，直接背词
+        </button>
+        <button id="btnStartYesterdayReviewModal" type="button" class="btn-tap flex-[1.35] py-2.5 px-4 rounded-xl bg-amber-500 text-white text-xs font-extrabold hover:bg-amber-600 shadow-sm whitespace-nowrap">
+          立即复习
+        </button>
       </div>
     </div>
   </div>
@@ -10702,6 +10741,72 @@
       return out;
     }
 
+    function formatLocalDateKey(ts) {
+      var d = ts ? new Date(ts) : new Date();
+      if (isNaN(d.getTime())) return "";
+      var y = d.getFullYear();
+      var m = String(d.getMonth() + 1).padStart(2, "0");
+      var day = String(d.getDate()).padStart(2, "0");
+      return y + "-" + m + "-" + day;
+    }
+
+    function getYesterdayLocalDateKey() {
+      var d = new Date();
+      d.setHours(12, 0, 0, 0);
+      d.setDate(d.getDate() - 1);
+      return formatLocalDateKey(d.getTime());
+    }
+
+    function extractRecordStudyDates(rec) {
+      var map = {};
+      if (!rec || !rec.learned) return map;
+      if (Array.isArray(rec.studiedDates)) {
+        for (var i = 0; i < rec.studiedDates.length; i++) {
+          if (rec.studiedDates[i]) map[String(rec.studiedDates[i])] = true;
+        }
+      }
+      if (rec.updatedAt) {
+        var uk = formatLocalDateKey(Number(rec.updatedAt));
+        if (uk) map[uk] = true;
+      } else if (typeof rec.lastReviewedDay === "number" && rec.lastReviewedDay === (nowDayStamp() - 1)) {
+        map[getYesterdayLocalDateKey()] = true;
+      }
+      return map;
+    }
+
+    function getYesterdayReviewInfo() {
+      var todayKey = formatLocalDateKey();
+      var yesterdayKey = getYesterdayLocalDateKey();
+      var active = getActiveWords();
+      var allYesterday = [];
+      var pendingYesterday = [];
+
+      for (var i = 0; i < active.length; i++) {
+        var w = active[i];
+        var rec = state.records[w.id];
+        if (!rec || !rec.learned) continue;
+        var dmap = extractRecordStudyDates(rec);
+        if (dmap[yesterdayKey]) {
+          allYesterday.push(w);
+          if (!dmap[todayKey]) {
+            pendingYesterday.push(w);
+          }
+        }
+      }
+
+      var sortByNeed = function (a, b) {
+        return getWordStage(a.id) - getWordStage(b.id);
+      };
+      allYesterday.sort(sortByNeed);
+      pendingYesterday.sort(sortByNeed);
+      return {
+        todayKey: todayKey,
+        yesterdayKey: yesterdayKey,
+        allWords: allYesterday,
+        pendingWords: pendingYesterday
+      };
+    }
+
     function nowDayStamp() {
       return Math.floor(Date.now() / 86400000);
     }
@@ -10755,6 +10860,20 @@
         nextInterval = 1;
       }
 
+      var nowMs = Date.now();
+      var todayLocalKey = formatLocalDateKey(nowMs);
+      var prevDates = Array.isArray(prev.studiedDates) ? prev.studiedDates.slice() : [];
+      if (prev.updatedAt && prevDates.length === 0) {
+        var prevDateStr = formatLocalDateKey(Number(prev.updatedAt));
+        if (prevDateStr) prevDates.push(prevDateStr);
+      }
+      if (prevDates.indexOf(todayLocalKey) === -1) {
+        prevDates.push(todayLocalKey);
+      }
+      if (prevDates.length > 14) {
+        prevDates = prevDates.slice(prevDates.length - 14);
+      }
+
       state.records[wordId] = {
         stage: newStage,
         reps: choice === "know" ? (Number(prev.reps || 0) + 1) : 0,
@@ -10762,7 +10881,8 @@
         due: today + nextInterval,
         lastChoice: choice,
         lastReviewedDay: today,
-        updatedAt: Date.now(),
+        studiedDates: prevDates,
+        updatedAt: nowMs,
         learned: true
       };
       saveState();
@@ -12634,6 +12754,12 @@
               out.records[wid] = stgB >= stgA ? rb : ra;
             }
           }
+          var mergedRec = JSON.parse(JSON.stringify(out.records[wid]));
+          var unionDatesMap = Object.assign({}, extractRecordStudyDates(ra), extractRecordStudyDates(rb));
+          var unionDatesList = Object.keys(unionDatesMap).sort();
+          if (unionDatesList.length > 14) unionDatesList = unionDatesList.slice(unionDatesList.length - 14);
+          if (unionDatesList.length > 0) mergedRec.studiedDates = unionDatesList;
+          out.records[wid] = mergedRec;
         }
       }
 
@@ -12868,6 +12994,7 @@
         var finalSum = summarizeIdiomState(state);
         showGistFeedback("✓ 下载合并成功（" + formatSyncClock(now) + "）：本机现已同步共背 " + finalSum.learned + " 词 · 收藏 " + finalSum.fav + " · 已删熟词 " + finalSum.dismissed, false);
         showToast("已从云端拉取合并最新进度");
+        maybeAutoPromptYesterdayReview();
       } catch (err) {
         showGistFeedback("⚠️ " + (err && err.message ? err.message : "下载失败，请检查网络或令牌权限"), true);
       } finally {
@@ -13010,6 +13137,128 @@
       var cur = document.documentElement.getAttribute("data-theme");
       var next = cur === "dark" ? "light" : "dark";
       applyBubeiTheme(next, true);
+    });
+
+    // =========================================================================
+    // 每日登录自动弹窗提醒复习昨日所学成语（支持一键跳过，同日不再打扰）
+    // =========================================================================
+    var DAILY_YESTERDAY_PROMPT_KEY = "bubei_yesterday_prompt_date_v1";
+
+    function hasHandledYesterdayPromptToday(todayKey) {
+      try {
+        return window.localStorage.getItem(DAILY_YESTERDAY_PROMPT_KEY) === todayKey;
+      } catch (e) {
+        return false;
+      }
+    }
+
+    function markYesterdayPromptHandledToday(todayKey) {
+      try {
+        window.localStorage.setItem(DAILY_YESTERDAY_PROMPT_KEY, todayKey || formatLocalDateKey());
+      } catch (e) {}
+    }
+
+    function closeYesterdayReviewModal(markHandled) {
+      var modal = document.getElementById("modalYesterdayReview");
+      if (modal) modal.classList.add("hidden");
+      if (markHandled) {
+        markYesterdayPromptHandledToday(formatLocalDateKey());
+      }
+    }
+
+    function startYesterdayReviewSession() {
+      var info = getYesterdayReviewInfo();
+      var targetList = info.pendingWords.length > 0 ? info.pendingWords : info.allWords;
+      if (targetList.length === 0) {
+        showToast("昨天暂无已学成语记录，可先背一组新词");
+        return;
+      }
+      closeYesterdayReviewModal(true);
+      sessionQueue = targetList.slice();
+      sessionTargetTotal = sessionQueue.length;
+      sessionPassedMap = {};
+      sessionIndex = 0;
+      sessionMeta = {};
+      sessionModeTitle = "昨日所学成语复习";
+      switchView("session");
+      renderCurrentCard();
+    }
+
+    function openYesterdayReviewModal(info) {
+      var modal = document.getElementById("modalYesterdayReview");
+      if (!modal) return;
+      var list = info.pendingWords.length > 0 ? info.pendingWords : info.allWords;
+      if (list.length === 0) return;
+
+      document.getElementById("yesterdayModalCount").textContent = String(info.allWords.length);
+      var descEl = document.getElementById("yesterdayModalDesc");
+      if (info.pendingWords.length < info.allWords.length && info.pendingWords.length > 0) {
+        descEl.innerHTML =
+          '昨天共学习了 <strong id="yesterdayModalCount" class="text-amber-600 font-extrabold">' +
+          info.allWords.length +
+          '</strong> 个成语，今日还有 <strong class="text-amber-600 font-extrabold">' +
+          info.pendingWords.length +
+          '</strong> 个待巩固；趁记忆尚热过一遍效果最好，也可以直接跳过。';
+      } else {
+        descEl.innerHTML =
+          '昨天你共学习了 <strong id="yesterdayModalCount" class="text-amber-600 font-extrabold">' +
+          info.allWords.length +
+          '</strong> 个成语，趁隔夜遗忘临界点先过一遍印象最深；今天不想复习也可以直接跳过。';
+      }
+
+      var tagBox = document.getElementById("yesterdayPreviewTags");
+      tagBox.innerHTML = "";
+      var maxPreview = 8;
+      for (var i = 0; i < Math.min(list.length, maxPreview); i++) {
+        var chip = document.createElement("span");
+        chip.className = "px-2.5 py-1 rounded-lg bg-white text-slate-800 border border-slate-200/80 text-xs font-bold";
+        chip.textContent = list[i].word;
+        tagBox.appendChild(chip);
+      }
+      if (list.length > maxPreview) {
+        var moreChip = document.createElement("span");
+        moreChip.className = "px-2.5 py-1 rounded-lg bg-amber-100/80 text-amber-800 text-xs font-semibold";
+        moreChip.textContent = "等共 " + list.length + " 词";
+        tagBox.appendChild(moreChip);
+      }
+
+      document.getElementById("btnStartYesterdayReviewModal").textContent =
+        "立即复习（" + list.length + " 词）";
+      modal.classList.remove("hidden");
+    }
+
+    function maybeAutoPromptYesterdayReview() {
+      if (currentView !== "home") return;
+      var modal = document.getElementById("modalYesterdayReview");
+      if (!modal || !modal.classList.contains("hidden")) return;
+      var info = getYesterdayReviewInfo();
+      if (hasHandledYesterdayPromptToday(info.todayKey)) return;
+      if (info.pendingWords.length > 0) {
+        openYesterdayReviewModal(info);
+      }
+    }
+
+    document.getElementById("btnSkipYesterdayReview").addEventListener("click", function () {
+      closeYesterdayReviewModal(true);
+    });
+    document.getElementById("btnCloseYesterdayModal").addEventListener("click", function () {
+      closeYesterdayReviewModal(true);
+    });
+    document.getElementById("modalYesterdayReview").addEventListener("click", function (e) {
+      if (e.target && e.target.id === "modalYesterdayReview") {
+        closeYesterdayReviewModal(true);
+      }
+    });
+    document.getElementById("btnStartYesterdayReviewModal").addEventListener("click", function () {
+      startYesterdayReviewSession();
+    });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") {
+        var ym = document.getElementById("modalYesterdayReview");
+        if (ym && !ym.classList.contains("hidden")) {
+          closeYesterdayReviewModal(true);
+        }
+      }
     });
 
     renderGistSyncPanel();
@@ -13224,14 +13473,16 @@
       }
     }
 
-    // Boot: restore cached study packs AND full 31,648 lookup dictionary from IndexedDB
+    // Boot: restore cached study packs AND full 31,648 lookup dictionary from IndexedDB, then check daily yesterday review prompt
     renderHomeStats();
+    maybeAutoPromptYesterdayReview();
     loadExpandedFromIdb(function (cachedArr) {
       if (cachedArr && cachedArr.length > 0) {
         cloudExpandedWords = cachedArr;
         var btn = document.getElementById("btnLoadGithubCorpus");
         btn.textContent = "🔄 重新筛选扩充库 (已载 " + cachedArr.length + " 词)";
         refreshAllViews();
+        maybeAutoPromptYesterdayReview();
       }
     });
     loadPackFromIdb("full_xinhua_lookup_v2", function (cachedFull) {
@@ -13242,13 +13493,14 @@
           badgeEl.textContent = "✓ 全量 " + getAllSearchableWords().length + " 条中华成语检索库已离线就绪 · 开源来源 ";
         }
         refreshAllViews();
+        maybeAutoPromptYesterdayReview();
       } else {
         silentlyEnsureFullSearchDict();
       }
     });
     if ("serviceWorker" in navigator && (location.protocol === "https:" || location.hostname === "localhost")) {
       window.addEventListener("load", function () {
-        navigator.serviceWorker.register("./sw.js?v=14").catch(function () {});
+        navigator.serviceWorker.register("./sw.js?v=15").catch(function () {});
       });
     }
   </script>
