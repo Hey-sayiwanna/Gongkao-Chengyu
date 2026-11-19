@@ -1,12 +1,12 @@
-const CACHE_NAME = "gongkao-idiom-pwa-v16";
+const CACHE_NAME = "gongkao-idiom-pwa-v18";
 const ASSETS = [
   "./",
   "./index.html",
-  "./manifest.json?v=16",
-  "./apple-touch-icon.png?v=16",
-  "./icon-192.png?v=16",
-  "./icon-512.png?v=16",
-  "./icon-maskable-512.png?v=16",
+  "./manifest.json?v=18",
+  "./apple-touch-icon.png?v=18",
+  "./icon-192.png?v=18",
+  "./icon-512.png?v=18",
+  "./icon-maskable-512.png?v=18",
   "https://cdn.tailwindcss.com/3.4.17"
 ];
 
@@ -27,8 +27,12 @@ self.addEventListener("activate", (event) => {
 
 self.addEventListener("fetch", (event) => {
   if (event.request.method !== "GET") return;
+  const isNav = event.request.mode === "navigate";
+  const netFetch = isNav
+    ? fetch(event.request.url, { cache: "no-cache" })
+    : fetch(event.request);
   event.respondWith(
-    fetch(event.request)
+    netFetch
       .then((resp) => {
         if (resp && resp.status === 200) {
           const clone = resp.clone();

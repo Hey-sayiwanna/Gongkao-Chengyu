@@ -22,8 +22,8 @@
     })();
   </script>
   <title>不背成语</title>
-  <link rel="manifest" href="./manifest.json?v=16" />
-  <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png?v=16" />
+  <link rel="manifest" href="./manifest.json?v=18" />
+  <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png?v=18" />
   <script>window.__GONGKAO_LOCAL_DICT_URL = "./idiom_full_dict.json";</script>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Crect width='120' height='120' rx='26' fill='%237b342d'/%3E%3Ccircle cx='60' cy='34' r='22' fill='none' stroke='%23ff6a00' stroke-width='4.5'/%3E%3Ctext x='60' y='42' font-size='23' font-family='sans-serif' font-weight='800' text-anchor='middle' fill='%23ff6a00'%3E成%3C/text%3E%3Ccircle cx='60' cy='86' r='24' fill='%23ff6a00'/%3E%3Ctext x='60' y='94' font-size='23' font-family='sans-serif' font-weight='800' text-anchor='middle' fill='%23ffffff'%3E语%3C/text%3E%3C/svg%3E" />
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
@@ -216,6 +216,11 @@
       padding: 22px 20px 18px;
       text-align: center;
       animation: celebratePopIn 0.26s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    html[data-theme="dark"] #btnRegretWrong {
+      background: rgba(244, 63, 94, 0.18) !important;
+      color: #fda4af !important;
+      border: 1px solid rgba(244, 63, 94, 0.34) !important;
     }
     html[data-theme="dark"] #modalSessionCelebrateCard {
       background: rgba(20, 29, 47, 0.97) !important;
@@ -810,10 +815,10 @@
         <div id="cardRatingBar" class="hidden pt-5 mt-5 border-t border-slate-200/70 space-y-2.5">
           <div id="cardLoopFeedbackBanner" class="text-xs text-center font-medium px-3 py-2 rounded-xl bg-slate-100 text-slate-600"></div>
           <div class="flex items-center gap-2.5">
-            <button id="btnRegretWrong" type="button" class="hidden btn-tap py-3 px-4 rounded-2xl bg-rose-100 text-rose-800 hover:bg-rose-200 text-xs sm:text-sm font-bold shrink-0">
+            <button id="btnRegretWrong" type="button" class="hidden btn-tap py-3 px-3.5 sm:px-4 rounded-2xl bg-rose-100 text-rose-800 hover:bg-rose-200 text-xs sm:text-sm font-bold shrink-0 whitespace-nowrap" title="快捷键 R：改判为不认识并重置熟悉度">
               记错了 · 改判不认识
             </button>
-            <button id="btnNextCardAfterRate" type="button" class="btn-tap flex-1 py-3 px-5 rounded-2xl bg-slate-900 text-white hover:bg-slate-800 text-xs sm:text-sm font-extrabold shadow-sm">
+            <button id="btnNextCardAfterRate" type="button" class="btn-tap flex-1 py-3 px-3 sm:px-5 rounded-2xl bg-slate-900 text-white hover:bg-slate-800 text-xs sm:text-sm font-extrabold shadow-sm whitespace-nowrap">
               下一词 →（空格键）
             </button>
           </div>
@@ -11484,7 +11489,7 @@
 
       if (choice === "know") {
         regretBtn.classList.remove("hidden");
-        nextBtn.textContent = "下一词 →（空格键）";
+        nextBtn.innerHTML = '下一词 →<span class="hidden sm:inline">（空格键）</span>';
         if (willRepeatInRound) {
           banner.className = "text-xs text-center font-medium px-3 py-2 rounded-xl bg-blue-50 text-blue-800 border border-blue-200/70";
           banner.textContent = "✓ 本次巩固答对！稍后再复核 1 次即可彻底通过本组（若刚才想错了点左下角「记错了」）";
@@ -11493,10 +11498,10 @@
           banner.textContent = "✓ 已判为「认识」· 核对下方陷阱无误请点下一词，若发现望文生义可点「记错了」纠偏";
         }
       } else if (choice === "vague") {
-        regretBtn.classList.add("hidden");
-        nextBtn.textContent = "记住了，下一词 →（空格键）";
+        regretBtn.classList.remove("hidden");
+        nextBtn.innerHTML = '记住了，下一词 →<span class="hidden sm:inline">（空格键）</span>';
         banner.className = "text-xs text-center font-medium px-3 py-2 rounded-xl bg-amber-50 text-amber-900 border border-amber-200/70";
-        banner.textContent = "已记为「模糊」· 稍后将在本组内再次抽查巩固，并自动缩短艾宾浩斯复习周期";
+        banner.textContent = "已记为「模糊」· 稍后将在本组内抽查巩固；若发现其实想反了可点左下「记错了」";
       } else {
         regretBtn.classList.add("hidden");
         nextBtn.textContent = "记住了，下一词 →（空格键）";
@@ -11515,21 +11520,35 @@
       handleEbbinghausChoice("unknown");
     }
 
-    // 选「认识」翻面后发现自己其实望文生义了 -> 点「记错了」一键改判为「不认识」并加入本组重现
+    // 选「认识」或「模糊」翻面后发现自己望文生义记错了 -> 一键改判为「不认识」（无论首见还是组内复核，均重置回 1/7 并在本组内强制答对 2 次）
     function handleRegretWrong() {
-      if (!sessionRevealed) return;
+      if (!sessionRevealed || (currentCardChoice !== "know" && currentCardChoice !== "vague")) return;
       var item = sessionQueue[sessionIndex];
       if (!item) return;
       var meta = sessionMeta[item.id];
       if (meta) {
-        if (currentCardWasFirst && meta.prevSnapshot) {
-          state.records[item.id] = meta.prevSnapshot;
+        var removedQueued = false;
+        for (var q = sessionQueue.length - 1; q > sessionIndex; q--) {
+          if (sessionQueue[q] && sessionQueue[q].id === item.id) {
+            sessionQueue.splice(q, 1);
+            removedQueued = true;
+          }
+        }
+        if (removedQueued && meta.repeatsDone > 0) {
+          meta.repeatsDone--;
+        }
+        if (currentCardWasFirst) {
+          if (meta.prevSnapshot) {
+            state.records[item.id] = meta.prevSnapshot;
+          } else {
+            delete state.records[item.id];
+          }
         }
         delete sessionPassedMap[item.id];
         applyEbbinghausFirstImpression(item.id, "unknown");
         meta.firstChoice = "unknown";
         meta.neededStreak = 2;
-        if (meta.repeatsDone < 4) {
+        if (meta.repeatsDone < 6) {
           meta.repeatsDone++;
           insertRequeueCard(item, 3);
         }
@@ -12713,7 +12732,7 @@
         if (e.code === "Space" || e.code === "Enter") {
           e.preventDefault();
           advanceToNextSessionCard();
-        } else if ((k === "r" || k === "3") && currentCardChoice === "know") {
+        } else if ((k === "r" || k === "3") && (currentCardChoice === "know" || currentCardChoice === "vague")) {
           e.preventDefault();
           handleRegretWrong();
         }
@@ -13721,7 +13740,7 @@
     });
     if ("serviceWorker" in navigator && (location.protocol === "https:" || location.hostname === "localhost")) {
       window.addEventListener("load", function () {
-        navigator.serviceWorker.register("./sw.js?v=16").catch(function () {});
+        navigator.serviceWorker.register("./sw.js?v=18", { updateViaCache: "none" }).catch(function () {});
       });
     }
   </script>
